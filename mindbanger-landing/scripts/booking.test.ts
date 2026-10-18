@@ -6,25 +6,27 @@ import { PGlite } from '@electric-sql/pglite';
 import { availableSlots } from '../src/lib/booking/availability';
 import { DEFAULT_SETTINGS, settingsSchema, TIME_ZONE, LEGAL_VERSION, money } from '../src/lib/booking/model';
 
+const LEGACY_GRID = { ...DEFAULT_SETTINGS, slotMinutes: 15 as const };
+
 test('Configuration cannot enable reservations with incomplete identity or unreviewed prices', () => {
-  assert.equal(settingsSchema.safeParse(DEFAULT_SETTINGS).success, true);
-  assert.equal(settingsSchema.safeParse({ ...DEFAULT_SETTINGS, enabled: true }).success, false);
-  assert.equal(settingsSchema.safeParse({ ...DEFAULT_SETTINGS, hours: DEFAULT_SETTINGS.hours.map(h => ({ ...h, day: 0 })) }).success, false);
+  assert.equal(settingsSchema.safeParse(LEGACY_GRID).success, true);
+  assert.equal(settingsSchema.safeParse({ ...LEGACY_GRID, enabled: true }).success, false);
+  assert.equal(settingsSchema.safeParse({ ...LEGACY_GRID, hours: LEGACY_GRID.hours.map(h => ({ ...h, day: 0 })) }).success, false);
   assert.ok(money(50.5).includes('50,5'), 'Do not round away agreed cents');
 });
 test('Availability respects buffers, expired holds, closed days, notice and DST', () => {
   const now = new Date('2026-10-01T00:00:00Z');
-  const slots = availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-10-02', [], now);
+  const slots = availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-10-02', [], now);
   assert.equal(slots[0], '2026-10-02T07:00:00.000Z');
   assert.equal(slots.at(-1), '2026-10-02T13:45:00.000Z');
   const busy = [{ starts_at: slots[0], busy_until: '2026-10-02T08:15:00Z', status: 'confirmed', hold_until: null }];
-  assert.equal(availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-10-02', busy, now)[0], '2026-10-02T08:15:00.000Z');
-  assert.equal(availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-10-02', [{ ...busy[0], status: 'pending', hold_until: '2026-09-30T00:00:00Z' }], now)[0], slots[0]);
-  assert.deepEqual(availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-10-03', [], now), []);
-  assert.deepEqual(availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-02-30', [], now), []);
-  const winter = availableSlots(DEFAULT_SETTINGS, 'hypnoticke-sedenie', '2026-10-26', [], now);
+  assert.equal(availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-10-02', busy, now)[0], '2026-10-02T08:15:00.000Z');
+  assert.equal(availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-10-02', [{ ...busy[0], status: 'pending', hold_until: '2026-09-30T00:00:00Z' }], now)[0], slots[0]);
+  assert.deepEqual(availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-10-03', [], now), []);
+  assert.deepEqual(availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-02-30', [], now), []);
+  const winter = availableSlots(LEGACY_GRID, 'hypnoticke-sedenie', '2026-10-26', [], now);
   assert.equal(winter[0], '2026-10-26T08:00:00.000Z');
-  const sunday = { ...DEFAULT_SETTINGS, hours: DEFAULT_SETTINGS.hours.map(h => ({ ...h, enabled: true, open: '01:00', close: '06:00' })) };
+  const sunday = { ...LEGACY_GRID, hours: LEGACY_GRID.hours.map(h => ({ ...h, enabled: true, open: '01:00', close: '06:00' })) };
   const transition = availableSlots(sunday, 'hypnoticke-sedenie', '2026-10-25', [], now);
   for (const start of transition) {
     const hour = new Intl.DateTimeFormat('en-GB', { timeZone: TIME_ZONE, hour:'2-digit', minute:'2-digit' });
@@ -37,7 +39,7 @@ test('Real PostgreSQL migration: permissions, creation, collisions, idempotency,
   try {
     await db.exec('create role anon; create role authenticated; create role service_role bypassrls; grant usage on schema public to service_role;');
     await db.exec(readFileSync(new URL('../supabase/migrations/20261007103443_personal_appointments.sql', import.meta.url), 'utf8'));
-    const cfg = { ...DEFAULT_SETTINGS, enabled: true, legalReviewed: true, pricesApproved: true, provider: 'Test', companyId: '00000000', registration:'Test register', registeredAddress:'Test address', address:'Test meeting room', email:'owner@example.test', phone:'+421000000000', leadHours:1 };
+    const cfg = { ...LEGACY_GRID, enabled: true, legalReviewed: true, pricesApproved: true, provider: 'Test', companyId: '00000000', registration:'Test register', registeredAddress:'Test address', address:'Test meeting room', email:'owner@example.test', phone:'+421000000000', leadHours:1 };
     await db.query('select public.appointment_save_settings($1::jsonb,$2)', [JSON.stringify(cfg),'test-admin']);
     await db.exec('set role anon');
     await assert.rejects(db.query('select * from public.appointments'), /permission denied/);

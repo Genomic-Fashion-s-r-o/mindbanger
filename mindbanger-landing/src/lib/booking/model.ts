@@ -20,6 +20,7 @@ export const settingsSchema = z.object({
   cancellationHours: z.number().int().min(0).max(168),
   leadHours: z.number().int().min(1).max(168), horizonDays: z.number().int().min(7).max(180),
   bufferMinutes: z.number().int().min(0).max(60), holdHours: z.number().int().min(1).max(72),
+  slotMinutes: z.union([z.literal(15), z.literal(30)]).default(30),
   hours: z.array(hoursSchema).length(7).refine(h => new Set(h.map(x => x.day)).size === 7 && h.every(x => !x.enabled || x.open < x.close), 'Skontrolujte pracovné hodiny.'),
   services: z.array(serviceSchema).min(1).max(15).refine(s => new Set(s.map(x => x.id)).size === s.length, 'Služby musia mať jedinečné ID.'),
 }).superRefine((s, ctx) => {
@@ -32,12 +33,12 @@ export type Service = z.infer<typeof serviceSchema>;
 export const DEFAULT_SETTINGS: BookingSettings = {
   enabled: false, legalReviewed: false, pricesApproved: false,
   provider: '', companyId: '', registration: '', registeredAddress: '', address: 'Online · Spôsob pripojenia dohodneme emailom.', email: '', phone: '',
-  cancellationHours: 24, leadHours: 24, horizonDays: 60, bufferMinutes: 15, holdHours: 24,
+  cancellationHours: 24, leadHours: 24, horizonDays: 60, bufferMinutes: 15, holdHours: 24, slotMinutes: 30,
   hours: Array.from({ length: 7 }, (_, day) => ({ day, open: '09:00', close: '17:00', enabled: day > 0 && day < 6 })),
   services: [
-    { id: 'uvodne-stretnutie', name: 'Úvodné stretnutie', description: 'Zoznámime sa, prejdeme vaše očakávania a vyskúšame vedenú hypnotickú relaxáciu.', minutes: 75, price: 55, active: true },
+    { id: 'uvodne-stretnutie', name: 'Úvodné stretnutie', description: 'Zoznámime sa, prejdeme vaše očakávania a vyskúšame vedenú hypnotickú relaxáciu.', minutes: 60, price: 55, active: true },
     { id: 'hypnoticke-sedenie', name: 'Individuálna hypnóza', description: 'Vedené hypnotické techniky, predstavivosť a nácvik práce s pozornosťou.', minutes: 60, price: 50, active: true },
-    { id: 'relaxacia', name: 'Hypnotická relaxácia', description: 'Priestor na spomalenie, uvoľnenie a nácvik relaxácie pre každodenný život.', minutes: 90, price: 65, active: true },
+    { id: 'relaxacia', name: 'Hypnotická relaxácia', description: 'Priestor na spomalenie, uvoľnenie a nácvik relaxácie pre každodenný život.', minutes: 60, price: 65, active: true },
     { id: 'mentalny-trening', name: 'Mentálny tréning športovca', description: 'Práca s koncentráciou, vizualizáciou a prípravou na športový výkon.', minutes: 60, price: 45, active: true },
     { id: 'coaching', name: 'Coaching a osobný rozvoj', description: 'Praktická práca s cieľmi, každodennými návykmi a organizáciou času.', minutes: 60, price: 45, active: true },
   ],

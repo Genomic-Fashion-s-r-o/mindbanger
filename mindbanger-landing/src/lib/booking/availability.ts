@@ -22,7 +22,7 @@ export function availableSlots(settings: BookingSettings, serviceId: string, day
     const date = `${p.year}-${p.month}-${p.day}`;
     const clock = `${p.hour}:${p.minute}`;
     const minute = toMinutes(clock);
-    if (date !== day || minute < toMinutes(hours.open) || (minute - toMinutes(hours.open)) % 15 !== 0 || minute + service.minutes + settings.bufferMinutes > toMinutes(hours.close)) continue;
+    if (date !== day || minute < toMinutes(hours.open) || (minute - toMinutes(hours.open)) % settings.slotMinutes !== 0 || minute + service.minutes + settings.bufferMinutes > toMinutes(hours.close)) continue;
     const end = t + (service.minutes + settings.bufferMinutes) * 60000;
     // A slot may not cross a DST clock change or local date boundary.
     const ep = Object.fromEntries(parts.formatToParts(new Date(end)).map(x => [x.type, x.value]));

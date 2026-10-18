@@ -11,7 +11,7 @@ Klient otvorí `/ucet/rezervovat`, vyberie službu, deň a voľný čas a potvrd
 5. Nastavte dni a hodiny, minimálny predstih, počet dní dopredu, prestávku po stretnutí a platnosť čakajúcej žiadosti.
 6. Po kontrole prevádzky a podmienok zapnite kalendár a uložte nastavenia. Bez vyplnených údajov a potvrdení sa neotvorí. Online platby zostávajú vypnuté.
 
-Časy sa zobrazujú v pásme Europe/Bratislava. Voľné začiatky sa ponúkajú po 15 minútach; musia sa zmestiť do pracovných hodín vrátane prestávky. Existujúce termíny a blokovanie času sa od dostupnosti odpočítavajú.
+Časy sa zobrazujú v pásme Europe/Bratislava. Voľné začiatky sa predvolene ponúkajú po 30 minútach (v admine možno zvoliť 15 alebo 30 minút); musia sa zmestiť do pracovných hodín vrátane prestávky. Existujúce termíny a blokovanie času sa od dostupnosti odpočítavajú.
 
 ## Správa rezervácií
 
