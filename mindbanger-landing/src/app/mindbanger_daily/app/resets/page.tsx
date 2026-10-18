@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
 import { getDictionary } from '@/lib/i18n';
@@ -8,7 +9,7 @@ export const revalidate = 0;
 
 export default async function ResetsPage() {
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   // Get user profile for language
   const { data: profile } = await supabase

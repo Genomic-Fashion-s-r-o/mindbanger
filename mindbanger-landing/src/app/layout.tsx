@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import './personal.css';
+import './client.css';
 import { Suspense } from 'react';
 import AffiliateTracker from '@/components/AffiliateTracker';
 

@@ -1,0 +1,2 @@
+import { ProgramCard } from '@/components/client/ClientCards';
+export default function Page() { return <><header className="client-page-heading"><div><p className="client-eyebrow">VAŠE ONLINE PROGRAMY</p><h1>Priestor pre <em>nové návyky.</em></h1><p>Programy, ku ktorým sa budete môcť vracať vlastným tempom.</p></div></header><ProgramCard /><div className="client-notice">Program je vo vývoji. Predaj, aktivácia a lekcie zatiaľ nie sú dostupné.</div></>; }

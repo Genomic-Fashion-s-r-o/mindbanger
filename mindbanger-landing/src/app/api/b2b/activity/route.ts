@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
 import { getServiceSupabase } from '@/lib/supabase-service';
@@ -15,7 +16,7 @@ export async function GET(req: Request) {
 
         // 1. Verify user's session and permissions
         const supabase = await createClient();
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await getVerifiedSession(supabase);
 
         if (!session) {
             return new NextResponse('Unauthorized', { status: 401 });

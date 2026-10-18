@@ -2,14 +2,14 @@ import type { MetadataRoute } from 'next'
 
 function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Mindbanger Daily',
+    name: 'Mindbanger',
     short_name: 'Mindbanger',
-    description: 'Daily mental clarity & focus signals.',
-    start_url: '/mindbanger_daily/app/today',
-    scope: '/mindbanger_daily/',
+    description: 'Váš klientsky účet pre online služby a programy.',
+    start_url: '/ucet',
+    scope: '/',
     display: 'standalone',
-    background_color: '#0f172a',
-    theme_color: '#0f172a',
+    background_color: '#f7f6f0',
+    theme_color: '#f7f6f0',
     icons: [
       {
         src: '/icon.png',

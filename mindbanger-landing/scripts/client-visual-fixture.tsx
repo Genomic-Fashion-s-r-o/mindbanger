@@ -1,0 +1,8 @@
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { writeFileSync } from 'node:fs';
+import { ProgramCard, EmptyAppointment, ServiceCards } from '../src/components/client/ClientCards';
+import { DEFAULT_SETTINGS } from '../src/lib/booking/model';
+// Offline visual fixture uses production presentation components; no auth bypass route.
+const html=renderToStaticMarkup(<div className="client-site"><header className="client-header"><a className="client-brand">mindbanger<span>PRIESTOR PRE VÁS</span></a><nav><a aria-current="page">Prehľad</a><a>Rezervácie</a><a>Produkty</a><a>Môj účet</a></nav><div className="client-identity"><span className="client-avatar">M</span><span>Testovací klient</span></div></header><main className="client-main"><header className="client-page-heading"><div><p className="client-eyebrow">VÁŠ KLIENTSKY ÚČET</p><h1>Vitajte, Miroslav.</h1><p>Vaše stretnutia, malé kroky a priestor pre seba.</p></div><span className="client-badge">Bez pravidelného predplatného</span></header><EmptyAppointment/><section className="client-section"><div className="client-section-heading"><div><p className="client-eyebrow">STRETNIME SA ONLINE</p><h2>Čas venovaný <em>vám.</em></h2><p>Individuálny prístup, vaše tempo a spoločný zámer.</p></div><a className="client-text-link">Všetky online služby ↗</a></div><ServiceCards settings={DEFAULT_SETTINGS} compact/></section><section className="client-section"><div className="client-section-heading"><div><p className="client-eyebrow">ONLINE PROGRAMY</p><h2>Priestor pre nové <em>návyky.</em></h2></div></div><ProgramCard/></section></main></div>);
+writeFileSync('.next/client-visual-fixture.html',html);

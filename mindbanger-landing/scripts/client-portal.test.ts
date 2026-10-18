@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { readFileSync } from 'node:fs';
+import { PGlite } from '@electric-sql/pglite';
+import { safeClientReturn, CLIENT_TERMS_VERSION } from '../src/lib/client-platform';
+import { clientProfileSchema } from '../src/lib/client-validation';
+test('Only local portal destinations and editable profile fields are accepted', () => {
+  for (const value of ['https://evil.test', '//evil.test', '/ucet/../../admin', '/ucet\\evil', '/admin', '/ucet-other', null]) assert.equal(safeClientReturn(value), '/ucet');
+  assert.equal(safeClientReturn('/produkty/chut-na-sladke?from=account'), '/produkty/chut-na-sladke?from=account');
+  const profile = { fullName: 'Test Klient', language: 'sk', timezone: 'Europe/Bratislava' };
+  assert.ok(clientProfileSchema.safeParse(profile).success);
+  for (const extra of [{ role: 'admin' }, { subscription_status: 'premium' }, { user_id: 'other' }, { stripe_customer_id: 'cus_other' }, { timezone: 'invalid' }, { accepted: true }]) assert.equal(clientProfileSchema.safeParse({ ...profile, ...extra }).success, false);
+  assert.ok(clientProfileSchema.safeParse({ ...profile, accepted: true, termsVersion: CLIENT_TERMS_VERSION }).success);
+});
+test('Database enforces profile ownership, protected columns, signed MFA admins and retryable webhook claims', async () => {
+  const db = new PGlite();
+  try {
+    await db.exec(`create role anon; create role authenticated; create role service_role bypassrls;
+      create schema auth; grant usage on schema public,auth to anon,authenticated,service_role;
+      create table auth.users(id uuid primary key);
+      create function auth.uid() returns uuid language sql as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+      create function auth.jwt() returns jsonb language sql as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;
+      create table public.profiles(id uuid primary key,full_name text,avatar_url text,username text,bio text,preferred_language text,timezone text,notification_time text,role text,subscription_status text,stripe_customer_id text);
+      create table public.appointments(id uuid primary key, starts_at timestamptz);
+      create table public.organizations(id uuid); create table public.organization_members(id uuid); create table public.individual_recordings(id uuid);
+      alter table public.individual_recordings enable row level security;
+      create table public.admin_fixture(id int); alter table public.admin_fixture enable row level security;
+      grant all on public.profiles,public.admin_fixture to anon,authenticated;
+      create policy old_public on public.profiles for select using(true);
+      create policy old_edit on public.profiles for update using(id=auth.uid());
+      create policy old_admin on public.admin_fixture for select using ((( SELECT profiles.role FROM profiles WHERE (profiles.id = auth.uid())) = 'admin'::text));
+      insert into auth.users values('00000000-0000-0000-0000-000000000001'),('00000000-0000-0000-0000-000000000002');
+      insert into public.profiles(id,full_name,role) values('00000000-0000-0000-0000-000000000001','One','admin'),('00000000-0000-0000-0000-000000000002','Two','user');
+      insert into public.admin_fixture values(1);`);
+    await db.exec(readFileSync(new URL('../supabase/migrations/20261018192946_client_portal_security.sql', import.meta.url), 'utf8'));
+    const policies = await db.query<{ qual: string }>("select qual from pg_policies where tablename='admin_fixture'");
+    assert.ok(!policies.rows[0].qual.includes('profiles.role'));
+    await db.exec('set role anon');
+    await assert.rejects(db.query('select * from public.profiles'), /permission denied/);
+    await db.exec("reset role;set role authenticated;set request.jwt.claim.sub='00000000-0000-0000-0000-000000000001';set request.jwt.claims='{}'");
+    assert.equal((await db.query('select * from public.profiles')).rows.length,1);
+    assert.equal((await db.query('select * from public.admin_fixture')).rows.length,0,'Legacy role admin cannot grant access');
+    await db.exec("update public.profiles set full_name='Updated' where id=auth.uid()");
+    for (const statement of ["update public.profiles set role='admin'", "update public.profiles set subscription_status='premium'", "update public.profiles set stripe_customer_id='cus_fake'", "insert into public.profiles(id) values(gen_random_uuid())", 'select * from public.client_consents', "select public.claim_stripe_event('evt_test','test',gen_random_uuid())"]) await assert.rejects(db.query(statement), /permission denied/);
+    await db.exec(`set request.jwt.claims='{"email":"miroslav.jobus@gmail.com","aal":"aal1"}'`);
+    assert.equal((await db.query('select * from public.admin_fixture')).rows.length,0);
+    await db.exec(`set request.jwt.claims='{"email":"miroslav.jobus@gmail.com","aal":"aal2"}'`);
+    assert.equal((await db.query('select * from public.profiles')).rows.length,2);
+    assert.equal((await db.query('select * from public.admin_fixture')).rows.length,1);
+    await db.exec('reset role;set role service_role');
+    const claim = async (token:string) => (await db.query<{ result:string }>("select public.claim_stripe_event('evt_test','test',$1::uuid) as result",[token])).rows[0].result;
+    const a='00000000-0000-0000-0000-000000000003', b='00000000-0000-0000-0000-000000000004';
+    assert.equal(await claim(a),'claimed');assert.equal(await claim(b),'busy');
+    await db.exec("update public.processed_stripe_events set status='failed',lease_until=null");assert.equal(await claim(b),'claimed');
+    await db.exec("update public.processed_stripe_events set lease_until=now()-interval '1 minute'");assert.equal(await claim(a),'claimed');
+    await db.exec("update public.processed_stripe_events set status='completed'");assert.equal(await claim(b),'completed');
+  } finally { await db.close(); }
+});

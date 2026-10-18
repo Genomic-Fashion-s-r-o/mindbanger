@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import { createAdminClient, createClient } from '@/lib/supabase-server';
 import Stripe from 'stripe';
@@ -9,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function DELETE(req: Request) {
   try {
     const supabase = await createClient();
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await getVerifiedSession(supabase);
 
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

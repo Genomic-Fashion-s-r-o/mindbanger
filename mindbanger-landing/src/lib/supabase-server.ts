@@ -1,5 +1,12 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import type { SupabaseClient } from '@supabase/supabase-js';
+
+// Legacy callers only need session.user. Verify with Auth, never trust cookie data.
+export async function getVerifiedSession(client: SupabaseClient) {
+  const { data: { user }, error } = await client.auth.getUser();
+  return { data: { session: user && !error ? { user } : null }, error };
+}
 
 export async function createClient() {
   const cookieStore = await cookies();

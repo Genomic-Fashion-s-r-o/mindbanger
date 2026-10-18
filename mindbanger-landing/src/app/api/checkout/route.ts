@@ -1,12 +1,15 @@
+import { DAILY_ENABLED } from '@/lib/client-platform';
+import { getVerifiedSession } from '@/lib/supabase-server';
 ﻿import { NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 import { createClient } from '@/lib/supabase-server';
 export async function POST(req: Request) {
+  if (!DAILY_ENABLED) return NextResponse.json({ error: 'Program Mindbanger Daily je momentálne vypnutý.' }, { status: 410 });
   try {
     const body = await req.json();
     const { email, refMode, refCode } = body;
     const supabase = await createClient();
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await getVerifiedSession(supabase);
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const userId = session.user.id;
 

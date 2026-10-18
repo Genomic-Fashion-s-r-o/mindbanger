@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
 import Link from 'next/link';
@@ -16,7 +17,7 @@ export default async function ArchivePage({ searchParams }: PageProps) {
   const currentTab = params.tab === 'products' ? 'products' : 'daily';
 
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   // Get user profile (language + registration date for temporal lock)
   const { data: profile } = await supabase

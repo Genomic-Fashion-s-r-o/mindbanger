@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
 import { getSecureAudioUrl } from '@/lib/cloudflare-r2';
@@ -13,7 +14,7 @@ export default async function ArchiveDetailPage({ params }: { params: Promise<{ 
   const signalId = resolvedParams.id;
   
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   // 1. Ochrana + zistenie user constraints
   const { data: profile } = await supabase

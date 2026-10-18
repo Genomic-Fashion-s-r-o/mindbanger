@@ -1,3 +1,5 @@
+import { DAILY_ENABLED } from '@/lib/client-platform';
+import { getVerifiedSession } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase-server';
 import MobileNavBar from '@/components/MobileNavBar';
@@ -12,10 +14,11 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (!DAILY_ENABLED) redirect('/ucet');
   const supabase = await createClient();
 
   // 1. Ziskaj usera zo session
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  const { data: { session }, error: sessionError } = await getVerifiedSession(supabase);
 
   if (!session || sessionError) {
     redirect('/mindbanger_daily/login');

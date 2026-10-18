@@ -1,4 +1,5 @@
-﻿import { headers } from 'next/headers';
+import { randomUUID } from 'node:crypto';
+import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase-server';
 import Stripe from 'stripe';
@@ -7,7 +8,12 @@ import { sendEmail } from '@/lib/email';
 import { welcomeEmailTemplates, generateEmailHtml } from '@/lib/email-templates';
 import { sendB2BInviteEmail } from '@/lib/b2b-services';
 
-// Zmena na citanie secretov tak aby bral aj fallback
+async function checked<T extends { error: unknown }>(operation: PromiseLike<T>): Promise<T> {
+  const result = await operation;
+  if (result.error) throw result.error;
+  return result;
+}
+// Existing billing events remain supported; new Daily checkout is disabled.
 export async function POST(req: Request) {
   const body = await req.text();
   const headersList = await headers();
@@ -34,27 +40,11 @@ export async function POST(req: Request) {
 
   const supabase = await createAdminClient();
 
-  // 1. Webhook Globally Idempotent Guard (Atomic)
-  try {
-    const { error: insertError } = await supabase.from('processed_stripe_events').insert({ id: event.id, status: 'processing' });
-    if (insertError) {
-      // 23505 is the Postgres error code for unique violation
-      if (insertError.code === '23505' || insertError.message?.includes('duplicate')) {
-         const { data: existing } = await supabase.from('processed_stripe_events').select('status').eq('id', event.id).single();
-         if (existing?.status === 'processing') {
-             // Another instance is currently processing this event. Return 409 to trigger a later Stripe retry.
-             return new NextResponse('Event currently processing', { status: 409 });
-         }
-         console.log(`[Stripe Webhook] Event ${event.id} already processed. Skipping.`);
-         return new NextResponse('Duplicate Event Skipped', { status: 200 });
-      }
-      console.error('Idempotency Insert Error:', insertError);
-      return new NextResponse('Database Error during Idempotency Check', { status: 500 });
-    }
-  } catch (pgErr: any) {
-    console.error('Idempotency Check Error:', pgErr);
-    return new NextResponse('Internal Idempotency Error', { status: 500 });
-  }
+  const leaseToken = randomUUID();
+  const { data: claim, error: claimError } = await supabase.rpc('claim_stripe_event', { p_id: event.id, p_type: event.type, p_token: leaseToken });
+  if (claimError) return new NextResponse('Event storage unavailable', { status: 500 });
+  if (claim === 'completed') return new NextResponse('Already processed', { status: 200 });
+  if (claim !== 'claimed') return new NextResponse('Event currently processing', { status: 409 });
 
   try {
     switch (event.type) {
@@ -66,7 +56,7 @@ export async function POST(req: Request) {
            const meta = session.metadata;
            
            // 1. Create Organization
-           const { data: org, error: orgError } = await supabase.from('organizations').upsert({
+           const { data: org, error: orgError } = await checked(supabase.from('organizations').upsert({
               name: meta.company_name,
               tax_id: meta.tax_id,
               vat_id: meta.vat_id,
@@ -77,11 +67,11 @@ export async function POST(req: Request) {
               stripe_customer_id: session.customer as string,
               stripe_subscription_id: session.subscription as string,
               seats_limit: parseInt(meta.seats || '5'),
-           }, { onConflict: 'stripe_subscription_id' }).select().single();
+           }, { onConflict: 'stripe_subscription_id' }).select().single());
 
            if (orgError) {
               console.error('B2B Org Creation Error:', orgError);
-              return new NextResponse('Org Creation Failed', { status: 500 });
+              throw new Error('Org Creation Failed');
            }
 
            // 2. Add Representative as Owner (Invite)
@@ -92,13 +82,13 @@ export async function POST(req: Request) {
 
            // Helper: Create Member (Idempotent)
            if (org) {
-             await supabase.from('organization_members').upsert({
+             await checked(supabase.from('organization_members').upsert({
                 organization_id: org.id,
                 user_id: userId || null, // If null, they are just invited by email
                 email: meta.contact_email,
                 role: 'owner',
                 status: existingUser ? 'active' : 'invited'
-             }, { onConflict: 'organization_id,email' });
+             }, { onConflict: 'organization_id,email' }));
            }
 
            // 3. Send Welcome Email (B2B Specific)
@@ -123,11 +113,11 @@ export async function POST(req: Request) {
              const newSeatsLimit = orgData.seats_limit + parseInt(meta.seats || '0');
 
              // 2. Update organization stats and clean pending
-             await supabase.from('organizations').update({
+             await checked(supabase.from('organizations').update({
                seats_limit: newSeatsLimit,
                subscription_status: 'active',
                pending_invites: [] // clear them
-             }).eq('id', orgId);
+             }).eq('id', orgId));
 
              // 3. Create member records & invite
              if (pendingEmails.length > 0) {
@@ -147,13 +137,13 @@ export async function POST(req: Request) {
                  const { data: existingUser } = await supabase.from('profiles').select('id').eq('email', em).single();
                  
                  // Upsert to handle event replays safely without triggering constraint violations
-                 await supabase.from('organization_members').upsert({
+                 await checked(supabase.from('organization_members').upsert({
                     organization_id: orgId,
                     user_id: existingUser?.id || null,
                     email: em,
                     role: 'member',
                     status: 'invited'
-                 }, { onConflict: 'organization_id,email' });
+                 }, { onConflict: 'organization_id,email' }));
 
                    // Send email via internal backend service
                    try {
@@ -176,7 +166,7 @@ export async function POST(req: Request) {
         if (userId && subscriptionId) {
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
-          await supabase.from('subscriptions').upsert({
+          await checked(supabase.from('subscriptions').upsert({
             id: subscriptionId,
             user_id: userId,
             status: subscription.status,
@@ -186,7 +176,7 @@ export async function POST(req: Request) {
             amount_total: session.amount_total ? session.amount_total / 100 : 0,
             currency: session.currency || 'eur',
             customer_email: session.customer_details?.email || ''
-          });
+          }));
 
           // --- PAYOUT AND AFFILIATE HANDLING START ---
           if (session.metadata?.refCode || session.metadata?.affiliate_id || session.metadata?.affiliateId) {
@@ -217,14 +207,14 @@ export async function POST(req: Request) {
                    // to correct payout entries. Stripe sessions represent checkout for specific sub lines.
                    const subKey = subscriptionId || session.id;
 
-                   await supabase.from('referrals').upsert({
+                   await checked(supabase.from('referrals').upsert({
                       affiliate_id: affiliate.id,
                       referee_user_id: userId || null, 
                       commission_model: commissionModel,
                       status: initialStatus,
                       commission_amount: commissionAmountVal,
                       stripe_session_id: subKey,
-                   }, { onConflict: 'stripe_session_id' });
+                   }, { onConflict: 'stripe_session_id' }));
                    console.log('Affiliate referral verified and inserted for session:', session.id, 'Status:', initialStatus, 'SubKey:', subKey);
                 }
              } catch (affErr) {
@@ -248,9 +238,10 @@ try {
                 }
               }
               
-              await supabase.from('profiles').update(updatePayload).eq('id', userId);
+              await checked(supabase.from('profiles').update(updatePayload).eq('id', userId));
             } catch (e) {
               console.error('Error updating profile with Stripe data:', e);
+              throw e;
           }
 
           // Send welcome email via Resend
@@ -330,7 +321,7 @@ try {
                  // Pokiaľ by náhodou mal užívateľ multi-tier referrals (napr viacero active sessions s waiting_second_month), 
                  // odomkneme bezpečne iba jeden prislúchajúci najstaršiemu záznamu.
                  const targetRef = waitingRefs[0];
-                 await supabase.from('referrals').update({ status: 'pending' }).eq('id', targetRef.id);
+                 await checked(supabase.from('referrals').update({ status: 'pending' }).eq('id', targetRef.id));
                  console.log(`Zmeneny status referralu ohladom second_month na pending po zaplateni dalsej faktury. Referral ID: ${targetRef.id}`);
                }
 
@@ -350,14 +341,14 @@ try {
 
                       for (const affId of uniqueAffiliates) {
                         try {
-                           await supabase.from('referrals').insert({
+                           await checked(supabase.from('referrals').insert({
                               affiliate_id: affId,
                               referee_user_id: userProfile.id,
                               commission_model: 'lifetime_20',
                               status: 'pending',
                               commission_amount: commAmount,
                               stripe_session_id: `invoice_${invoice.id}_${affId}`,
-                           });
+                           }));
                         } catch (e: any) {
                            if (e.code === '23505') {
                               // Duplicate stripe_session_id insert - already processed this invoice
@@ -381,18 +372,18 @@ try {
         const userId = subscription.metadata?.userId;
 
         if (userId) {
-          await supabase.from('subscriptions').upsert({
+          await checked(supabase.from('subscriptions').upsert({
             id: subscription.id,
             user_id: userId,
             status: subscription.status,
             price_id: subscription.items.data[0].price.id,
             current_period_end: new Date(((subscription as any).current_period_end || (subscription.items.data[0] as any).current_period_end) * 1000).toISOString(),
-          });
+          }));
 
           if (subscription.status === 'canceled' || subscription.status === 'unpaid') {
-             await supabase.from('profiles').update({ subscription_status: 'canceled' }).eq('id', userId);
+             await checked(supabase.from('profiles').update({ subscription_status: 'canceled' }).eq('id', userId));
           } else if (['active', 'trialing', 'past_due'].includes(subscription.status)) {
-             await supabase.from('profiles').update({ subscription_status: 'premium' }).eq('id', userId);
+             await checked(supabase.from('profiles').update({ subscription_status: 'premium' }).eq('id', userId));
           }
         }
         break;
@@ -401,9 +392,9 @@ try {
     
   } catch (err: any) {
     console.error(`Webhook Action Error: ${err.message}`, err);
-    // CRITICAL FIX: If business logic fails, remove idempotency marker so Stripe can retry
+    // Release only our lease. Failed or expired attempts can be retried safely.
     try {
-      await supabase.from('processed_stripe_events').delete().eq('id', event.id);
+      await supabase.from('processed_stripe_events').update({ status: 'failed', lease_until: null, updated_at: new Date().toISOString() }).eq('id', event.id).eq('lease_token', leaseToken);
     } catch (delErr) {
       console.error(`Failed to rollback idempotency marker for event ${event.id}:`, delErr);
     }
@@ -411,9 +402,11 @@ try {
   }
 
   try {
-    await supabase.from('processed_stripe_events').update({ status: 'completed' }).eq('id', event.id);
+    const { data: completed, error } = await supabase.from('processed_stripe_events').update({ status: 'completed', lease_until: null, updated_at: new Date().toISOString() }).eq('id', event.id).eq('lease_token', leaseToken).select('id');
+    if (error || !completed?.length) throw new Error('Could not complete event');
   } catch (updateErr) {
     console.error(`Failed to mark event ${event.id} as completed:`, updateErr);
+    return new NextResponse('Event completion unavailable', { status: 500 });
   }
 
   return new NextResponse('Success', { status: 200 });

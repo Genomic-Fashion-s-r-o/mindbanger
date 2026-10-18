@@ -1,0 +1,3 @@
+import { requireClient } from '@/lib/client-context';
+import ClientProfileForm from '@/components/client/ClientProfileForm';
+export default async function Page() { const c = await requireClient(); return <><header className="client-page-heading"><div><p className="client-eyebrow">VAŠE ÚDAJE A PREFERENCIE</p><h1>Môj <em>účet.</em></h1><p>Účet je bezplatný. Žiadne pravidelné predplatné sa týmto účtom neaktivuje.</p></div></header><section className="client-card client-profile-card"><ClientProfileForm name={c.profile?.full_name || ''} email={c.user.email || ''} language={c.profile?.preferred_language || 'sk'} timezone={c.profile?.timezone || 'Europe/Bratislava'} /></section></>; }

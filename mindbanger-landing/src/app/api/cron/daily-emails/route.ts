@@ -1,3 +1,4 @@
+import { DAILY_ENABLED } from '@/lib/client-platform';
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { dailyEmailTemplates, generateEmailHtml } from '@/lib/email-templates';
@@ -13,6 +14,7 @@ export async function GET(request: Request) {
       return new Response('Unauthorized Cron Source', { status: 401 });
     }
 
+    if (!DAILY_ENABLED) return NextResponse.json({ skipped: true, reason: 'Daily disabled' });
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 

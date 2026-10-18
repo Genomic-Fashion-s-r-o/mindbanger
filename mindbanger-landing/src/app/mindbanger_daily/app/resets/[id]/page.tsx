@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
 import { getSecureAudioUrl } from '@/lib/cloudflare-r2';
@@ -14,7 +15,7 @@ export default async function ResetDetailPage({ params }: { params: Promise<{ id
   const resetId = resolvedParams.id;
   
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   // Overenie profilu
   const { data: profile } = await supabase

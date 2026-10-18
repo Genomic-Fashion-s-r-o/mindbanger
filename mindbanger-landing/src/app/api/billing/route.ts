@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
 import stripe from '@/lib/stripe';
@@ -5,7 +6,7 @@ import stripe from '@/lib/stripe';
 export async function POST(req: Request) {
   try {
     const supabase = await createClient();
-    const { data: { session }, error: authError } = await supabase.auth.getSession();
+    const { data: { session }, error: authError } = await getVerifiedSession(supabase);
 
     if (authError || !session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

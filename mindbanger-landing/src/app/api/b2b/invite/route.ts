@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import { createClient } from '@/lib/supabase-server';
 import { sendEmail } from '@/lib/email';
 import { NextResponse } from 'next/server';
@@ -8,7 +9,7 @@ export async function POST(req: Request) {
         const supabase = await createClient();
         
         // 1. Verify Access
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await getVerifiedSession(supabase);
         if (!session) return new NextResponse('Unauthorized', { status: 401 });
 
         const { data: membership } = await supabase

@@ -1,9 +1,11 @@
+import { DAILY_ENABLED } from '@/lib/client-platform';
 import { createClient } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 const BASE_PRICE = 7.99;
 
 export async function POST(req: Request) {
+  if (!DAILY_ENABLED) return NextResponse.json({ error: 'Program Mindbanger Daily je momentálne vypnutý.' }, { status: 410 });
   try {
     const body = await req.json();
     const { 

@@ -3,26 +3,7 @@
     {
       "path": "/api/cron/appointments",
       "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/cron/generate-content?lang=en",
-      "schedule": "0 2 * * *"
-    },
-    {
-      "path": "/api/cron/generate-content?lang=sk",
-      "schedule": "5 2 * * *"
-    },
-    {
-      "path": "/api/cron/generate-content?lang=cs",
-      "schedule": "10 2 * * *"
-    },
-    {
-      "path": "/api/cron/daily-emails",
-      "schedule": "0 5 * * *"
-    },
-    {
-      "path": "/api/cron/daily-push",
-      "schedule": "0 * * * *"
     }
-  ]
+  ],
+  "buildCommand": "npm run build -- --webpack"
 }

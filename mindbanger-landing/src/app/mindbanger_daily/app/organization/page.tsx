@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
@@ -9,7 +10,7 @@ export const revalidate = 0;
 
 export default async function OrganizationPage() {
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   if (!session) {
     redirect('/mindbanger_daily/login');

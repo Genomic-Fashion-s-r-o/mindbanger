@@ -14,9 +14,10 @@ const COUNTRY_TO_LANG: Record<string, string> = {
 
 export async function proxy(request: NextRequest) {
   // The personal site has no login or language cookie and does not depend on Auth.
-  if (['/', '/rezervacia', '/rezervacia/sprava', '/podmienky', '/ochrana-udajov', '/cookies', '/robots.txt', '/sitemap.xml'].includes(request.nextUrl.pathname)) {
+  if (['/', '/rezervacia', '/rezervacia/sprava', '/podmienky', '/podmienky-uctu', '/ochrana-udajov', '/cookies', '/robots.txt', '/sitemap.xml'].includes(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
+  request.headers.set('x-client-return', request.nextUrl.pathname + request.nextUrl.search);
   // 1. Initialize response
   let response = NextResponse.next({
     request: {

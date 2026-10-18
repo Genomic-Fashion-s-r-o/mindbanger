@@ -1,3 +1,4 @@
+import { getVerifiedSession } from '@/lib/supabase-server';
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase-server';
@@ -10,7 +11,7 @@ export const revalidate = 0; // Ensure fresh data on every load for 'today'
 
 export default async function TodayPage() {
   const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await getVerifiedSession(supabase);
 
   // Get user profile for name, language and timezone
   const { data: profile } = await supabase

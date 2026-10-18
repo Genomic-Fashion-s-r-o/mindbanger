@@ -55,6 +55,16 @@ The booking tests use an isolated real PostgreSQL WASM runtime (PGlite). They do
 
 Legal sources reviewed: [psychological activity](https://static.slov-lex.sk/static/SK/ZZ/2025/242/20251001.print.html), [consumer protection](https://static.slov-lex.sk/static/SK/ZZ/2024/108/20260927.print.html), [GDPR](https://eur-lex.europa.eu/legal-content/SK/TXT/?uri=CELEX:32016R0679), and [alternative dispute resolution](https://www.mhsr.sk/obchod/ochrana-spotrebitela/alternativne-riesenie-spotrebitelskych-sporov-1). The actual content of sessions and operating permissions still determine the applicable legal regime.
 
+## Client portal — phase 1 (18 October 2026)
+
+The free Slovak portal starts at `/ucet`, with OTP login at `/prihlasenie`. It uses a light responsive layout, own upcoming appointments, the configured online service catalogue, editable profile and existing personal recordings. `/produkty/chut-na-sladke` is an informational coming-soon page and preserves an existing login. Payments, booking activation, product entitlements and lessons are deferred; no purchase button or fictional lesson access is exposed.
+
+Daily is disabled through `DAILY_ENABLED=false`, legacy client redirects, checkout guards and cron guards. Its engine/admin/data remain. Existing subscriptions are neither canceled nor deleted; billing webhooks remain available. Only the appointment maintenance cron remains scheduled.
+
+`20261018192946_client_portal_security.sql` was applied directly in a transaction to the verified Mindbanger database `ldjibcxqjbrjsmfppyoi` after an isolated PostgreSQL test and a rolled-back production-schema preflight. Do not blindly reapply it or the earlier manually applied booking migration. Profile reads require ownership or an allowlisted MFA admin; client writes cannot change roles, membership or Stripe IDs. Legacy organization writes are server-only, recordings admin access requires MFA, and webhook claims use a retryable lease. This is a scoped fix, not a claim of a complete legacy security audit.
+
+Run `npx tsx --test scripts/client-portal.test.ts scripts/booking.test.ts`, ESLint and `npm run build -- --webpack`. The isolated tests cover genuine PostgreSQL RLS/grants, protected profile columns, admin MFA predicates, safe return paths, strict API input and webhook retry claims. HTTP smoke checks cover disabled checkout, unauthorized profile writes, cross-origin rejection and unsigned webhook rejection. `scripts/client-visual-fixture.tsx` renders presentation components offline; it does not add an authentication bypass to the app. Full human OTP delivery, an authenticated browser session and live billing events require separate verification; no test email or charge was sent.
+
 ## Original development instructions
 
 First, run the development server:

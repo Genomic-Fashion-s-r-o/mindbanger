@@ -1,7 +1,9 @@
+import { DAILY_ENABLED } from '@/lib/client-platform';
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
 
 export async function POST(request: Request) {
+  if (!DAILY_ENABLED) return NextResponse.json({ error: 'Program Mindbanger Daily je momentálne vypnutý.' }, { status: 410 });
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
