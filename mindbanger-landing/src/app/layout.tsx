@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Mindbanger',
+    title: 'Mgr. Miroslav Jobus',
   },
 };
 

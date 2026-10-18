@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
-export default function manifest(): MetadataRoute.Manifest {
+function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Mindbanger Daily',
     short_name: 'Mindbanger',
@@ -29,3 +29,6 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
   }
 }
+
+export const dynamic = 'force-static';
+export function GET() { return Response.json(manifest(), { headers: { 'Content-Type': 'application/manifest+json' } }); }
