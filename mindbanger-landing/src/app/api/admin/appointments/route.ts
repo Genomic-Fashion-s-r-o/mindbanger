@@ -5,6 +5,7 @@ import { getServiceSupabase } from '@/lib/supabase-service';
 import { getBookingSettings, sameOrigin, publicError, managementToken, siteOrigin, tokenHash } from '@/lib/booking/store';
 import { settingsSchema, requestSchema, BOOKING_PAYMENTS_ENABLED } from '@/lib/booking/model';
 import { processBookingMail } from '@/lib/booking/notifications';
+import { plannerSchema } from '@/lib/booking/planner';
 export const dynamic = 'force-dynamic';
 const changeSchema = z.object({ action: z.enum(['confirm','cancel','complete','no_show','paid','move']), id: z.uuid(), startsAt: z.iso.datetime({ offset: true }).optional() });
 const blockSchema = z.object({ action: z.literal('block'), startsAt: z.iso.datetime({ offset: true }), endsAt: z.iso.datetime({ offset: true }), label: z.string().trim().min(2).max(100) });
@@ -32,7 +33,13 @@ export async function POST(request: Request) {
     const body = await request.json();
     if (body.action === 'paid' && !BOOKING_PAYMENTS_ENABLED) return NextResponse.json({ error: 'Platobné funkcie sú vypnuté.' }, { status: 409 });
     const db = getServiceSupabase();
-    if (body.action === 'settings') {
+    if (body.action === 'schedule') {
+      const input = z.object({ planner: plannerSchema, expected: plannerSchema.nullable() }).safeParse(body);
+      if (!input.success) return NextResponse.json({ error: input.error.issues[0].message }, { status: 400 });
+      const { error } = await db.rpc('appointment_save_planner', { p_planner: input.data.planner, p_expected: input.data.expected, p_actor: user.email });
+      if (error?.message?.includes('schedule_changed')) return NextResponse.json({ error: 'Rozvrh medzičasom zmenil iný správca. Pred ďalšou úpravou obnovte stránku.' }, { status: 409 });
+      if (error) throw error;
+    } else if (body.action === 'settings') {
       const config = settingsSchema.safeParse(body.settings);
       if (!config.success) return NextResponse.json({ error: config.error.issues[0].message }, { status: 400 });
       if (config.data.enabled && (!process.env.BREVO_API_KEY || !process.env.CRON_SECRET || !process.env.NEXT_PUBLIC_SITE_URL)) return NextResponse.json({ error: 'Pred zapnutím nastavte BREVO_API_KEY, CRON_SECRET a NEXT_PUBLIC_SITE_URL v prostredí servera.' }, { status: 400 });

@@ -1,0 +1,21 @@
+.availability-planner { max-width:100%; min-width:0; font-size:16px; }
+.availability-planner h2 { font-size:30px; margin:28px 0 16px; }
+.availability-planner p { line-height:1.65; }
+.availability-scroll { overflow:auto; max-height:560px; border:1px solid #d7ded3; border-radius:12px; background:#fafbf6; margin:20px 0; }
+.availability-grid { border-collapse:separate; border-spacing:0; min-width:810px; width:100%; font-size:14px; }
+.availability-grid caption { padding:12px; text-align:left; color:#445b51; }
+.availability-grid th { background:#edf2e8; padding:8px; text-align:center; font-weight:600; }
+.availability-grid thead th { position:sticky; top:0; z-index:2; }
+.availability-grid tbody th { position:sticky; left:0; z-index:1; }
+.availability-grid small { display:block; font-size:12px; }
+.availability-grid td { padding:2px; border-bottom:1px solid #e3e7dd; }
+.availability-grid button { width:100%; min-height:32px; padding:4px 8px; border:1px solid #e0e5d9; border-radius:5px; background:#fffdf8; color:#69796e; cursor:pointer; font:inherit; }
+.availability-grid button[aria-pressed=true] { background:#cfe4ce; border-color:#7a9c7d; color:#203f2d; }
+.availability-grid button:focus-visible { outline:3px solid #294c40; outline-offset:1px; }
+.availability-grid button:disabled { cursor:wait; opacity:.6; }
+.availability-preview { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+.availability-preview section { border:1px solid #d7ded3; border-radius:12px; padding:16px; background:#fffdf8; overflow-wrap:anywhere; }
+.availability-preview h3 { font-size:19px; margin:0 0 12px; }
+.availability-planner .booking-admin-toolbar { flex-wrap:wrap; }
+.availability-planner .booking-admin-toolbar button:not(.personal-button) { min-height:40px; border:1px solid #c8d1c1; background:#edf2e8; color:#294c40; border-radius:6px; padding:8px 14px; font:inherit; cursor:pointer; }
+.availability-planner button:disabled { opacity:.55; }

@@ -1,4 +1,5 @@
 import { BookingSettings, TIME_ZONE } from './model';
+import { coversCells, plannedCells } from './planner';
 
 export type BusyInterval = { starts_at: string; busy_until: string; status: string; hold_until: string | null };
 // Iterate real instants instead of parsing a local wall clock. This handles both DST transitions.
@@ -10,7 +11,8 @@ export function availableSlots(settings: BookingSettings, serviceId: string, day
   if (!Number.isFinite(midnight) || new Date(midnight).toISOString().slice(0, 10) !== day) return [];
   const weekday = new Date(midnight).getUTCDay();
   const hours = settings.hours.find(h => h.day === weekday && h.enabled);
-  if (!hours) return [];
+  const cells = settings.planner ? plannedCells(settings.planner, day) : null;
+  if (!cells && !hours) return [];
   const parts = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
   const min = now.getTime() + settings.leadHours * 3600000;
   const max = now.getTime() + settings.horizonDays * 86400000;
@@ -22,7 +24,9 @@ export function availableSlots(settings: BookingSettings, serviceId: string, day
     const date = `${p.year}-${p.month}-${p.day}`;
     const clock = `${p.hour}:${p.minute}`;
     const minute = toMinutes(clock);
-    if (date !== day || minute < toMinutes(hours.open) || (minute - toMinutes(hours.open)) % settings.slotMinutes !== 0 || minute + service.minutes + settings.bufferMinutes > toMinutes(hours.close)) continue;
+    if (date !== day) continue;
+    if (cells ? minute % settings.slotMinutes !== 0 || !coversCells(cells, minute, service.minutes + settings.bufferMinutes)
+      : !hours || minute < toMinutes(hours.open) || (minute - toMinutes(hours.open)) % settings.slotMinutes !== 0 || minute + service.minutes + settings.bufferMinutes > toMinutes(hours.close)) continue;
     const end = t + (service.minutes + settings.bufferMinutes) * 60000;
     // A slot may not cross a DST clock change or local date boundary.
     const ep = Object.fromEntries(parts.formatToParts(new Date(end)).map(x => [x.type, x.value]));

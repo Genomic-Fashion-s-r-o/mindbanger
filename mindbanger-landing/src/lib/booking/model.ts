@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { plannerSchema } from './planner';
 
 export const TIME_ZONE = 'Europe/Bratislava';
 export const LEGAL_VERSION = '2026-10-18-online-v1';
@@ -21,10 +22,13 @@ export const settingsSchema = z.object({
   leadHours: z.number().int().min(1).max(168), horizonDays: z.number().int().min(7).max(180),
   bufferMinutes: z.number().int().min(0).max(60), holdHours: z.number().int().min(1).max(72),
   slotMinutes: z.union([z.literal(15), z.literal(30)]).default(30),
+  planner: plannerSchema.optional(),
   hours: z.array(hoursSchema).length(7).refine(h => new Set(h.map(x => x.day)).size === 7 && h.every(x => !x.enabled || x.open < x.close), 'Skontrolujte pracovné hodiny.'),
   services: z.array(serviceSchema).min(1).max(15).refine(s => new Set(s.map(x => x.id)).size === s.length, 'Služby musia mať jedinečné ID.'),
 }).superRefine((s, ctx) => {
-  if (s.enabled && (!s.legalReviewed || !s.pricesApproved || !s.provider || !s.companyId || !s.registration || !s.registeredAddress || !s.address || !s.email || !s.phone || !s.hours.some(h => h.enabled) || !s.services.some(x => x.active))) {
+  // An explicitly empty planner means closed availability, even while the portal is enabled.
+  const hasHours = s.planner ? true : s.hours.some(h => h.enabled);
+  if (s.enabled && (!s.legalReviewed || !s.pricesApproved || !s.provider || !s.companyId || !s.registration || !s.registeredAddress || !s.address || !s.email || !s.phone || !hasHours || !s.services.some(x => x.active))) {
     ctx.addIssue({ code: 'custom', message: 'Pred zapnutím doplňte údaje prevádzkovateľa, kontakt, služby, hodiny a potvrďte kontrolu podmienok aj cien.' });
   }
 });
