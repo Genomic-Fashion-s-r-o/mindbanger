@@ -9,3 +9,62 @@
 
 /* Compact profile portrait */
 .personal-hero{grid-template-columns:1fr;max-width:1224px}.personal-hero-copy{max-width:760px}.personal-lead{max-width:650px}.personal-profile{display:flex;align-items:center;gap:18px;margin-top:26px}.personal-profile>img{width:88px;height:88px;flex-shrink:0;border-radius:50%;object-fit:cover;object-position:center 28%}.personal-profile>div{display:grid;gap:5px}.personal-profile span{font-size:10px;color:var(--muted)}.personal-profile strong{font-family:var(--font-serif),serif;font-size:23px;font-weight:400}@media(max-width:760px){.personal-profile>img{width:72px;height:72px}.personal-profile{gap:14px}.personal-profile strong{font-size:21px}.personal-header .personal-brand{font-size:18px}}
+
+/* Readable, full-width presentation on notebooks and larger screens. */
+@media (min-width: 1001px) {
+  .personal-site { font-size: 19px; line-height: 1.8; }
+  .personal-header, .personal-hero, .personal-section, .personal-footer {
+    width: 100%; max-width: 1760px; padding-left: clamp(40px, 4vw, 72px); padding-right: clamp(40px, 4vw, 72px);
+  }
+  .personal-header { min-height: 124px; }
+  .personal-brand { font-size: 32px; }
+  .personal-brand span { font-size: 11px; }
+  .personal-header nav { font-size: 17px; gap: 32px; }
+  .personal-button, .personal-text-link { font-size: 17px; }
+  .personal-button { padding: 18px 28px; }
+  .personal-button.small { font-size: 15px; padding: 14px 22px; }
+  .personal-hero { padding-top: 76px; padding-bottom: 54px; }
+  .personal-hero-copy { max-width: none; width: 100%; }
+  .personal-hero h1 { font-size: clamp(74px, 6vw, 108px); line-height: 1.08; }
+  .personal-lead { max-width: 900px; font-size: 24px; line-height: 1.75; }
+  .personal-profile { gap: 20px; }
+  .personal-profile strong { font-size: 28px; }
+  .personal-profile span { font-size: 13px; }
+  .personal-hero-note { font-size: 11px; gap: 32px; padding-top: 22px; }
+  .personal-strip { font-size: 25px; gap: 80px; padding: 25px; }
+  .personal-section { padding-top: 96px; padding-bottom: 96px; }
+  .personal-eyebrow, .personal-index { font-size: 13px; }
+  .personal-site h2 { font-size: clamp(48px, 4.2vw, 72px); }
+  .personal-site h3 { font-size: 30px; }
+  .personal-section-heading { gap: 72px; }
+  .personal-section-heading > p { max-width: 620px; }
+  .personal-services h3 { max-width: 360px; }
+  .personal-services p, .personal-steps p, .personal-faq details p { font-size: 18px; }
+  .personal-services a { font-size: 16px; }
+  .personal-services article { padding-top: 38px; padding-bottom: 38px; }
+  .personal-mind { padding-top: 88px; padding-bottom: 88px; }
+  .personal-mind p:not(.personal-eyebrow) { max-width: 900px; }
+  .personal-about-quote { font-size: 28px; }
+  .personal-prices h3 { font-size: 28px; }
+  .personal-prices span, .personal-prices strong { font-size: 18px; }
+  .personal-faq summary { font-size: 20px; }
+  .personal-contact > p:not(.personal-eyebrow) { max-width: 800px; font-size: 21px; }
+  .personal-contact .personal-actions > a:not(.personal-button) { font-size: 18px; }
+  .personal-footer p, .personal-footer-links { font-size: 15px; }
+  .personal-footer .personal-disclaimer { font-size: 14px; }
+  .personal-footer small { font-size: 13px; }
+  .personal-page { max-width: 1200px; }
+  .personal-page-intro { max-width: 880px; }
+  .personal-legal { max-width: 1000px; }
+}
+@media (min-width: 1200px) {
+  .personal-hero-copy {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 5vw, 88px); align-items: start;
+  }
+  .personal-hero h1 { grid-column: 1; grid-row: 1 / 4; margin-bottom: 0; }
+  .personal-hero .personal-lead { grid-column: 2; grid-row: 1; padding-top: 6px; }
+  .personal-hero .personal-profile { grid-column: 2; grid-row: 2; margin-top: 28px; }
+  .personal-hero .personal-actions { grid-column: 2; grid-row: 3; margin-top: 28px; gap: 24px; }
+  .personal-hero-note { grid-column: 1 / -1; margin-top: 52px; }
+}
