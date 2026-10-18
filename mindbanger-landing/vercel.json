@@ -1,6 +1,10 @@
 {
   "crons": [
     {
+      "path": "/api/cron/appointments",
+      "schedule": "*/15 * * * *"
+    },
+    {
       "path": "/api/cron/generate-content?lang=en",
       "schedule": "0 2 * * *"
     },
@@ -22,4 +26,3 @@
     }
   ]
 }
-

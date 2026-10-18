@@ -34,7 +34,7 @@ export default function InteractivePreviewSection() {
   return (
     <section className="py-24 bg-slate-900 px-6 overflow-hidden relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-950/40 via-slate-950/80 to-slate-950 pointer-events-none" />
-      
+
       <div className="max-w-5xl mx-auto text-center relative z-10 space-y-12">
         <h2 className="text-3xl md:text-5xl font-serif text-white tracking-tight">
           {dict?.landing?.interactivePreview?.title || 'Choose the word that pulls you in first'}
@@ -48,8 +48,8 @@ export default function InteractivePreviewSection() {
                 key={idx}
                 onClick={() => setActive(idx)}
                 className={`cursor-pointer rounded-2xl p-8 relative overflow-hidden transition-all duration-500 border group ${
-                  isActive 
-                    ? 'border-white/40 bg-white/10 scale-105 shadow-[0_0_30px_rgba(255,255,255,0.1)]' 
+                  isActive
+                    ? 'border-white/40 bg-white/10 scale-105 shadow-[0_0_30px_rgba(255,255,255,0.1)]'
                     : 'border-white/5 bg-slate-800/20 hover:bg-slate-800/40 hover:border-white/20'
                 }`}
               >
@@ -73,8 +73,8 @@ export default function InteractivePreviewSection() {
 
 <div className={`pt-8 max-w-lg mx-auto transition-all duration-500 transform ${active ? 'opacity-100 translate-y-0' : 'opacity-80 translate-y-2'}`}>
           <div className="flex flex-col items-center">
-            <Link 
-              href="/join" 
+            <Link
+              href="/mindbanger_daily/join"
               className="py-4 px-12 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg flex items-center justify-center transition-all hover:scale-105 shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]"
             >
               {active !== null

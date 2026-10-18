@@ -30,8 +30,8 @@ export default function FinalCTASection() {
         </p>
 
         <div className="pt-8 max-w-md mx-auto flex justify-center">
-           <Link 
-              href="/join" 
+           <Link
+              href="/mindbanger_daily/join"
               className="w-full sm:w-auto py-4 px-12 rounded-full bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-bold text-lg flex items-center justify-center transition-all hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             >
               {dict?.landing?.hero?.cta || 'Start Mindbanger Daily'}

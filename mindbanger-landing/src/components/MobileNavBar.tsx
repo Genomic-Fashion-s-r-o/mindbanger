@@ -36,22 +36,22 @@ export default function MobileNavBar() {
   }, []);
 
   const navItems = [
-    { name: t.today, icon: Home, href: '/app/today' },
-    { name: t.archive, icon: Library, href: '/app/archive' },
-    { name: t.resets, icon: Headphones, href: '/app/resets' },
-    { name: 'Moje audio', icon: MicVocal, href: '/app/my-audio' },
+    { name: t.today, icon: Home, href: '/mindbanger_daily/app/today' },
+    { name: t.archive, icon: Library, href: '/mindbanger_daily/app/archive' },
+    { name: t.resets, icon: Headphones, href: '/mindbanger_daily/app/resets' },
+    { name: 'Moje audio', icon: MicVocal, href: '/mindbanger_daily/app/my-audio' },
   ];
 
   // Insert B2B Dashboard if admin
   if (isB2BAdmin) {
-    navItems.push({ name: 'Company', icon: Building2, href: '/app/organization' });
+    navItems.push({ name: 'Company', icon: Building2, href: '/mindbanger_daily/app/organization' });
   } else {
     // Only show Affiliate if NOT B2B admin (optional, or show both)
-    navItems.push({ name: t.affiliate, icon: LinkIcon, href: '/app/affiliate' });
+    navItems.push({ name: t.affiliate, icon: LinkIcon, href: '/mindbanger_daily/app/affiliate' });
   }
 
   // Always show Account last
-  navItems.push({ name: t.account, icon: Settings, href: '/app/settings' });
+  navItems.push({ name: t.account, icon: Settings, href: '/mindbanger_daily/app/settings' });
 
   return (
     <>

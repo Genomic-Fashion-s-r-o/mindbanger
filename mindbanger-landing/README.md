@@ -1,6 +1,57 @@
+## Daily URL migration (18 October 2026)
+
+The personal presentation is served at `/`. The complete Daily page tree (including membership, B2B, auth and admin) lives under `/mindbanger_daily`. Previous page URLs redirect with 308 and retain query parameters; old root referral links go to Daily. External `/api` webhook/cron addresses and `/sw.js` remain operational; `/mindbanger_daily/api/*` aliases the same API. Assets and Next.js runtime files keep their shared URLs. The existing Supabase callback URL remains supported through the redirect. No engine data or subscriptions are moved or removed.
+
+Verify the deployed origin with `BOOKING_TEST_ORIGIN=https://mindbanger.com node scripts/daily-routing-smoke.mjs`. Public reservations remain disabled until operator configuration and mail delivery are ready.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+
+## Personal site and appointments (October 2026)
+
+The active checkout is this `mindbanger-landing` directory, which contains the existing Vercel project link. The nested `../mindbanger/mindbanger-landing` copy has not been edited.
+
+- `/`: Miroslav Jobus personal presentation in Slovak.
+- `/rezervacia`: free, nonbinding requests for an in-person adult appointment.
+- `/rezervacia/sprava#<token>`: private appointment summary and cancellation. Tokens stay in the URL fragment, are sent in a POST body, and are stored hashed in the appointments table.
+- `/mindbanger_daily/admin/rezervacie`: calendar, confirmations, moves, holidays, payment tracking, manual requests and settings. Requires an existing allowlisted admin account and MFA (`aal2`). Verify MFA on `/admin/dashboard` first.
+- `/mindbanger_daily`: original landing page. `/app/*`, existing APIs, billing callbacks and engine schedules keep their routes. Original pages are marked `noindex` and excluded from the new sitemap, but remain accessible by direct URL.
+- `/podmienky`, `/ochrana-udajov`, `/cookies`: separate personal-service policies; the original product policies remain at `/terms` and `/privacy`.
+
+### Installation and activation
+
+1. Install locked dependencies with `npm ci`.
+2. The migration `supabase/migrations/20261007103443_personal_appointments.sql` was applied on 7 October 2026 to the verified Mindbanger database `ldjibcxqjbrjsmfppyoi.supabase.co` using its existing direct connection. `node scripts/booking-db.mjs` checks that exact target; `node scripts/booking-db.mjs --verify` tests the production schema using a rolled-back transaction and sends no email. The migration adds only `appointment_*` tables/functions and `appointments`; no engine tables are modified. Do not reapply it or apply it to Sportbooster/Real Games. Direct SQL application does not create a Supabase CLI migration-history entry; reconcile history before adopting `supabase db push` for this existing project.
+3. Configure server-only `SUPABASE_SERVICE_ROLE_KEY`, existing Supabase public URL/key, `BREVO_API_KEY`, `CRON_SECRET`, and the correct `NEXT_PUBLIC_SITE_URL` for the deployed origin. Optional `BOOKING_FROM_EMAIL` defaults to `hello@mindbanger.com`; the sender must be verified in Brevo.
+4. Deploy with the additional `/api/cron/appointments` schedule from `vercel.json` (every 15 minutes). Check the hosting plan supports that frequency. The endpoint requires `Authorization: Bearer <CRON_SECRET>`.
+5. Sign into the existing admin, complete MFA, open **Kalendár a rezervácie → Nastavenia** and enter the verified company identity, register entry, registered and meeting addresses, public email/phone, hours and services. Save settings while reservations are still disabled. No business identity or contact has been invented.
+6. Verify prices, actual professional qualifications and service scope, provider business authorization, GDPR processor agreements/regions and policy wording. The checkbox records the operator's review; it is not legal certification. Confirm prices and review, then enable requests. Unapproved prices are not published. Teen appointments, online sessions, online contracts, deposits and cancellation penalties are intentionally not offered in this first version.
+7. Test an authorized real booking and notification delivery before advertising the calendar. Public routes fail closed when configuration or schema is missing. Live email delivery and real admin MFA require the actual configured environment.
+
+### Operational behavior
+
+Bookings occupy their duration plus a configurable buffer. PostgreSQL exclusion constraints enforce overlap protection for bookings and blocked time. Advisory locks serialize calendar mutations and settings changes. Slots use Europe/Bratislava including DST, notice and horizon limits. Pending requests expire after the configured hold (or before the appointment start). Rescheduling preserves the originally agreed duration, buffer and price. Only future pending appointments can be confirmed; completion/no-show are available after the start.
+
+The client sends a stable request UUID; retries with the same request do not create another booking. Private management links arrive by email, including the original link on an idempotent retry. Email jobs are committed in the same transaction as the booking. Post-response processing and cron claim leased jobs, retry up to five attempts, and expose failed-job counts/retry in admin. Reminders are queued once per confirmed appointment start within 24 hours. Delivery is at least once; rare provider-success/database-failure cases can produce a duplicate email.
+
+All scheduling tables have RLS enabled, no public/client grants and no client policies. Only the server service role can access them. All scheduling RPCs are security-invoker with an empty search path and execute grants restricted to the service role. New admin APIs check authentication and MFA on every request. Mutations require a same-origin POST. Public request limiting is persisted in the database (pseudonymized email/IP counters); customer fields and mail rendering are validated/escaped. There is no free-text medical field.
+
+Maintenance removes mail snapshots after 30 days and booking contacts/private links after one year; invoice storage is separate. Security rate counters are removed after expiry. Keep the cron operational for reminders and retention.
+
+### Verification
+
+```bash
+npm run test:booking
+npm exec tsc -- --noEmit
+npm run build -- --webpack
+```
+
+The booking tests use an isolated real PostgreSQL WASM runtime (PGlite). They do not connect to production or send emails. They cover configuration gates, availability, buffers, DST, anonymous permissions, overlap rejection, request idempotency, immutable agreed terms on moves, expiration, cancellation, mail leases and persistent rate limiting. Google font access is required for the existing `next/font` production build.
+
+Legal sources reviewed: [psychological activity](https://static.slov-lex.sk/static/SK/ZZ/2025/242/20251001.print.html), [consumer protection](https://static.slov-lex.sk/static/SK/ZZ/2024/108/20260927.print.html), [GDPR](https://eur-lex.europa.eu/legal-content/SK/TXT/?uri=CELEX:32016R0679), and [alternative dispute resolution](https://www.mhsr.sk/obchod/ochrana-spotrebitela/alternativne-riesenie-spotrebitelskych-sporov-1). The actual content of sessions and operating permissions still determine the applicable legal regime.
+
+## Original development instructions
 
 First, run the development server:
 

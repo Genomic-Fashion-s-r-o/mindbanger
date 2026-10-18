@@ -127,7 +127,7 @@ export async function GET(request: Request) {
       const payload = JSON.stringify({
         title: signalContext?.title || 'Mindbanger Daily',
         body: signalContext?.push_text || fallbackText[userLang] || fallbackText['en'],
-        url: 'https://mindbanger.com/app/today'
+        url: 'https://mindbanger.com/mindbanger_daily/app/today'
       });
 
       const pushSubscription = {

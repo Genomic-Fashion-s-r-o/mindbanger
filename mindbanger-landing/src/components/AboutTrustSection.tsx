@@ -31,7 +31,7 @@ export default function AboutTrustSection() {
 
         <div className="space-y-4 max-w-2xl mx-auto">
           <p className="text-amber-500 font-medium tracking-wide text-sm uppercase">{dict?.landing?.about?.badge}</p>
-          <Link href="/about" className="block w-fit mx-auto group">
+          <Link href="/mindbanger_daily/about" className="block w-fit mx-auto group">
             <h2 className="text-3xl md:text-5xl font-serif text-white tracking-tight leading-tight group-hover:text-amber-500 transition-colors duration-300">
               Mgr. Miroslav Jobus
             </h2>

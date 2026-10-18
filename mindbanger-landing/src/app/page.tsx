@@ -1,90 +1,24 @@
-﻿import React from 'react';
-import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
-import DailyRitualSection from '@/components/DailyRitualSection';
-import InteractivePreviewSection from '@/components/InteractivePreviewSection';
-import HowItWorksSection from '@/components/HowItWorksSection';
-import BenefitsSection from '@/components/BenefitsSection';
-import VIPZonePreviewSection from '@/components/VIPZonePreviewSection';
-import AboutTrustSection from '@/components/AboutTrustSection';
-import PricingSection from '@/components/PricingSection';
-import FAQSection from '@/components/FAQSection';
-import FinalCTASection from '@/components/FinalCTASection';
-import Footer from '@/components/Footer';
-import B2BCtaBanner from '@/components/B2BCtaBanner';
-import { CookieBanner } from '@/components/CookieBanner';
-import { LanguageProvider } from '@/components/LanguageProvider';
-import { cookies, headers } from 'next/headers';
-import fs from 'fs';
-import path from 'path';
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { PersonalShell } from '@/components/personal/PersonalShell';
+import { getBookingSettings } from '@/lib/booking/store';
+import { money } from '@/lib/booking/model';
 
-export default async function Home(props: any) {
-  const searchParams = await (props?.searchParams || Promise.resolve({}));
-  const headersList = await headers();
-  const country = typeof searchParams.country === "string" ? searchParams.country : (headersList.get("x-vercel-ip-country") || "SK");
-
-  const cookieStore = await cookies();
-  let lang = cookieStore.get('user-lang')?.value;
-
-  if (!lang) {
-    const acceptLang = headersList.get('accept-language')?.toLowerCase() || '';
-    if (acceptLang.includes('sk')) {
-      lang = 'sk';
-    } else if (acceptLang.includes('cs')) {
-      lang = 'cs';
-    } else if (country === 'SK') {
-      lang = 'sk';
-    } else if (country === 'CZ') {
-      lang = 'cs';
-    } else {
-      lang = 'en';
-    }
-  }
-  
-  let dict: any = {};
-  try {
-    const dictPath = path.join(process.cwd(), 'src/dictionaries', lang + '.json');
-    dict = JSON.parse(fs.readFileSync(dictPath, 'utf8'));
-  } catch (e) {
-    try {
-      const fallbackPath = path.join(process.cwd(), 'src/dictionaries', 'en.json');
-      dict = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
-    } catch(err) {}
-  }
-
-  // Dynamic Pricing Logic based on Geo-Location
-  let dynamicPrice = '7,99€'; // Default to EUR
-  
-  if (country === 'GB' || country === 'UK') {
-    dynamicPrice = '£7.99';
-  } else if (!['AT', 'BE', 'HR', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE'].includes(country)) {
-    // If not in UK and not in EU... make it USD
-    dynamicPrice = '$8.99';
-  }
-
-  if (dict?.landing?.pricing) {
-    dict.landing.pricing.price = dynamicPrice;
-  }
-
-  // Variant B: All main CTAs now direct to free signup instead of checkout
-  return (
-    <LanguageProvider dict={dict} lang={lang}>
-      <main className="min-h-screen bg-slate-950 text-white selection:bg-amber-500/30 selection:text-amber-100">
-        <Navbar /> {/* Ensure Navbar links to /join or /login */}
-        <HeroSection />
-        <DailyRitualSection />
-        <InteractivePreviewSection />
-        <HowItWorksSection />
-        <BenefitsSection />
-        <VIPZonePreviewSection />
-        <AboutTrustSection />
-        <PricingSection /> {/* Pricing buttons can still go to checkout OR to join first. Probably good to keep pricing buttons to checkout for high intent? No, let's funnel all through free account first. */}
-        <B2BCtaBanner />
-        <FAQSection />
-        <FinalCTASection />
-        <Footer />
-        {dict.cookieBanner && <CookieBanner dict={dict.cookieBanner} />}
-      </main>
-    </LanguageProvider>
-  );
+export const dynamic = 'force-dynamic';
+export const metadata: Metadata = { title: 'Mgr. Miroslav Jobus | Hypnóza a mentálny tréning v Skalici', description: 'Osobný prístup k hypnóze, relaxácii, coachingu a mentálnemu tréningu. Naučte sa lepšie pracovať s pozornosťou, predstavivosťou a návykmi.', alternates: { canonical: '/' }, openGraph: { title: 'Mgr. Miroslav Jobus · Hypnóza a mentálny tréning', description: 'Priestor spomaliť. Pozornosť pre to, na čom vám záleží.', images: ['/miro-profile.jpg'], locale: 'sk_SK', type: 'website' } };
+export default async function Home() {
+  const { settings } = await getBookingSettings();
+  const services = settings.services.filter(s => s.active);
+  return <PersonalShell settings={settings}><main id="obsah">
+    <section className="personal-hero"><div className="personal-hero-copy"><p className="personal-eyebrow"><span /> OSOBNE V SKALICI</p><h1>Spomaľte.<br />Vráťte pozornosť<br /><em>k sebe.</em></h1><p className="personal-lead">Hypnóza, relaxácia a mentálny tréning s Mgr. Miroslavom Jobusom. Priestor naučiť sa vedomejšie pracovať so svojou mysľou, pozornosťou a každodennými návykmi.</p><div className="personal-profile"><Image src="/miro-profile.jpg" alt="Mgr. Miroslav Jobus" width={88} height={88} priority /><div><span>Váš sprievodca</span><strong>Mgr. Miroslav Jobus</strong><span>Hypnóza · Coaching · Mentálny tréning</span></div></div><div className="personal-actions"><Link className="personal-button" href="/rezervacia">Dohodnúť prvé stretnutie <span aria-hidden="true">↗</span></Link><a className="personal-text-link" href="#ako-to-prebieha">Ako to prebieha <span aria-hidden="true">↓</span></a></div><div className="personal-hero-note"><span>01 — POZORNOSŤ</span><span>02 — RELAXÁCIA</span><span>03 — OSOBNÝ ROZVOJ</span></div></div></section>
+    <div className="personal-strip"><span>Menej zhonu.</span><span>Viac vedomej pozornosti.</span><span>Vlastné tempo.</span></div>
+    <section id="sluzby" className="personal-section"><div className="personal-section-heading"><div><p className="personal-eyebrow">PRIESTOR PRE VAŠE CIELE</p><h2>S čím môžeme<br /><em>pracovať.</em></h2></div><p>Každé stretnutie má konkrétny zámer. Vyberieme techniky a tempo, ktoré zodpovedajú vašim očakávaniam a nezdravotníckemu rozsahu služby.</p></div><div className="personal-services">{services.map((s, i) => <article key={s.id}><span className="personal-index">0{i + 1}</span><h3>{s.name}</h3><p>{s.description}</p><Link href={`/rezervacia?sluzba=${s.id}`} aria-label={`Zistiť termíny: ${s.name}`}>Pozrieť termíny <span aria-hidden="true">↗</span></Link></article>)}</div></section>
+    <section className="personal-mind"><p className="personal-eyebrow">POZORNOSŤ SA DÁ TRÉNOVAŤ</p><h2>Naučte sa lepšie pracovať<br /><em>so svojou mysľou a myšlienkami.</em></h2><p>Cieľom nie je zastaviť myšlienky. Pomocou relaxácie, predstavivosti a praktických cvičení sa môžete učiť vnímať svoj vnútorný dialóg s väčším odstupom a presmerovať pozornosť na to, čo je pre vás užitočné.</p><span className="personal-mind-symbol" aria-hidden="true">◎</span></section>
+    <section id="o-mne" className="personal-section personal-about"><div><p className="personal-eyebrow">ČLOVEK ZA STRETNUTÍM</p><h2>Mgr. Miroslav<br /><em>Jobus.</em></h2><p className="personal-about-quote">„Zmena začína pri tom,<br />čomu venujeme pozornosť.“</p></div><div><p className="personal-lead">Vo svojej práci prepájam záujem o hypnózu a coaching so skúsenosťami zo športového tréningu.</p><p>Stretnutie je priestor na učenie, nácvik a rozhovor o vašich cieľoch. Dôležitá je pre mňa dobrovoľnosť, zrozumiteľnosť a rešpekt k vášmu tempu. Žiadne sľuby zázračnej premeny — konkrétna práca s tým, čo chcete rozvíjať.</p><p>Moje vzdelávanie zahŕňa aj Teenage Life Coach. Služby pre neplnoletých pripravujem so samostatnými podmienkami a zapojením zákonného zástupcu; online rezervácie sú zatiaľ určené dospelým.</p><a className="personal-text-link" href="https://www.linkedin.com/in/miroslav-jobus/" target="_blank" rel="noopener noreferrer">Viac o mojich skúsenostiach <span aria-hidden="true">↗</span></a></div></section>
+    <section id="ako-to-prebieha" className="personal-section personal-process"><p className="personal-eyebrow">BEZ ZBYTOČNÝCH NEZNÁMYCH</p><h2>Vaše prvé <em>stretnutie.</em></h2><div className="personal-steps">{[['Vyberiete si termín', 'Odošlete nezáväznú žiadosť. Termín následne osobne potvrdím emailom.'], ['Zoznámime sa', 'Prejdeme vaše očakávania, rozsah služby a dohodneme sa na priebehu.'], ['Vyskúšate si techniky', 'Podľa dohody pracujeme s relaxáciou, pozornosťou alebo predstavivosťou. Sedenie môžete kedykoľvek ukončiť.']].map(([title, body], i) => <article key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div></section>
+    <section id="cennik" className="personal-section"><div className="personal-section-heading"><div><p className="personal-eyebrow">ČAS VENOVANÝ VÁM</p><h2>Stretnutia <em>a ceny.</em></h2></div><p>{settings.pricesApproved ? 'Uvedené ceny sú konečné. Online žiadosť o termín je bezplatná. Úhradu služby dohodneme osobne.' : 'Ponuku a cenník pripravujem. Online rezervácie otvorím po dokončení prevádzkových podmienok.'}</p></div><div className="personal-prices">{services.map(s => <div key={s.id}><h3>{s.name}</h3><span>{s.minutes} min</span><strong>{settings.pricesApproved ? money(s.price) : 'Pripravujeme'}</strong><Link href={`/rezervacia?sluzba=${s.id}`} aria-label={`Rezervovať ${s.name}`}>↗</Link></div>)}</div></section>
+    <section className="personal-section personal-faq"><div><p className="personal-eyebrow">DOBRÉ VEDIEŤ</p><h2>Vaše <em>otázky.</em></h2></div><div>{[['Budem počas hypnózy strácať kontrolu?', 'Stretnutie je dobrovoľné. Priebeh vám vopred vysvetlím a môžete ho kedykoľvek prerušiť alebo ukončiť.'], ['Je to zdravotná starostlivosť alebo psychoterapia?', 'Nie. Ponuka má nezdravotnícky charakter a slúži na relaxáciu, nácvik a osobný rozvoj. Ak hľadáte diagnostiku alebo liečbu, obráťte sa na príslušného zdravotníckeho odborníka.'], ['Čo mám napísať do rezervácie?', 'Stačí kontakt a výber služby. Rezervačný formulár nežiada diagnózy, lieky ani zdravotnú anamnézu.'], ['Môžem rezervovať stretnutie pre tínedžera?', 'Online formulár je zatiaľ pre dospelých. Služby pre neplnoletých pripravujem samostatne so zapojením zákonného zástupcu.']].map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+    <section id="kontakt" className="personal-contact"><p className="personal-eyebrow">ĎALŠÍ KROK JE NA VÁS</p><h2>Začnime<br /><em>rozhovorom.</em></h2><p>Osobné stretnutia v Skalici.{settings.address ? ` ${settings.address}` : ' Presné miesto zverejním pred otvorením rezervácií.'}</p><div className="personal-actions"><Link className="personal-button" href="/rezervacia">Pozrieť dostupné termíny <span aria-hidden="true">↗</span></Link>{settings.email && <a href={`mailto:${settings.email}`}>{settings.email}</a>}{settings.phone && <a href={`tel:${settings.phone.replace(/\s/g, '')}`}>{settings.phone}</a>}</div></section>
+  </main></PersonalShell>;
 }

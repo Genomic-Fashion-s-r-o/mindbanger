@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
         // 3. Send Email
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com';
-        const inviteLink = `${siteUrl}/login?email=${encodeURIComponent(email)}`;
+        const inviteLink = `${siteUrl}/mindbanger_daily/login?email=${encodeURIComponent(email)}`;
         
         const subject = lang === 'sk' 
             ? `Pozvánka do tímu ${org?.name} na Mindbanger` 

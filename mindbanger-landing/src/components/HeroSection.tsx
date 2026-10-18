@@ -17,20 +17,20 @@ export default function HeroSection() {
 
       {/* Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        
+
         {/* Left Column: Text */}
         <div className="text-center md:text-left space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse box-shadow-[0_0_8px_2px_rgba(251,191,36,0.5)]"></span>
             <span className="text-xs font-medium text-amber-100 tracking-wider uppercase">{dict?.landing?.hero?.badge || 'Mindbanger Daily'}</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]">
             {dict?.landing?.hero?.titlePart1 || 'Set yourself up for '}<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600">{dict?.landing?.hero?.titleHighlight || 'success'}</span>{dict?.landing?.hero?.titlePart2 || ' every day'}
           </h1>
-          
+
           <p className="text-lg md:text-xl text-slate-300 max-w-md mx-auto md:mx-0 leading-relaxed font-light">
-            {dict?.landing?.hero?.subtitleDesc || 'Daily mind signals for clarity, calm & focus.'} 
+            {dict?.landing?.hero?.subtitleDesc || 'Daily mind signals for clarity, calm & focus.'}
             <br className="hidden md:block" />
             {dict?.landing?.hero?.subtitleAuthor || 'Created by a Life Coach & Hypnotherapist.'}
           </p>
@@ -40,8 +40,8 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4 w-full">
-            <Link 
-              href="/join" 
+            <Link
+              href="/mindbanger_daily/join"
               className="w-full sm:w-auto py-4 px-8 rounded-full bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-bold flex items-center justify-center transition-all hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             >
               {dict?.landing?.hero?.cta || 'Start Mindbanger Daily'}
@@ -52,7 +52,7 @@ export default function HeroSection() {
 
         {/* Right Column: Visual Mockup */}
         <div className="relative flex justify-center perspective-1000 animate-in fade-in slide-in-from-right-8 duration-1000 delay-200">
-          
+
           {/* Phone Mockup Container */}
           <div className="relative w-[300px] md:w-[340px] h-[600px] border-[8px] border-slate-800 rounded-[3rem] bg-slate-950 shadow-2xl overflow-hidden ring-1 ring-white/10 transform rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
             {/* Status Bar */}
@@ -62,7 +62,7 @@ export default function HeroSection() {
 
             {/* Screen Content */}
             <div className="absolute inset-0 bg-gradient-to-b from-indigo-950 to-slate-900 flex flex-col p-6 pt-12 space-y-6">
-              
+
               {/* Card Title */}
               <div className="flex justify-between items-center text-white/50 text-xs tracking-widest uppercase">
                 <span>{dict?.landing?.hero?.widgetTitle || "Today's Signal"}</span>
@@ -72,7 +72,7 @@ export default function HeroSection() {
               {/* Today's Card */}
               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-bl-full blur-xl pointer-events-none" />
-                
+
                 <div className="flex items-center space-x-2 mb-4">
                   <span className="p-2 bg-amber-500/20 rounded-full text-amber-400">
                     <Sun size={18} />
@@ -111,7 +111,7 @@ export default function HeroSection() {
               {/* Small detail below */}
               <div className="text-center space-y-2 pt-2">
                 <div className="h-0.5 w-12 bg-white/10 mx-auto rounded-full" />
-                <p 
+                <p
                   className="text-xs text-slate-400/80 font-medium"
                   dangerouslySetInnerHTML={{ __html: dict?.landing?.hero?.widgetFooter || 'A new signal every day. <br/> A stronger inner direction over time.' }}
                 />

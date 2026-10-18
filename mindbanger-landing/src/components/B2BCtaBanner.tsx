@@ -31,7 +31,7 @@ export default function B2BCtaBanner() {
           </p>
           
           <Link 
-            href="/b2b"
+            href="/mindbanger_daily/b2b"
             className="flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-950 font-bold text-lg hover:bg-amber-100 transition-all transform hover:scale-105"
           >
             {cta.btn}

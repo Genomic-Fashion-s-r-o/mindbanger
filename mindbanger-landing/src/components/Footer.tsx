@@ -17,7 +17,7 @@ export default function Footer() {
         
         {/* Brand */}
         <div className="flex flex-col items-center md:items-start space-y-2">
-          <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80 opacity-50">
+          <Link href="/mindbanger_daily" className="flex items-center gap-3 transition-opacity hover:opacity-80 opacity-50">
             <span className="font-serif font-bold text-xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
             <Image src="/logo.png" alt="Mindbanger Daily" width={140} height={35} className="h-8 w-auto object-contain" />
           </Link>
@@ -28,12 +28,12 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex flex-wrap justify-center md:items-center space-x-6 text-sm text-slate-400 gap-y-2">
-          <Link href="/b2b" className="hover:text-white transition-colors">{dict?.landing?.footer?.b2b || 'For Teams'}</Link>
-          <Link href="/login" className="hover:text-white transition-colors">{dict?.landing?.footer?.login || 'Login'}</Link>
-          <Link href="/join" className="hover:text-white transition-colors">{dict?.landing?.navbar?.join || 'Start Membership'}</Link>
-          <Link href="/privacy" className="hover:text-white transition-colors">{dict?.landing?.footer?.privacy || 'Privacy'}</Link>
-          <Link href="/terms" className="hover:text-white transition-colors">{dict?.landing?.footer?.terms || 'Terms'}</Link>
-          <Link href="/affiliate-terms" className="hover:text-white transition-colors">{dict?.landing?.footer?.affiliateTerms || 'Affiliate Terms'}</Link>
+          <Link href="/mindbanger_daily/b2b" className="hover:text-white transition-colors">{dict?.landing?.footer?.b2b || 'For Teams'}</Link>
+          <Link href="/mindbanger_daily/login" className="hover:text-white transition-colors">{dict?.landing?.footer?.login || 'Login'}</Link>
+          <Link href="/mindbanger_daily/join" className="hover:text-white transition-colors">{dict?.landing?.navbar?.join || 'Start Membership'}</Link>
+          <Link href="/mindbanger_daily/privacy" className="hover:text-white transition-colors">{dict?.landing?.footer?.privacy || 'Privacy'}</Link>
+          <Link href="/mindbanger_daily/terms" className="hover:text-white transition-colors">{dict?.landing?.footer?.terms || 'Terms'}</Link>
+          <Link href="/mindbanger_daily/affiliate-terms" className="hover:text-white transition-colors">{dict?.landing?.footer?.affiliateTerms || 'Affiliate Terms'}</Link>
         </div>
 
         {/* Social & Copyright */}

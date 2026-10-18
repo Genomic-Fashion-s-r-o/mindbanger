@@ -274,6 +274,7 @@ try {
                 email: email
               });
               if (linkData?.properties?.action_link) {
+                // Keep the already-allowed Supabase callback; our 308 moves it to Daily.
                 magicUrl = linkData.properties.action_link + "&redirect_to=https://www.mindbanger.com/auth/callback";
               }
             } catch (e) {

@@ -13,7 +13,7 @@ interface LockedDashboardProps {
 
 export default function LockedDashboard({ title = "Today's Mindset", lang = 'en', firstName = 'Friend', isFirstVisit = false }: LockedDashboardProps) {
   const router = useRouter();
-  
+
   const translations = {
     en: {
       title: "Unlock Today's Mindset",
@@ -153,13 +153,13 @@ export default function LockedDashboard({ title = "Today's Mindset", lang = 'en'
           <h3 className="text-white text-xl font-semibold mb-4">{t.howItWorks}</h3>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={() => router.push('/checkout')}
+              onClick={() => router.push('/mindbanger_daily/checkout')}
               className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold rounded-full px-8 py-3 shadow-[0_0_20px_rgba(245,158,11,0.25)] transition-all"
             >
               {t.primaryCta}
             </button>
             <button
-              onClick={() => router.push('/checkout')}
+              onClick={() => router.push('/mindbanger_daily/checkout')}
               className="bg-slate-900 hover:bg-slate-800 border border-white/15 text-white font-semibold rounded-full px-8 py-3 transition-all"
             >
               {t.secondaryCta}
@@ -195,8 +195,8 @@ export default function LockedDashboard({ title = "Today's Mindset", lang = 'en'
             </div>
             <h3 className="text-xl font-serif text-white mb-2">{t.title}</h3>
             <p className="text-sm text-slate-400 mb-6 max-w-xs">{t.subtitle}</p>
-            <button 
-                onClick={() => router.push('/checkout')} 
+            <button
+                onClick={() => router.push('/mindbanger_daily/checkout')}
                 className="bg-amber-500 hover:bg-amber-600 text-black font-semibold rounded-full px-8 py-3 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all hover:scale-105 inline-flex items-center justify-center"
             >
                 <CreditCard className="w-4 h-4 mr-2" />
@@ -218,7 +218,7 @@ export default function LockedDashboard({ title = "Today's Mindset", lang = 'en'
           </div>
         </div>
       </div>
-      
+
       {/* Additional Teaser Elements */}
       <div className="grid grid-cols-2 gap-4 opacity-50 pointer-events-none blur-[1px]">
          <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5 h-32"></div>

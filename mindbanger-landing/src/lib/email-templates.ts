@@ -4,21 +4,21 @@ export const dailyEmailTemplates = {
     headline: "Good morning, time for your ritual.",
     body: "Today's signal is already tuned to the correct frequency. Take a moment for yourself.",
     cta: "Start today's signal",
-    url: "https://mindbanger.com/app/today"
+    url: "https://mindbanger.com/mindbanger_daily/app/today"
   },
   sk: {
     subject: "Dnešný signál je pripravený 🎵",
     headline: "Dobré ráno, čas na tvoj rituál.",
     body: "Dnešný signál je už naladený na frekvenciu. Nájdi si chvíľu pre seba.",
     cta: "Spustiť dnešný signál",
-    url: "https://mindbanger.com/app/today"
+    url: "https://mindbanger.com/mindbanger_daily/app/today"
   },
   cs: {
     subject: "Dnešní signál je připraven 🎵",
     headline: "Dobré ráno, čas na tvůj rituál.",
     body: "Dnešní signál je už naladěn na frekvenci. Najdi si chvíli pro sebe.",
     cta: "Spustit dnešní signál",
-    url: "https://mindbanger.com/app/today"
+    url: "https://mindbanger.com/mindbanger_daily/app/today"
   }
 };
 
@@ -28,21 +28,21 @@ export const welcomeEmailTemplates = {
     headline: "Welcome to Mindbanger",
     body: "Your mind has just become your most powerful tool. Get ready for daily clarity.",
     cta: "Log In",
-    url: "https://mindbanger.com/login"
+    url: "https://mindbanger.com/mindbanger_daily/login"
   },
   sk: {
     subject: "Vitajte v Mindbanger Daily",
     headline: "Vitaj v Mindbanger",
     body: "Tvoja myseľ sa práve stala tvojím najsilnejším nástrojom. Priprav sa na dennú dávku čistoty.",
     cta: "Prihlásiť sa",
-    url: "https://mindbanger.com/login"
+    url: "https://mindbanger.com/mindbanger_daily/login"
   },
   cs: {
     subject: "Vítejte v Mindbanger Daily",
     headline: "Vítej v Mindbanger",
     body: "Tvoje mysl se právě stala tvým nejsilnějším nástrojem. Připrav se na denní dávku čistoty.",
     cta: "Přihlásit se",
-    url: "https://mindbanger.com/login"
+    url: "https://mindbanger.com/mindbanger_daily/login"
   }
 };
 

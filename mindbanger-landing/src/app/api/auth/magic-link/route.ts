@@ -113,7 +113,7 @@ export async function POST(req: Request) {
               ${t.sk.subtitle} <strong>${otpCode}</strong>
           </p>
           <div style="text-align: center; margin-bottom: 32px;">
-              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/mindbanger_daily/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
                   ${t.sk.button}
               </a>
           </div>
@@ -127,7 +127,7 @@ export async function POST(req: Request) {
               ${t.cs.subtitle} <strong>${otpCode}</strong>
             </p>
             <div style="text-align: center; margin-bottom: 32px;">
-              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/mindbanger_daily/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
                 ${t.cs.button}
               </a>
             </div>
@@ -141,7 +141,7 @@ export async function POST(req: Request) {
               Your verification code is: <strong>${otpCode}</strong>
           </p>
           <div style="text-align: center; margin-bottom: 32px;">
-              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+              <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mindbanger.com'}/mindbanger_daily/auth/verify" style="display: inline-block; padding: 14px 28px; background-color: #f59e0b; color: #0f172a; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
                   Go to verification
               </a>
           </div>

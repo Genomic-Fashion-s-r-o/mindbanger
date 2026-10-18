@@ -76,8 +76,8 @@ export async function POST(req: Request) {
       ],
       mode: 'subscription',
       customer_email: contactEmail, // Pre-fill email
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/b2b/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/b2b?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/mindbanger_daily/b2b/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/mindbanger_daily/b2b?canceled=true`,
       metadata: {
         type: 'b2b_subscription',
         company_name: companyName,

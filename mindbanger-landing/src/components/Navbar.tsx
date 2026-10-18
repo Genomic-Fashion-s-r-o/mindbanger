@@ -34,7 +34,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link
-          href="/"
+          href="/mindbanger_daily"
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
         >
           <span className="font-serif font-bold text-2xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
@@ -44,14 +44,14 @@ export default function Navbar() {
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-6">
           <LanguageSwitcher />
-          <Link href="/b2b" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+          <Link href="/mindbanger_daily/b2b" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
             {dict?.landing?.navbar?.b2b || 'For Teams'}
           </Link>
-          <Link href="/login" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+          <Link href="/mindbanger_daily/login" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
             {dict?.landing?.navbar?.login || 'Login'}
           </Link>
           <Link 
-            href="/join"
+            href="/mindbanger_daily/join"
             className="px-5 py-2 rounded-full bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 text-slate-900 font-bold text-sm hover:shadow-[0_0_15px_rgba(251,191,36,0.4)] transition-all transform hover:scale-105"
           >
             {dict?.landing?.navbar?.join || 'Start Membership'}
@@ -74,21 +74,21 @@ export default function Navbar() {
             <LanguageSwitcher />
           </div>
           <Link
-            href="/b2b"
+            href="/mindbanger_daily/b2b"
             className="text-amber-400 hover:text-amber-300 py-2 text-center font-medium"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {dict?.landing?.navbar?.b2b || 'For Teams'}
           </Link>
           <Link
-            href="/login"
+            href="/mindbanger_daily/login"
             className="text-gray-300 hover:text-white py-2 text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {dict?.landing?.navbar?.login || 'Login'}
           </Link>
           <Link
-            href="/join"
+            href="/mindbanger_daily/join"
             className="w-full py-3 rounded-full bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 text-slate-900 font-bold text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >

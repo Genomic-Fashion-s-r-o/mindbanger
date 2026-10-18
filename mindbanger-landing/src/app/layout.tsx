@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import './personal.css';
 import { Suspense } from 'react';
 import AffiliateTracker from '@/components/AffiliateTracker';
 
@@ -20,13 +21,12 @@ export const viewport: Viewport = {
   themeColor: '#0f172a',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: 'Mindbanger Daily | Daily mental clarity & focus',
-  description: 'Daily mind signals for clarity, calm & focus. Created by a Life Coach & Hypnotherapist. The way your mind is set begins to shape your reality.',
+  title: 'Mgr. Miroslav Jobus | Hypnóza a mentálny tréning',
+  description: 'Hypnóza, relaxácia, coaching a mentálny tréning s Mgr. Miroslavom Jobusom v Skalici.',
   icons: {
     icon: '/favicon.jpg',
   },
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} scroll-smooth antialiased`}>
+    <html lang="sk" className={`${inter.variable} ${playfair.variable} scroll-smooth antialiased`}>
       <body className="bg-slate-950 text-slate-100 font-sans">
         <Suspense fallback={null}>
           <AffiliateTracker />

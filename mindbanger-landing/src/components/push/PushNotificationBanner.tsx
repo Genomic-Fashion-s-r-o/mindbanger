@@ -33,7 +33,7 @@ export default function PushNotificationBanner() {
     // Logic: Show banner if permission is 'default' OR (iOS and not standalone)
     // Don't show if denied (user explicitly said no) or granted (already enabled)
     // Unless we want to bug them about "Add to Home Screen" on iOS
-    
+
     const dismissed = localStorage.getItem('push_banner_dismissed');
     if (dismissed) return;
 
@@ -56,7 +56,7 @@ export default function PushNotificationBanner() {
   return (
     <div className="bg-amber-500/10 border-b border-amber-500/20 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-4xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-        
+
         <div className="flex items-center gap-3">
           <div className="p-2 bg-amber-500/20 rounded-full text-amber-500 shrink-0">
             <Bell size={20} />
@@ -72,13 +72,13 @@ export default function PushNotificationBanner() {
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
-            <a 
-              href="/checkout" 
+            <a
+              href="/mindbanger_daily/checkout"
               className="px-4 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-900 text-sm font-bold rounded-full transition-colors whitespace-nowrap text-center flex-1 sm:flex-none"
             >
               {(dict.settings as any)?.pushBannerBtn || 'Odoberať Mindsety'}
             </a>
-            <button 
+            <button
               onClick={handleDismiss}
               className="p-1.5 text-slate-500 hover:text-white rounded-full hover:bg-white/10 transition-colors"
             >

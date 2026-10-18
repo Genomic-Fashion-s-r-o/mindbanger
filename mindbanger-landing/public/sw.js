@@ -4,13 +4,13 @@ self.addEventListener('push', function(event) {
     
     const options = {
       body: data.body,
-      icon: '/icon?size=192', // Use app icon
-      badge: '/icon?size=96',  // Use app icon for badge
+      icon: '/icon.png',
+      badge: '/icon.png',
       vibrate: [100, 50, 100],
       data: {
         dateOfArrival: Date.now(),
         primaryKey: '2',
-        url: data.url || '/' // Default to root
+        url: data.url || '/mindbanger_daily/app/today' // Default to root
       }
     };
 

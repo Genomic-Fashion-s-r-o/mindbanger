@@ -69,7 +69,7 @@ export async function POST(request: Request) {
                             <h2>Získali ste novú nahrávku!</h2>
                             <p>Ahoj ${userName || ""},</p>
                             <p>Do vášho profilu v aplikácii Mindbanger bola pridaná nová súkromná nahrávka s názvom: <strong>${title}</strong>.</p>
-                            <p><a href="https://mindbanger.com/app/my-audio" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">Prehrať nahrávku v appke</a></p>
+                            <p><a href="https://mindbanger.com/mindbanger_daily/app/my-audio" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">Prehrať nahrávku v appke</a></p>
                             <p style="margin-top: 30px; font-size: 12px; color: #666;">Táto nahrávka je dostupná len pre váš profil.</p>
                         </div>
                     `
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
                 const payload = JSON.stringify({
                     title: 'Nová osobná nahrávka!',
                     body: `Práve pre vás bola nahratá nová nahrávka: ${title}`,
-                    url: '/app/my-audio'
+                    url: '/mindbanger_daily/app/my-audio'
                 });
 
                 for (const subRow of subs) {

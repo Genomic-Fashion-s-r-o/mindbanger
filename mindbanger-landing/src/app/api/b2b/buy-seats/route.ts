@@ -96,8 +96,8 @@ export async function POST(req: Request) {
       mode: 'subscription',
       customer_email: org.billing_email || session.user.email,
       billing_address_collection: 'required',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/app/organization?payment=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/app/organization?payment=cancelled`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/mindbanger_daily/app/organization?payment=success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/mindbanger_daily/app/organization?payment=cancelled`,
       metadata: {
         type: 'b2b_upgrade', // Important metadata
         org_id: org.id,

@@ -40,7 +40,7 @@ export async function POST(req: Request) {
        return NextResponse.json({ error: 'Customer not found or not subscribed yet' }, { status: 404 });
     }
 
-    const returnUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/app/organization`;
+    const returnUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/mindbanger_daily/app/organization`;
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: org.stripe_customer_id,
       return_url: returnUrl,

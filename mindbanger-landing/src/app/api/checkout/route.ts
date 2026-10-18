@@ -28,8 +28,8 @@ export async function POST(req: Request) {
         },
       ],
       // Hardcoded appUrl to avoid Vercel preview environments grabbing the success URL
-      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${appUrl}/cancel`,
+      success_url: `${appUrl}/mindbanger_daily/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/mindbanger_daily/cancel`,
       metadata: {
         userId: userId,
         ...(refMode && { refMode }),

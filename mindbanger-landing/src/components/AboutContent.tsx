@@ -18,10 +18,10 @@ export default function AboutContent() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <Link href="/" className="text-2xl font-serif text-white tracking-tight hover:opacity-80 transition-opacity">
+            <Link href="/mindbanger_daily" className="text-2xl font-serif text-white tracking-tight hover:opacity-80 transition-opacity">
               Mindbanger <span className="text-amber-500">Daily</span>
             </Link>
-            <Link href="/" className="inline-flex items-center text-sm font-medium text-slate-400 hover:text-white transition-colors">
+            <Link href="/mindbanger_daily" className="inline-flex items-center text-sm font-medium text-slate-400 hover:text-white transition-colors">
                <ArrowLeft size={16} className="mr-2" /> {t.back}
             </Link>
         </div>
@@ -122,7 +122,7 @@ export default function AboutContent() {
 
            {/* CTA */}
            <div className="text-center pt-12 border-t border-white/10">
-              <Link href="/" className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-slate-200 transition-colors shadow-lg hover:shadow-white/20">
+              <Link href="/mindbanger_daily" className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-slate-200 transition-colors shadow-lg hover:shadow-white/20">
                 {t.back}
               </Link>
            </div>

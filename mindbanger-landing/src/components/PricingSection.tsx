@@ -27,11 +27,11 @@ export default function PricingSection() {
         </h2>
 
         <div className="bg-slate-900 border border-amber-500/30 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(234,179,8,0.1)] relative overflow-hidden group hover:border-amber-400/50 transition-colors duration-300">
-          
+
           <div className="absolute -top-32 -right-32 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-amber-500/20 transition-colors" />
 
           <h3 className="text-xl font-medium text-amber-500 uppercase tracking-widest mb-4">{dict?.landing?.pricing?.planName || 'Mindbanger Daily'}</h3>
-          
+
           <div className="text-5xl md:text-6xl font-bold text-white mb-2">
             {dict?.landing?.pricing?.price || '€7.99'}
             <span className="text-xl md:text-2xl text-slate-400 font-medium font-serif normal-case ml-2">{dict?.landing?.pricing?.period || '/ month'}</span>
@@ -40,7 +40,7 @@ export default function PricingSection() {
           {dict?.landing?.pricing?.vatExcluded && (
              <p className="text-xs text-slate-500 mb-4">{dict.landing.pricing.vatExcluded}</p>
           )}
-          
+
           {dict?.landing?.pricing?.priceNote && (
             <p className="text-slate-300 text-sm font-medium mb-2">{dict.landing.pricing.priceNote}</p>
           )}
@@ -57,8 +57,8 @@ export default function PricingSection() {
           </div>
 
           <div className="pt-4 px-0 md:px-8">
-            <Link 
-              href="/join" 
+            <Link
+              href="/mindbanger_daily/join"
               className="w-full py-4 px-8 rounded-full bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600 text-slate-900 font-bold flex items-center justify-center transition-all hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.3)] hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]"
             >
               {dict?.landing?.pricing?.cta || 'Start Mindbanger Daily'}

@@ -5,7 +5,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Lock, Smartphone, KeyRound, AlertTriangle } from "lucide-react";
 import AdminPanel from "@/components/admin/AdminPanel";
 
-const ADMIN_EMAIL = 'miroslav.jobus@gmail.com';
+const ADMIN_EMAILS = ['miroslav.jobus@gmail.com', 'jobusmiro@gmail.com'];
 
 export default function MfaLock() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function MfaLock() {
     setLoading(true);
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
     
-    if (sessionError || !session || session.user.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+    if (sessionError || !session || !ADMIN_EMAILS.includes(session.user.email?.toLowerCase() || '')) {
       setAccessDenied(true);
       setLoading(false);
       return;

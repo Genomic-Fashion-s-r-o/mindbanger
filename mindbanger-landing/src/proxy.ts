@@ -13,6 +13,10 @@ const COUNTRY_TO_LANG: Record<string, string> = {
 }
 
 export async function proxy(request: NextRequest) {
+  // The personal site has no login or language cookie and does not depend on Auth.
+  if (['/', '/rezervacia', '/rezervacia/sprava', '/podmienky', '/ochrana-udajov', '/cookies', '/robots.txt', '/sitemap.xml'].includes(request.nextUrl.pathname)) {
+    return NextResponse.next();
+  }
   // 1. Initialize response
   let response = NextResponse.next({
     request: {
@@ -74,6 +78,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Avoid running middleware on static files and API endpoints (unless api endpoints need it, but we can read cookies there)
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api|mindbanger_daily/api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
