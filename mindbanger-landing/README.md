@@ -1,3 +1,7 @@
+## Production release (18 October 2026)
+
+The personal site is live at https://www.mindbanger.com/ and the original Daily site at https://www.mindbanger.com/mindbanger_daily. The existing Mindbanger Vercel project was used; Sportbooster was not changed. `NEXT_PUBLIC_SITE_URL` is configured for production as `https://www.mindbanger.com`. Sources were deployed through the authenticated Vercel API because the current Git integration returns `git_info_fail` after the repository moved to the Genomic-Fashion-s-r-o organization; reconnect that existing Git integration before relying on automatic builds. No local .env files were uploaded.
+
 ## Daily URL migration (18 October 2026)
 
 The personal presentation is served at `/`. The complete Daily page tree (including membership, B2B, auth and admin) lives under `/mindbanger_daily`. Previous page URLs redirect with 308 and retain query parameters; old root referral links go to Daily. External `/api` webhook/cron addresses and `/sw.js` remain operational; `/mindbanger_daily/api/*` aliases the same API. Assets and Next.js runtime files keep their shared URLs. The existing Supabase callback URL remains supported through the redirect. No engine data or subscriptions are moved or removed.

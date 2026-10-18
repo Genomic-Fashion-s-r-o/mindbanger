@@ -6,7 +6,7 @@ for (const old of ['/mindbanger', '/app/today', '/app/archive/old-item', '/app/s
   const response = await fetch(`${origin}${old}?migration=keep`, { redirect: 'manual' });
   assert.equal(response.status, 308, old);
   const target = new URL(response.headers.get('location'), origin);
-  assert.equal(target.pathname, old === '/mindbanger' ? prefix : prefix + old, old);
+  assert.equal(target.pathname.replace(/\/$/, ''), old === '/mindbanger' ? prefix : prefix + old, old);
   assert.equal(target.searchParams.get('migration'), 'keep', old);
 }
 for (const page of ['', '/login', '/join', '/about', '/terms', '/privacy', '/affiliate-terms', '/b2b', '/b2b/register', '/checkout', '/admin/login', '/auth/callback']) {

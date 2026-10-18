@@ -12,7 +12,11 @@ for (const path of routes) {
     console.log('OG image:', body.match(/property="og:image" content="([^"]+)/)?.[1]);
   }
   if (path === '/mindbanger_daily') assert.ok(response.headers.get('x-robots-tag')?.includes('noindex'));
-  if (path === '/sitemap.xml') assert.ok(!body.includes('/mindbanger') && !body.includes('/app/'));
+  if (path === '/sitemap.xml') {
+    const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => new URL(m[1]));
+    assert.ok(urls.length > 0);
+    assert.ok(urls.every(u => !u.pathname.startsWith('/mindbanger') && !u.pathname.startsWith('/app/')));
+  }
   console.log('PASS', path);
 }
 const admin = await fetch(origin + '/api/admin/appointments?day=2026-10-08');
