@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { bookingAdmin } from '@/lib/booking/admin';
 import { getServiceSupabase } from '@/lib/supabase-service';
 import { getBookingSettings, sameOrigin, publicError, managementToken, siteOrigin, tokenHash } from '@/lib/booking/store';
-import { settingsSchema, requestSchema } from '@/lib/booking/model';
+import { settingsSchema, requestSchema, BOOKING_PAYMENTS_ENABLED } from '@/lib/booking/model';
 import { processBookingMail } from '@/lib/booking/notifications';
 export const dynamic = 'force-dynamic';
 const changeSchema = z.object({ action: z.enum(['confirm','cancel','complete','no_show','paid','move']), id: z.uuid(), startsAt: z.iso.datetime({ offset: true }).optional() });
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
   if (!user) return NextResponse.json({ error: 'Vyžaduje sa admin s overeným druhým faktorom.' }, { status: 401 });
   try {
     const body = await request.json();
+    if (body.action === 'paid' && !BOOKING_PAYMENTS_ENABLED) return NextResponse.json({ error: 'Platobné funkcie sú vypnuté.' }, { status: 409 });
     const db = getServiceSupabase();
     if (body.action === 'settings') {
       const config = settingsSchema.safeParse(body.settings);

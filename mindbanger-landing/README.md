@@ -57,7 +57,15 @@ Legal sources reviewed: [psychological activity](https://static.slov-lex.sk/stat
 
 ## Client portal — phase 1 (18 October 2026)
 
-The free Slovak portal starts at `/ucet`, with OTP login at `/prihlasenie`. It uses a light responsive layout, own upcoming appointments, the configured online service catalogue, editable profile and existing personal recordings. `/produkty/chut-na-sladke` is an informational coming-soon page and preserves an existing login. Payments, booking activation, product entitlements and lessons are deferred; no purchase button or fictional lesson access is exposed.
+The free Slovak portal starts at `/ucet`, with OTP login at `/prihlasenie`. It uses a light responsive layout, own upcoming appointments, the configured online service catalogue, editable profile and existing personal recordings. `/produkty/chut-na-sladke` is an informational coming-soon page and preserves an existing login. Payments, product entitlements and lessons are deferred; no purchase button or fictional lesson access is exposed.
+
+## Account booking calendar (18 October 2026)
+
+`/ucet/rezervovat` provides service → calendar day → available time → a free request awaiting admin confirmation. `/rezervacia` forwards to it and retains a selected service through login. The verified Auth identity supplies the owner and email; client input cannot choose another identity or payment state. `/ucet/rezervacie` shows own upcoming requests/history and permits cancellation of a future owned booking. Confirmation, moves, weekly hours and unavailable blocks are managed at `/mindbanger_daily/admin/rezervacie` with MFA. See `docs/booking-calendar.md` for setup.
+
+Migration `20261018202341_client_online_bookings.sql` was applied to the verified Mindbanger database after isolated PostgreSQL tests and a rolled-back production-schema preflight. It adds service-role-only ownership RPCs. Assignment of `user_id` and creation of the booking happen atomically, and an idempotency key belonging to another account cannot be adopted. Existing settings and records were not changed. The owner must complete operating details, review prices/terms and save availability before enabling reservations. Payments remain disabled in both client UI and admin API.
+
+Run `npx tsx --test scripts/booking.test.ts scripts/client-booking.test.ts scripts/client-portal.test.ts`. Seven tests cover existing slot logic, DST, overlap rejection, mail queues, account ownership, retries, admin lifecycle and cancellation permissions. An isolated browser test verified the actual interactive calendar and admin components with synthetic API responses, including a slot collision and mobile layout. No production test reservation, payment or email was created for this change.
 
 Daily is disabled through `DAILY_ENABLED=false`, legacy client redirects, checkout guards and cron guards. Its engine/admin/data remain. Existing subscriptions are neither canceled nor deleted; billing webhooks remain available. Only the appointment maintenance cron remains scheduled.
 

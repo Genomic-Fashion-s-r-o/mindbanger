@@ -1,8 +1,9 @@
+import { getClientContext } from '@/lib/client-context';
 import { NextResponse } from 'next/server';
 import { after } from 'next/server';
 import { createHmac } from 'node:crypto';
 import { getBookingSettings, managementToken, publicError, sameOrigin, siteOrigin, tokenHash } from '@/lib/booking/store';
-import { requestSchema } from '@/lib/booking/model';
+import { clientBookingSchema, requestSchema } from '@/lib/booking/model';
 import { availableSlots } from '@/lib/booking/availability';
 import { getServiceSupabase } from '@/lib/supabase-service';
 import { processBookingMail } from '@/lib/booking/notifications';
@@ -24,11 +25,15 @@ export async function POST(request: Request) {
   if (!sameOrigin(request)) return NextResponse.json({ error: 'Neplatný pôvod požiadavky.' }, { status: 403 });
   if (Number(request.headers.get('content-length')) > 8000) return NextResponse.json({ error: 'Príliš veľká požiadavka.' }, { status: 413 });
   try {
-    const input = requestSchema.safeParse(await request.json());
-    if (!input.success || input.data.website) return NextResponse.json({ error: 'Skontrolujte kontaktné údaje a potvrdenia.' }, { status: 400 });
+    const context = await getClientContext();
+    if (!context) return NextResponse.json({ error: 'Prihláste sa do svojho účtu.' }, { status: 401 });
+    if (!context.accepted || !context.profile?.full_name || !context.user.email) return NextResponse.json({ error: 'Najprv dokončite svoj profil a potvrďte podmienky účtu.' }, { status: 403 });
+    if(!requestSchema.shape.name.safeParse(context.profile.full_name).success || !requestSchema.shape.email.safeParse(context.user.email).success) return NextResponse.json({error:'Skontrolujte meno a email vo svojom profile.'},{status:400});
+    const input = clientBookingSchema.safeParse(await request.json());
+    if (!input.success) return NextResponse.json({ error: 'Skontrolujte kontaktné údaje a potvrdenia.' }, { status: 400 });
     const { settings, installed } = await getBookingSettings();
     if (!installed || !settings.enabled || !process.env.BREVO_API_KEY) return NextResponse.json({ error: 'Online rezervácie ešte nie sú otvorené.' }, { status: 503 });
-    const db = getServiceSupabase(), b = input.data;
+    const db = getServiceSupabase(), b = { ...input.data, name: context.profile.full_name, email: context.user.email };
     const ip = request.headers.get('x-vercel-forwarded-for') || request.headers.get('x-forwarded-for') || 'local';
     const hash = (v: string) => createHmac('sha256', process.env.SUPABASE_SERVICE_ROLE_KEY!).update(v).digest('hex');
     const { data: allowed, error: limitError } = await db.rpc('appointment_rate_limit', { p_email_key: hash(b.email.toLowerCase()), p_ip_key: hash(ip.split(',')[0].trim()) });
@@ -36,7 +41,7 @@ export async function POST(request: Request) {
     if (!allowed) return NextResponse.json({ error: 'Odoslali ste viac žiadostí. Skúste to o hodinu.' }, { status: 429 });
     const token = managementToken();
     const manageUrl = `${siteOrigin()}/rezervacia/sprava#${token}`;
-    const { data: id, error } = await db.rpc('appointment_create', { p_service_id: b.serviceId, p_start: b.startsAt, p_name: b.name, p_email: b.email, p_phone: b.phone, p_hash: tokenHash(token), p_request_id: b.requestId, p_manage_url: manageUrl, p_legal_version: b.legalVersion });
+    const { data: id, error } = await db.rpc('appointment_create_for_client', { p_user: context.user.id, p_service_id: b.serviceId, p_start: b.startsAt, p_name: b.name, p_email: b.email, p_phone: b.phone, p_hash: tokenHash(token), p_request_id: b.requestId, p_manage_url: manageUrl, p_legal_version: b.legalVersion });
     if (error) { const result = publicError(error); return NextResponse.json({ error: result.error }, { status: result.status }); }
     // A retry must not receive a new invalid token; the original private link arrives by email.
     after(async () => { try { await processBookingMail(); } catch { /* Durable queue is retried by cron. */ } });

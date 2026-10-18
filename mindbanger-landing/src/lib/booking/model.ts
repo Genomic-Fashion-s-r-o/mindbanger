@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const TIME_ZONE = 'Europe/Bratislava';
-export const LEGAL_VERSION = '2026-10-07-v1';
+export const LEGAL_VERSION = '2026-10-18-online-v1';
+export const BOOKING_PAYMENTS_ENABLED = false;
 export const serviceSchema = z.object({
   id: z.string().regex(/^[a-z][a-z0-9-]{1,50}$/),
   name: z.string().trim().min(3).max(100),
@@ -30,7 +31,7 @@ export type BookingSettings = z.infer<typeof settingsSchema>;
 export type Service = z.infer<typeof serviceSchema>;
 export const DEFAULT_SETTINGS: BookingSettings = {
   enabled: false, legalReviewed: false, pricesApproved: false,
-  provider: '', companyId: '', registration: '', registeredAddress: '', address: '', email: '', phone: '',
+  provider: '', companyId: '', registration: '', registeredAddress: '', address: 'Online · Spôsob pripojenia dohodneme emailom.', email: '', phone: '',
   cancellationHours: 24, leadHours: 24, horizonDays: 60, bufferMinutes: 15, holdHours: 24,
   hours: Array.from({ length: 7 }, (_, day) => ({ day, open: '09:00', close: '17:00', enabled: day > 0 && day < 6 })),
   services: [
@@ -47,6 +48,7 @@ export const requestSchema = z.object({
   adult: z.literal(true), accepted: z.literal(true), website: z.string().max(200).default(''),
   requestId: z.uuid(), legalVersion: z.literal(LEGAL_VERSION),
 });
+export const clientBookingSchema = requestSchema.omit({ name: true, email: true, website: true }).strict();
 export type Appointment = {
   id: string; kind: 'booking' | 'block'; status: 'pending' | 'confirmed' | 'cancelled' | 'expired' | 'completed' | 'no_show' | 'blocked';
   starts_at: string; ends_at: string; busy_until: string; hold_until: string | null;

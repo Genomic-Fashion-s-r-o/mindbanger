@@ -22,10 +22,12 @@ export async function requireClient() {
   if (!context) redirect('/prihlasenie?next=' + encodeURIComponent(safeClientReturn((await headers()).get('x-client-return'))));
   return context;
 }
-export async function clientAppointments(userId: string) {
-  const { data, error } = await getServiceSupabase().from('appointments')
-    .select('id,starts_at,ends_at,service_name,status,paid').eq('user_id', userId)
-    .in('status', ['pending', 'confirmed']).gte('starts_at', new Date().toISOString()).order('starts_at').limit(20);
+export async function clientAppointments(userId: string, history = false) {
+  let query = getServiceSupabase().from('appointments')
+    .select('id,starts_at,ends_at,service_name,status,hold_until,location,price').eq('user_id', userId).eq('kind','booking');
+  if(!history) query=query.in('status',['pending','confirmed']).gte('starts_at',new Date().toISOString());
+  const {data,error}=await query.order('starts_at',{ascending:!history}).limit(100);
   if (error) throw new Error('Termíny sa nepodarilo načítať.');
-  return data || [];
+  const rows=(data||[]).map(a=>({...a,status:a.status==='pending'&&a.hold_until&&Date.parse(a.hold_until)<=Date.now()?'expired':a.status}));
+  return history?rows:rows.filter(a=>a.status!=='expired');
 }
