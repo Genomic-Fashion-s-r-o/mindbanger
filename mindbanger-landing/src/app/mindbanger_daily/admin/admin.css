@@ -44,5 +44,18 @@
 .admin-root input,.admin-root select,.admin-root textarea{color-scheme:light}
 .admin-root :focus-visible{outline:3px solid #72977c;outline-offset:3px}
 .admin-root [class~="text-amber-500"],.admin-root [class~="text-amber-400"]{color:#805d16}
+/* Keep helper text and unavailable controls readable without relying on opacity. */
+.admin-root .personal-form label{color:#253f36;font-size:15px;font-weight:600}
+.admin-root .personal-form small,.admin-root .personal-checkbox span{color:#3f5147;font-size:14px;line-height:1.65}
+.admin-root .personal-form input,.admin-root .personal-form select,.admin-root .personal-form textarea{color:#20382e;font-weight:500;border-color:#899b89}
+.admin-root input::placeholder,.admin-root textarea::placeholder{color:#596b5d;opacity:1;font-weight:400}
+.admin-root .admin-client-results button,.admin-root .admin-selected-client{color:#20382e;border-color:#899b89}
+.admin-root .admin-client-results strong,.admin-root .admin-selected-client strong{font-size:16px;font-weight:700}
+.admin-root .admin-client-results span,.admin-root .admin-selected-client span{color:#3f5147;font-size:15px}
+.admin-root .admin-client-results small{color:#5b481c;font-size:14px;font-weight:500}
+.admin-root button:disabled,.admin-root input:disabled,.admin-root select:disabled,.admin-root textarea:disabled{opacity:1;color:#49594d;background:#e6eadf;border-color:#9aa894;cursor:not-allowed}
+.admin-root .admin-client-results button:disabled{opacity:1;color:#253f36;background:#eef1e7;border-color:#9aa894;cursor:not-allowed}
+.admin-root .booking-admin-toolbar label,.admin-root .booking-week h2 span{color:#405447;font-weight:600}
+.admin-root .admin-free-slot>span,.admin-root .booking-admin-settings p{color:#405447}
 @media(min-width:1600px){.admin-workspace-content{padding:32px 40px 56px}.admin-navigation{padding-inline:40px}.admin-root .booking-card-actions button{font-size:14px}}
 @media(max-width:760px){.admin-navigation{padding:18px 16px;gap:16px}.admin-navigation nav{width:100%;order:3}.admin-navigation nav a{font-size:14px;padding:10px 14px}.admin-signed-in{font-size:12px;max-width:55%}.admin-workspace-content{padding:22px 16px 36px}.admin-root .booking-admin-tabs button{font-size:14px;padding:10px 13px}.admin-root .booking-admin-settings{padding:18px}.admin-root .booking-admin-fields{grid-template-columns:1fr}.admin-root .admin-calendar-scroll{max-width:100%}}
