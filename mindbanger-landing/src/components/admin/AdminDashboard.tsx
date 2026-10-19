@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { QRCodeSVG } from "qrcode.react";
 import { Lock, Smartphone, KeyRound, AlertTriangle } from "lucide-react";
-import AdminPanel from "@/components/admin/AdminPanel";
+import { useRouter } from 'next/navigation';
 
 const ADMIN_EMAILS = ['miroslav.jobus@gmail.com', 'jobusmiro@gmail.com'];
 
-export default function MfaLock() {
+export default function MfaLock({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [accessDenied, setAccessDenied] = useState(false);
   const [mfaStatus, setMfaStatus] = useState<'needs_enroll' | 'needs_verify' | 'verified'>('needs_verify');
@@ -17,9 +18,6 @@ export default function MfaLock() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    checkMfaStatus();
-  }, []);
-
   async function checkMfaStatus() {
     setLoading(true);
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
@@ -78,6 +76,9 @@ export default function MfaLock() {
     setLoading(false);
   }
 
+  void checkMfaStatus();
+  }, []);
+
   async function handleVerify(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -98,6 +99,7 @@ export default function MfaLock() {
 
       // Ak úspešne, re-loadneme session aby malo AAL2
       setMfaStatus('verified');
+      router.refresh();
     } catch (e: any) {
       setError("Invalid code. Skúste to znova.");
     }
@@ -119,7 +121,7 @@ export default function MfaLock() {
   }
 
   if (mfaStatus === 'verified') {
-    return <AdminPanel />;
+    return <>{children}</>;
   }
 
   return (

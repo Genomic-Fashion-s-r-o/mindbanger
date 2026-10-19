@@ -23,12 +23,12 @@ export default function AdminLoginPage() {
     });
 
     if (signInError) {
-      setError("Invalid credentials.");
+      setError("Nesprávny email alebo heslo.");
       setLoading(false);
       return;
     }
 
-    router.push("/mindbanger_daily/admin/dashboard");
+    router.push("/mindbanger_daily/admin/rezervacie");
     router.refresh(); // Vynuti refresh layoutu a v nom serverovej kontroly roly
   };
 
@@ -43,13 +43,13 @@ export default function AdminLoginPage() {
             <h1 className="text-3xl font-serif font-bold text-white mb-2">
               <span className="text-amber-500">Mindbanger</span> Admin
             </h1>
-            <p className="text-slate-400">Authorized personnel only</p>
+            <p className="text-slate-400">Prihláste sa do správy kalendára a služieb.</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-2">
-                Admin Email
+                Administrátorský email
               </label>
               <input
                 type="email"
@@ -92,14 +92,14 @@ export default function AdminLoginPage() {
                   Overovanie...
                 </>
               ) : (
-                "Enter System"
+                "Prihlásiť sa do kalendára"
               )}
             </button>
           </form>
 
           <div className="mt-8 pt-6 border-t border-white/10 text-center">
             <p className="text-xs text-slate-500">
-              This portal is strictly monitored.
+              Prístup je chránený dvojfaktorovým overením.
             </p>
           </div>
         </div>
