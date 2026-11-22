@@ -1,3 +1,5 @@
+import{portalHtml,portalText}from '@/lib/portal-text';
+import{normalizeLocale}from '@/lib/portal-locale';
 ﻿import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
@@ -60,19 +62,21 @@ export async function POST(request: Request) {
         // Send Email
         if (userEmail) {
             try {
+                const profile=await supabaseAdmin.from('profiles').select('preferred_language').eq('id',userId).maybeSingle(),locale=normalizeLocale(profile.data?.preferred_language);
+                const escape=(value:string)=>value.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
                 await sendEmail({
                     from: "Mindbanger <noreply@mindbanger.com>",
                     to: userEmail,
-                    subject: "Máte novú individuálnu nahrávku!",
-                    html: `
+                    subject: portalText("Máte novú individuálnu nahrávku!",locale),
+                    html: portalHtml(`
                         <div style="font-family: sans-serif; padding: 20px; color: #333;">
                             <h2>Získali ste novú nahrávku!</h2>
-                            <p>Ahoj ${userName || ""},</p>
-                            <p>Do vášho profilu v aplikácii Mindbanger bola pridaná nová súkromná nahrávka s názvom: <strong>${title}</strong>.</p>
-                            <p><a href="https://mindbanger.com/mindbanger_daily/app/my-audio" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">Prehrať nahrávku v appke</a></p>
+                            <p>Ahoj ${escape(userName || "")},</p>
+                            <p>Do vášho profilu v aplikácii Mindbanger bola pridaná nová súkromná nahrávka s názvom: <strong>${escape(title)}</strong>.</p>
+                            <p><a href="https://www.mindbanger.com/ucet/materialy" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">Prehrať nahrávku v appke</a></p>
                             <p style="margin-top: 30px; font-size: 12px; color: #666;">Táto nahrávka je dostupná len pre váš profil.</p>
                         </div>
-                    `
+                    `,locale)
                 });
             } catch(e) {
                 console.error("Email send error:", e);

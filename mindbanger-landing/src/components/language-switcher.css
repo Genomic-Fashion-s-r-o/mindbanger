@@ -1,0 +1,16 @@
+.language-switcher {
+  flex-shrink: 0;
+}
+
+.personal-header .language-switcher {
+  flex: 0 0 auto;
+}
+
+.personal-header .language-switcher select {
+  flex: none;
+  width: 64px;
+  min-width: 64px;
+  max-width: none;
+  min-height: 44px;
+  padding: 12px 10px;
+}

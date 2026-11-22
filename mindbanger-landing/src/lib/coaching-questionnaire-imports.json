@@ -1,0 +1,1265 @@
+{
+  "intake": {
+    "title": "Vstupný dotazník klienta – 18+",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Pomôžte mi lepšie pochopiť, s čím prichádzate a čo chcete spoluprácou dosiahnuť. Dotazník nie je diagnostický test ani krízový komunikačný kanál a nie je sledovaný nepretržite. Citlivé bezpečnostné otázky sú nepovinné a zobrazia sa na vyplnenie iba po osobitnom výslovnom súhlase. Nemusíte opisovať diagnózy, lieky ani prikladať zdravotnú dokumentáciu; odpoveď môžete nechať na osobný rozhovor.",
+    "questions": [
+      "Vek (18+)",
+      "Dátum stretnutia (ak už je dohodnutý)",
+      "Vybraná služba",
+      "Čo je hlavným dôvodom, prečo ste sa rozhodli vyhľadať koučing práve teraz?",
+      "Ako dlho túto situáciu alebo problém riešite?",
+      "Čo ste už vyskúšali, aby ste svoju situáciu zlepšili?",
+      "Ako veľmi vás táto situácia momentálne ovplyvňuje?",
+      "Čo konkrétne by ste chceli dosiahnuť?",
+      "Podľa čoho spoznáte, že naše stretnutia mali pre vás zmysel?",
+      "Čo vám podľa vás najviac bráni v dosiahnutí požadovanej zmeny?",
+      "Nakoľko ste pripravený/-á aktívne pracovať na zmene?",
+      "Prežívate momentálne takú psychickú alebo emocionálnu záťaž, ktorá vám výrazne sťažuje každodenné fungovanie?",
+      "Ste aktuálne v starostlivosti odborníka na duševné zdravie alebo máte odporučenú takúto starostlivosť?",
+      "Máte momentálne myšlienky na ublíženie sebe alebo niekomu inému, prípadne obavu, že nedokážete zostať v bezpečí?",
+      "Existuje zdravotná alebo iná okolnosť, ktorú by som mal poznať, aby naše stretnutie prebehlo bezpečne?",
+      "Je niečo, čo som sa vás nespýtal, ale považujete to za dôležité?",
+      "Čo by ste chceli vyriešiť alebo pochopiť už počas nášho prvého stretnutia?"
+    ],
+    "questionLayout": [
+      {
+        "section": "A. Základné informácie",
+        "kind": "age",
+        "required": true,
+        "numbered": false,
+        "hint": "Uveď iba vek, dátum narodenia netreba."
+      },
+      {
+        "section": "A. Základné informácie",
+        "kind": "short",
+        "required": false,
+        "numbered": false
+      },
+      {
+        "section": "A. Základné informácie",
+        "kind": "single",
+        "options": [
+          "Ovládanie vlastnej mysle a myšlienok",
+          "Osobný a životný koučing",
+          "Sústredenie a mentálny výkon",
+          "Relaxácia a zvládanie stresu",
+          "Hypnóza a vedená relaxácia",
+          "Osobný rozvoj, motivácia a životné zmeny"
+        ],
+        "required": true,
+        "numbered": false
+      },
+      {
+        "section": "B. Prečo prichádzate?",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Prečo prichádzate?",
+        "kind": "single",
+        "options": [
+          "Niekoľko dní alebo týždňov",
+          "Niekoľko mesiacov",
+          "Dlhšie ako rok",
+          "Nejde o problém, chcem sa rozvíjať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Prečo prichádzate?",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Prečo prichádzate?",
+        "kind": "single",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "hint": "0 = vôbec, 10 = zásadne ovplyvňuje môj každodenný život",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Očakávania a ciele",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Očakávania a ciele",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Očakávania a ciele",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Očakávania a ciele",
+        "kind": "single",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "hint": "0 = zatiaľ vôbec, 10 = som plne rozhodnutý/-á",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "D. Bezpečnosť a vhodnosť koučingu",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Nechcem odpovedať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Bezpečnosť a vhodnosť koučingu",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Nechcem odpovedať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Bezpečnosť a vhodnosť koučingu",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Chcem o tom hovoriť osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Bezpečnosť a vhodnosť koučingu",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno – vysvetlím počas rozhovoru",
+          "Nie som si istý/-á"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "E. Záver",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "E. Záver",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      }
+    ]
+  },
+  "mind-goals": {
+    "title": "Myseľ, ciele a osobná zmena",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Pomôžte mi lepšie pochopiť, s čím prichádzate a čo chcete spoluprácou dosiahnuť. Dotazník nie je diagnostický test ani krízový komunikačný kanál a nie je sledovaný nepretržite. Citlivé bezpečnostné otázky sú nepovinné a zobrazia sa na vyplnenie iba po osobitnom výslovnom súhlase. Nemusíte opisovať diagnózy, lieky ani prikladať zdravotnú dokumentáciu; odpoveď môžete nechať na osobný rozhovor.",
+    "questions": [
+      "V ktorej oblasti života momentálne pociťujete najväčšiu nespokojnosť alebo potrebu zmeny?",
+      "Ktoré myšlienky alebo situácie sa vám opakovane vracajú?",
+      "Keď sa objavia, čo zvyčajne urobíte?",
+      "Ako často máte pocit, že vás vaše myšlienky ovládajú?",
+      "Čoho sa v súvislosti so svojou situáciou najviac obávate?",
+      "Čo by ste vo svojom živote robili inak, keby vás tento strach alebo vnútorná prekážka neobmedzovali?",
+      "Ako by vyzeral váš ideálny život o jeden rok?",
+      "Akú jednu konkrétnu zmenu máte možnosť urobiť už teraz?",
+      "Čo od kouča najviac potrebujete?",
+      "Čo je pre vás pri našej spolupráci dôležité, aby ste sa cítili bezpečne a komfortne?"
+    ],
+    "questionLayout": [
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "multiple",
+        "options": [
+          "Práca a kariéra",
+          "Financie",
+          "Vzťahy",
+          "Sebavedomie",
+          "Neustále myšlienky a obavy",
+          "Motivácia a disciplína",
+          "Osobné smerovanie"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "single",
+        "options": [
+          "Zriedkavo",
+          "Občas",
+          "Často",
+          "Takmer neustále"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "multiple",
+        "options": [
+          "Pomoc s ujasnením cieľov",
+          "Otázky, ktoré mi pomôžu lepšie porozumieť sebe",
+          "Praktické mentálne techniky",
+          "Podporu a motiváciu",
+          "Pomoc s vytvorením akčného plánu"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      }
+    ]
+  },
+  "focus-performance": {
+    "title": "Sústredenie a mentálny výkon",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Pomôžte mi lepšie pochopiť, s čím prichádzate a čo chcete spoluprácou dosiahnuť. Dotazník nie je diagnostický test ani krízový komunikačný kanál a nie je sledovaný nepretržite. Citlivé bezpečnostné otázky sú nepovinné a zobrazia sa na vyplnenie iba po osobitnom výslovnom súhlase. Nemusíte opisovať diagnózy, lieky ani prikladať zdravotnú dokumentáciu; odpoveď môžete nechať na osobný rozhovor.",
+    "questions": [
+      "V akej oblasti chcete zlepšiť svoje sústredenie alebo mentálny výkon?",
+      "Kedy najčastejšie strácate sústredenie?",
+      "Čo vás najčastejšie vyrušuje?",
+      "Ako hodnotíte svoju schopnosť koncentrácie?",
+      "Ako reagujete, keď urobíte chybu alebo sa vám niečo nepodarí?",
+      "Ako často máte pocit dlhodobého psychického preťaženia?",
+      "Ako by ste opísali kvalitu svojho spánku a odpočinku?",
+      "Používate už nejaké techniky sústredenia, dýchania alebo relaxácie? Ak áno, aké?",
+      "V akej konkrétnej situácii chcete ako prvú pocítiť zlepšenie?",
+      "Ako spoznáme, že váš mentálny tréning priniesol výsledok?"
+    ],
+    "questionLayout": [
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "multiple",
+        "options": [
+          "Práca",
+          "Štúdium",
+          "Šport",
+          "Verejné vystupovanie",
+          "Každodenné fungovanie",
+          "Oddych a regenerácia"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "multiple",
+        "options": [
+          "Vlastné myšlienky",
+          "Mobil a sociálne siete",
+          "Okolie",
+          "Obavy z výsledku",
+          "Únava",
+          "Časový tlak"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "single",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "hint": "0 = veľmi slabá, 10 = výborná",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "single",
+        "options": [
+          "Zriedkavo",
+          "Občas",
+          "Často",
+          "Takmer neustále"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "single",
+        "options": [
+          "Dobrá",
+          "Kolísavá",
+          "Slabá"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Téma a očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      }
+    ]
+  },
+  "relaxation-safety": {
+    "title": "Bezpečnostný dotazník – hypnóza a vedená relaxácia",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Pomôžte mi lepšie pochopiť, s čím prichádzate a čo chcete spoluprácou dosiahnuť. Dotazník nie je diagnostický test ani krízový komunikačný kanál a nie je sledovaný nepretržite. Citlivé bezpečnostné otázky sú nepovinné a zobrazia sa na vyplnenie iba po osobitnom výslovnom súhlase. Nemusíte opisovať diagnózy, lieky ani prikladať zdravotnú dokumentáciu; odpoveď môžete nechať na osobný rozhovor.",
+    "questions": [
+      "Čo je vaším hlavným cieľom pri hypnóze alebo vedenej relaxácii?",
+      "Absolvovali ste už podobné techniky?",
+      "Máte z tejto techniky alebo jej priebehu nejaké obavy?",
+      "Zažili ste v minulosti záchvaty alebo stavy straty vedomia, ktoré môžu byť relevantné pre bezpečnosť cvičenia?",
+      "Mali ste niekedy epizódy halucinácií, výrazne narušeného vnímania reality alebo mánie?",
+      "Zažívate výraznú disociáciu, stratu kontaktu s okolím alebo silné panické reakcie?",
+      "Máte skúsenosť, že pri relaxácii, zatvorených očiach alebo mentálnych cvičeniach sa váš stav výrazne zhoršil?",
+      "Ste aktuálne pod vplyvom alkoholu alebo iných látok ovplyvňujúcich vedomie, prípadne pociťujete výrazný útlm v dôsledku liekov?",
+      "Existuje zdravotná okolnosť, pre ktorú vám odborník neodporučil podobné techniky?",
+      "Nachádzate sa momentálne v akútnej psychickej kríze alebo máte obavy o vlastnú bezpečnosť?",
+      "Vyhovuje vám predstava relaxácie so zatvorenými očami?",
+      "Máte nejaké osobné hranice alebo požiadavky, ktoré mám pri cvičení rešpektovať?",
+      "Rozumiem, že môžem cvičenie kedykoľvek prerušiť.",
+      "Rozumiem, že technika neslúži na diagnostiku ani liečbu ochorení.",
+      "Mal/-a som možnosť položiť otázky pred začatím cvičenia."
+    ],
+    "questionLayout": [
+      {
+        "section": "A. Cieľ stretnutia",
+        "kind": "multiple",
+        "options": [
+          "Hlboká relaxácia",
+          "Zvládanie bežného stresu",
+          "Sústredenie",
+          "Sebavedomie",
+          "Mentálna príprava na výkon"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "A. Cieľ stretnutia",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno, s príjemnou skúsenosťou",
+          "Áno, s nepríjemnou skúsenosťou"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "A. Cieľ stretnutia",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Nechcem odpovedať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Nechcem odpovedať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Nechcem odpovedať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Neviem"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Bezpečnostné otázky",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Chcem o tom hovoriť osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "C. Priebeh",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Radšej ponechám oči otvorené",
+          "Nie som si istý/-á"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Priebeh",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Krátke potvrdenie pred cvičením",
+        "kind": "single",
+        "options": [
+          "Potvrdzujem"
+        ],
+        "required": true,
+        "numbered": false
+      },
+      {
+        "section": "D. Krátke potvrdenie pred cvičením",
+        "kind": "single",
+        "options": [
+          "Potvrdzujem"
+        ],
+        "required": true,
+        "numbered": false
+      },
+      {
+        "section": "D. Krátke potvrdenie pred cvičením",
+        "kind": "single",
+        "options": [
+          "Potvrdzujem"
+        ],
+        "required": true,
+        "numbered": false
+      }
+    ]
+  },
+  "teen-intake": {
+    "title": "Teenage Coaching · poďme sa trochu spoznať",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Ahoj! Toto nie je test. Nemusíš mať správne odpovede a nemusíš odpovedať na všetko. Chcem vedieť, čo je pre teba dôležité. Tento formulár nie je sledovaný nepretržite; ak ide o naliehavú situáciu, nečakaj na jeho prečítanie. Citlivé otázky môžeme prebrať osobne.",
+    "questions": [
+      "Ako ťa mám oslovovať?",
+      "Koľko máš rokov?",
+      "Čo ťa momentálne najviac baví?",
+      "Čo sa ti na sebe páči alebo čo sa ti darí?",
+      "Čo ti posledné dni alebo týždne robí najväčšie starosti?",
+      "Ako sa momentálne cítiš?",
+      "V čom by si chcel/-a pomoc?",
+      "Keby si mohol alebo mohla zmeniť jednu vec vo svojom živote, čo by to bolo?",
+      "Je niečo, o čom sa ti ťažko hovorí s rodičmi alebo s inými dospelými?",
+      "Máš niekoho, komu dôveruješ a môžeš sa naňho obrátiť, keď ti je ťažko?",
+      "Cítiš sa bezpečne doma, v škole a medzi kamarátmi?",
+      "Ubližuje ti niekto, vyhráža sa ti alebo ťa núti robiť niečo, čo nechceš?",
+      "Napadlo ti v poslednom čase, že si chceš ublížiť alebo že už nechceš žiť?",
+      "Ako by si chcel/-a, aby naše rozhovory vyzerali?",
+      "Chceš sa týchto stretnutí zúčastňovať?",
+      "Je niečo, čo by si chcel/-a, aby som o tebe vedel, ešte pred naším prvým rozhovorom?"
+    ],
+    "questionLayout": [
+      {
+        "section": "Predtým, než začneme",
+        "kind": "short",
+        "required": false,
+        "numbered": false
+      },
+      {
+        "section": "Predtým, než začneme",
+        "kind": "single",
+        "options": [
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ],
+        "required": false,
+        "numbered": false
+      },
+      {
+        "section": "A. O tebe",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "A. O tebe",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "A. O tebe",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "A. O tebe",
+        "kind": "single",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "hint": "0 = veľmi zle, 10 = výborne",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Čo by si chcel/-a zmeniť?",
+        "kind": "multiple",
+        "options": [
+          "Lepšie si veriť",
+          "Menej sa stresovať",
+          "Lepšie zvládať školu",
+          "Lepšie sa sústrediť",
+          "Zlepšiť vzťahy",
+          "Vyrovnať sa s kritikou",
+          "Viac si rozumieť s rodičmi",
+          "Mať viac motivácie",
+          "Nájsť, čo ma baví a čo chcem"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Čo by si chcel/-a zmeniť?",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Čo by si chcel/-a zmeniť?",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Neviem"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "C. Bezpečie a dôvera",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Nie",
+          "Nie som si istý/-á"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "C. Bezpečie a dôvera",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Nie vždy",
+          "Nie",
+          "Radšej o tom poviem osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "C. Bezpečie a dôvera",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Radšej o tom poviem osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "C. Bezpečie a dôvera",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Neviem",
+          "Radšej o tom poviem osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Naše stretnutia",
+        "kind": "multiple",
+        "options": [
+          "Chcem sa hlavne porozprávať",
+          "Chcem praktické tipy a cvičenia",
+          "Chcem lepšie pochopiť seba",
+          "Ešte neviem"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Naše stretnutia",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Chcem si to najprv vyskúšať",
+          "Zatiaľ nechcem"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "D. Naše stretnutia",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      }
+    ]
+  },
+  "treatment-intake": {
+    "title": "Opora počas liečby · vstupný dotazník",
+    "answerMode": "text",
+    "templateVersion": "2026-10-21-source-chat-v4",
+    "text": "Keď človek prechádza ochorením, liečbou alebo zotavovaním, nemusí byť jednoduché zvládať všetko, čo táto skúsenosť prináša. Tento dotazník pomôže pripraviť podporný rozhovor. Nie je sledovaný nepretržite a nie je krízovým komunikačným kanálom. Nemusíte uvádzať diagnózu ani podrobnosti o liečbe. Citlivé otázky sú nepovinné a majú samostatný súhlas. Naša spolupráca podporuje psychickú pohodu, vnútorné zdroje, motiváciu a relaxáciu; nenahrádza zdravotnú ani psychoterapeutickú starostlivosť a nezasahuje do rozhodnutí o liečbe.",
+    "questions": [
+      "V akej životnej alebo zdravotnej situácii sa momentálne nachádzate?",
+      "Čo je pre vás v súčasnosti najťažšie?",
+      "Ako dlho táto situácia trvá?",
+      "Ste momentálne v starostlivosti lekára alebo iného zdravotníckeho odborníka?",
+      "Ako sa v súvislosti so svojím zdravotným stavom najčastejšie cítite?",
+      "Čoho sa v súvislosti so svojou situáciou najviac obávate?",
+      "Ako veľmi vás vaša situácia momentálne psychicky zaťažuje?",
+      "Čo vám dnes pomáha zvládať náročné chvíle?",
+      "Máte vo svojom okolí človeka, s ktorým môžete otvorene hovoriť o svojich pocitoch?",
+      "Čo vám aj počas náročného obdobia prináša pokoj, radosť alebo pocit zmyslu?",
+      "Čo vám momentálne najviac chýba?",
+      "Čo by ste chceli našou spoluprácou dosiahnuť?",
+      "Keby vám naše stretnutia mohli pomôcť v jednej konkrétnej veci, čo by to bolo?",
+      "Ako by ste chceli, aby vyzeralo naše prvé stretnutie?",
+      "Máte zdravotné obmedzenie alebo odporúčanie lekára, ktoré by bolo potrebné zohľadniť pri relaxačných či dychových cvičeniach?",
+      "Prežívate momentálne takú psychickú krízu, že máte obavy o svoju bezpečnosť, alebo myšlienky na ublíženie si?",
+      "Je niečo, čomu by sme sa počas rozhovorov alebo cvičení mali vyhnúť, aby ste sa cítili komfortne a bezpečne?",
+      "Čo je pre vás v tomto období života najdôležitejšie?"
+    ],
+    "questionLayout": [
+      {
+        "section": "A. Vaša aktuálna situácia",
+        "kind": "single",
+        "options": [
+          "Prechádzam liečbou ochorenia",
+          "Čaká ma liečba alebo zákrok",
+          "Zotavujem sa po ochorení alebo zákroku",
+          "Žijem s dlhodobým zdravotným obmedzením",
+          "Podporujem blízkeho človeka počas jeho liečby",
+          "Iné – preberieme osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "A. Vaša aktuálna situácia",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "A. Vaša aktuálna situácia",
+        "kind": "single",
+        "options": [
+          "Krátko, niekoľko týždňov",
+          "Niekoľko mesiacov",
+          "Viac ako rok",
+          "Dlhodobo"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "A. Vaša aktuálna situácia",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Nie",
+          "Čakám na vyšetrenie alebo začatie starostlivosti"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Psychická a emocionálna pohoda",
+        "kind": "multiple",
+        "options": [
+          "Pokojne",
+          "Plný/-á nádeje",
+          "V neistote",
+          "V strachu alebo obavách",
+          "Smutne",
+          "Nahnevane",
+          "Vyčerpane",
+          "Bezmocne",
+          "Moje pocity sa často menia"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Psychická a emocionálna pohoda",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Psychická a emocionálna pohoda",
+        "kind": "single",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "hint": "0 = vôbec, 10 = mimoriadne silno",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "B. Psychická a emocionálna pohoda",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Vnútorné zdroje a podpora",
+        "kind": "single",
+        "options": [
+          "Áno",
+          "Niekedy",
+          "Nie"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Vnútorné zdroje a podpora",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "C. Vnútorné zdroje a podpora",
+        "kind": "multiple",
+        "options": [
+          "Pokoj",
+          "Nádej",
+          "Pocit bezpečia",
+          "Motivácia",
+          "Psychická sila",
+          "Možnosť otvorene sa porozprávať",
+          "Lepší oddych"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "D. Vaše očakávania",
+        "kind": "multiple",
+        "options": [
+          "Naučiť sa lepšie zvládať bežný stres",
+          "Získať väčší vnútorný pokoj",
+          "Pracovať s obavami a negatívnymi myšlienkami",
+          "Posilniť motiváciu a pocit vlastnej kompetencie",
+          "Naučiť sa jednoduché relaxačné techniky",
+          "Lepšie zvládať každodenný život počas liečby",
+          "Mať priestor na rozhovor a podporu"
+        ],
+        "hint": "",
+        "allowOther": true,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "D. Vaše očakávania",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "D. Vaše očakávania",
+        "kind": "single",
+        "options": [
+          "Predovšetkým rozhovor",
+          "Rozhovor a jednoduchá relaxácia",
+          "Práca s myšlienkami a osobnými cieľmi",
+          "Zatiaľ neviem, chcem sa najprv porozprávať"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": true,
+        "numbered": true
+      },
+      {
+        "section": "E. Bezpečnosť",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Neviem",
+          "Chcem to vysvetliť osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "E. Bezpečnosť",
+        "kind": "single",
+        "options": [
+          "Nie",
+          "Áno",
+          "Chcem o tom hovoriť osobne"
+        ],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": true,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "E. Bezpečnosť",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      },
+      {
+        "section": "F. Záverečná otázka",
+        "kind": "text",
+        "options": [],
+        "hint": "",
+        "allowOther": false,
+        "sensitive": false,
+        "required": false,
+        "numbered": true
+      }
+    ]
+  }
+}

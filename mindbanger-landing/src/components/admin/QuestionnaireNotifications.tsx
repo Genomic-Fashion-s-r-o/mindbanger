@@ -1,0 +1,8 @@
+'use client';
+import Link from 'next/link';
+import {useEffect,useState} from 'react';
+type Notification={id:string;user:string;title:string;name:string;at:string};
+export default function QuestionnaireNotifications(){const [data,setData]=useState<{count:number;items:Notification[]}|null>(null),[failed,setFailed]=useState(false);
+ useEffect(()=>{let live=true;async function refresh(){try{const r=await fetch('/api/admin/coaching-clients?notifications=questionnaires',{cache:'no-store'});if(!r.ok)throw Error();const b=await r.json();if(live){setData(b);setFailed(false);}}catch{if(live)setFailed(true);}}void refresh();const timer=setInterval(()=>void refresh(),60000);const focus=()=>void refresh();window.addEventListener('focus',focus);window.addEventListener('coaching-questionnaires-changed',focus);return()=>{live=false;clearInterval(timer);window.removeEventListener('focus',focus);window.removeEventListener('coaching-questionnaires-changed',focus);};},[]);
+ return <details className="questionnaire-notifications"><summary>Vyplnené dotazníky{data?` · ${data.count} nových`:failed?' · nedostupné':' · načítavam'}</summary>{failed&&<p role="status">Upozornenia sa nepodarilo obnoviť. Skontroluj prihlásenie; odpovede zostávajú v kartách klientov.</p>}{data?.count===0&&<p>Žiadne neprečítané odpovede.</p>}<ul>{data?.items.map(n=><li key={n.id}><Link href={'/mindbanger_daily/admin/klienti/'+n.user+'?dotaznik='+n.id}>{n.name} · {n.title}</Link><br/><small>{new Date(n.at).toLocaleString('sk-SK',{timeZone:'Europe/Bratislava'})}</small></li>)}</ul>{!!data&&data.count>10&&<p>Zobrazených 10 najnovších. Ďalšie sa zobrazia po označení prečítaných.</p>}</details>;
+}

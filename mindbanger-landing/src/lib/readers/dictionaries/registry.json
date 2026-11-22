@@ -1,0 +1,296 @@
+[
+  {
+    "code": "af",
+    "name": "Afrikaans",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "gsw",
+    "name": "Elsässisch",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "ar",
+    "name": "العربية",
+    "dir": "rtl",
+    "ready": true
+  },
+  {
+    "code": "eu",
+    "name": "Euskara",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "nb",
+    "name": "Norsk bokmål",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "br",
+    "name": "Brezhoneg",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "ca",
+    "name": "Català",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "zh-Hant",
+    "name": "繁體中文",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "kw",
+    "name": "Kernewek",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "co",
+    "name": "Corsu",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "da",
+    "name": "Dansk",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "nl",
+    "name": "Nederlands",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "frs",
+    "name": "Seeltersk",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "en",
+    "name": "English",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "fi",
+    "name": "Suomi",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "fr",
+    "name": "Français",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "fy",
+    "name": "Frysk",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "gl",
+    "name": "Galego",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "de",
+    "name": "Deutsch",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "gu",
+    "name": "ગુજરાતી",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "he",
+    "name": "עברית",
+    "dir": "rtl",
+    "ready": true
+  },
+  {
+    "code": "hi",
+    "name": "हिन्दी",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "is",
+    "name": "Íslenska",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "ga",
+    "name": "Gaeilge",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "it",
+    "name": "Italiano",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "ja",
+    "name": "日本語",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "la",
+    "name": "Latina",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "lb",
+    "name": "Lëtzebuergesch",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "ml",
+    "name": "മലയാളം",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "gv",
+    "name": "Gaelg",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "mr",
+    "name": "मराठी",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "frr",
+    "name": "Nordfriisk",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "no",
+    "name": "Norsk",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "nn",
+    "name": "Norsk nynorsk",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "fa",
+    "name": "فارسی",
+    "dir": "rtl",
+    "ready": true
+  },
+  {
+    "code": "pl",
+    "name": "Polski",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "pt",
+    "name": "Português",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "oc",
+    "name": "Occitan",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "rm",
+    "name": "Rumantsch",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "sco",
+    "name": "Scots",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "gd",
+    "name": "Gàidhlig",
+    "dir": "ltr",
+    "ready": false
+  },
+  {
+    "code": "es",
+    "name": "Español",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "sv",
+    "name": "Svenska",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "ta",
+    "name": "தமிழ்",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "uk",
+    "name": "Українська",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "cy",
+    "name": "Cymraeg",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "yi",
+    "name": "ייִדיש",
+    "dir": "rtl",
+    "ready": true
+  },
+  {
+    "code": "sk",
+    "name": "Slovenčina",
+    "dir": "ltr",
+    "ready": true
+  },
+  {
+    "code": "cs",
+    "name": "Čeština",
+    "dir": "ltr",
+    "ready": true
+  }
+]

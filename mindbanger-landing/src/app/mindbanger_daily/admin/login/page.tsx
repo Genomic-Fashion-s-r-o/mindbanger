@@ -1,4 +1,5 @@
-"use client";
+'use client';
+import BrandLogo from '@/components/BrandLogo';
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
@@ -41,7 +42,7 @@ export default function AdminLoginPage() {
         <div className="relative z-10">
           <div className="text-center mb-10">
             <h1 className="text-3xl font-serif font-bold text-white mb-2">
-              <span className="text-amber-500">Mindbanger</span> Admin
+              <BrandLogo href="/" inverse/>
             </h1>
             <p className="text-slate-400">Prihláste sa do správy kalendára a služieb.</p>
           </div>

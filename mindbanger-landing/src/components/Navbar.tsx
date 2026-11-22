@@ -1,8 +1,9 @@
 'use client';
+import BrandLogo from '@/components/BrandLogo';
+
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { useDictionary } from './LanguageProvider';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -33,13 +34,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        <Link
-          href="/mindbanger_daily"
-          className="flex items-center gap-3 transition-opacity hover:opacity-80"
-        >
-          <span className="font-serif font-bold text-2xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
-          <Image src="/logo.png" alt="Mindbanger" width={180} height={45} className="h-10 w-auto object-contain" />
-        </Link>
+        <BrandLogo href="/mindbanger_daily" inverse/>
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center space-x-6">

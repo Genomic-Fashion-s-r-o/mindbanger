@@ -11,7 +11,7 @@ interface SendEmailParams {
  * Sends an email using Brevo (formerly Sendinblue) API via fetch.
  * Uses existing BREVO_API_KEY and configuration.
  */
-export async function sendEmail({ to, subject, html, from = 'Mindbanger <hello@mindbanger.com>', replyTo, bcc }: SendEmailParams) {
+export async function sendEmail({ to, subject, html, from = 'Miroslav Jobus | Mindbanger <miroslav@mindbanger.com>', replyTo, bcc }: SendEmailParams) {
   const apiKey = process.env.BREVO_API_KEY;
   
   if (!apiKey) {
@@ -20,7 +20,7 @@ export async function sendEmail({ to, subject, html, from = 'Mindbanger <hello@m
   }
 
   // Use a type guard for strings to be sure
-  const fromStr = from || 'Mindbanger <hello@mindbanger.com>';
+  const fromStr = from || 'Miroslav Jobus | Mindbanger <miroslav@mindbanger.com>';
 
   // Helper to parse "Name <email>" format or return generic
   const parseSender = (senderStr: string) => {
@@ -31,7 +31,7 @@ export async function sendEmail({ to, subject, html, from = 'Mindbanger <hello@m
     }
     // If no <>, assume just email or name (fallback to default email)
     if (senderStr.includes('@')) return { email: senderStr.trim(), name: 'Mindbanger' };
-    return { name: 'Mindbanger', email: 'hello@mindbanger.com' };
+    return { name: 'Mindbanger', email: 'miroslav@mindbanger.com' };
   };
 
   const senderObj = parseSender(fromStr);
@@ -53,7 +53,7 @@ export async function sendEmail({ to, subject, html, from = 'Mindbanger <hello@m
   };
 
   if (bccList) payload.bcc = bccList;
-  if (replyTo) payload.replyTo = { email: replyTo };
+  payload.replyTo = { email: replyTo || senderObj.email };
 
   try {
     const res = await fetch('https://api.brevo.com/v3/smtp/email', {

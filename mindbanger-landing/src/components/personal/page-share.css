@@ -1,0 +1,27 @@
+.page-share-compact{position:relative;flex-shrink:0;margin-left:auto}
+.personal-site .page-share-trigger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:10px 14px;border:1px solid #b4c0aa;border-radius:6px;background:transparent;color:#25473d;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.page-share-trigger:hover{background:#e9eddf}
+.page-share-trigger:disabled,.page-share-options button:disabled{opacity:.65;cursor:wait}
+.page-share-panel{max-width:1224px;margin:32px auto 60px;padding:36px 40px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;background:#e9eddf;border:1px solid #ccd5c1;border-radius:12px}
+.personal-site .page-share-panel h2{font-size:clamp(27px,3vw,36px);line-height:1.2;letter-spacing:-.025em;margin:12px 0}
+.personal-site .page-share-panel p{font-size:17px;line-height:1.65;margin:10px 0;color:#405744}
+.page-share-eyebrow{font-size:11px;letter-spacing:.1em;font-weight:600;color:#405744}
+.page-share-options{display:flex;flex-wrap:wrap;gap:10px}
+.personal-site .page-share-options>a,.personal-site .page-share-options>button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 15px;border:1px solid #abbba2;border-radius:6px;background:#fffefa;color:#25473d;font:inherit;font-size:16px;font-weight:600;line-height:1.4;text-decoration:none;cursor:pointer}
+.page-share-options svg{flex-shrink:0}
+.personal-site .page-share-options>.page-share-primary{background:#25473d;color:#fff;border-color:#25473d}
+.personal-site .page-share-options>a:hover,.personal-site .page-share-options>button:hover{background:#dce5d3;color:#25473d}
+.personal-site p.page-share-hint{font-size:15px;line-height:1.6;margin:14px 0 0;color:#405744}
+.personal-site p.page-share-status{font-size:16px;line-height:1.6;margin:12px 0 0;color:#25473d;overflow-wrap:anywhere}
+.page-share-status:empty{display:none}
+.page-share-manual{display:grid;gap:8px;margin-top:14px;font-size:16px;color:#25473d}
+.page-share-manual input{width:100%;min-width:0;padding:12px;border:1px solid #abbba2;background:#fffefa;color:#25473d;border-radius:5px;font:inherit;font-size:16px}
+.page-share-popover{position:absolute;right:0;top:calc(100% + 12px);z-index:30;width:350px;max-width:calc(100vw - 40px);padding:22px;background:#fffefa;border:1px solid #c2cdb8;border-radius:10px;box-shadow:0 12px 36px #25473d24}
+.page-share-popover-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;font-size:18px}
+.page-share-popover-heading button{flex-shrink:0;width:44px;height:44px;border:1px solid #c2cdb8;border-radius:5px;background:transparent;color:#25473d;font-size:26px;cursor:pointer}
+.page-share-popover .page-share-options{display:grid;grid-template-columns:1fr 1fr}
+.page-share-popover .page-share-options>button:last-child{grid-column:1/-1}
+@media(max-width:360px){.personal-site .page-share-options{grid-template-columns:1fr}.page-share-options>*{grid-column:1/-1}}
+@media(max-width:1100px){.page-share-panel{margin-left:24px;margin-right:24px}.personal-header:has(>.page-share-compact){gap:16px}.personal-header:has(>.page-share-compact)>nav{gap:16px}}
+@media(max-width:1000px){.personal-header:has(>.page-share-compact){display:grid;grid-template-columns:minmax(0,1fr) 44px auto;column-gap:10px}.personal-header:has(>.page-share-compact)>nav{display:none}.personal-header>.page-share-compact{grid-column:2;margin-left:0}.personal-header:has(>.page-share-compact)>.personal-mobile-menu{grid-column:3}}
+@media(max-width:760px){.page-share-panel{grid-template-columns:1fr;gap:24px;margin:24px 20px 40px;padding:26px 22px}.page-share-eyebrow{font-size:11px}.personal-site .page-share-panel p{font-size:17px}.page-share-options{display:grid;grid-template-columns:1fr 1fr}.personal-site .page-share-options>a,.personal-site .page-share-options>button{font-size:16px;padding:12px 9px}.page-share-options>.page-share-primary{grid-column:1/-1}.page-share-options>button:last-child{grid-column:1/-1}.personal-site p.page-share-hint{font-size:16px}.personal-site .page-share-trigger{min-width:44px;padding:10px}.page-share-trigger>span{display:none}.page-share-popover{position:fixed;top:auto;bottom:max(20px,env(safe-area-inset-bottom));left:20px;right:20px;width:auto;max-width:none;max-height:calc(100dvh - 40px);overflow-y:auto}}

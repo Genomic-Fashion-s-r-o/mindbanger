@@ -1,0 +1,10 @@
+'use client';
+import { useEffect,useState } from 'react';
+import type {ProgramRow} from '@/lib/online-programs/model';
+export default function ProgramPrerequisite({program,updated}:{program:ProgramRow;updated:()=>void}){
+ const [options,setOptions]=useState<{id:string;title:string}[]>([]),[required,setRequired]=useState(program.prerequisite_program_id||''),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
+ useEffect(()=>{let stopped=false;void fetch('/api/admin/member-funnels',{cache:'no-store'}).then(async response=>{const data=await response.json();if(!response.ok)throw new Error(data.error);if(!stopped)setOptions(data.programs);}).catch(()=>{if(!stopped)setMessage('Zoznam programov sa nepodarilo načítať.');});return()=>{stopped=true;};},[]);
+ useEffect(()=>setRequired(program.prerequisite_program_id||''),[program.prerequisite_program_id]);
+ async function save(){setBusy(true);setMessage('');try{const response=await fetch('/api/admin/member-funnels',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'prerequisite',programId:program.id,requiredId:required||null,revision:program.revision})});const data=await response.json();if(!response.ok)throw new Error(data.error);setMessage('Nadväznosť je uložená.');updated();}catch(error){setMessage(error instanceof Error?error.message:'Uloženie zlyhalo.');}finally{setBusy(false);}}
+ return <div className="op-stack op-tight"><hr className="op-divider"/><h3>Nadväznosť programu · voliteľné</h3><label>Program ponúknuť až po absolvovaní<select value={required} onChange={e=>setRequired(e.target.value)}><option value="">Bez podmienky · samostatný program</option>{options.filter(p=>p.id!==program.id).map(p=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label><p className="op-subtle">Podmienka sa kontroluje pri ponuke aj novom nákupe. Už zakúpený prístup klientovi zostáva.</p><div><button type="button" disabled={busy} onClick={()=>void save()}>Uložiť nadväznosť</button></div><p role="status">{message}</p></div>;
+}

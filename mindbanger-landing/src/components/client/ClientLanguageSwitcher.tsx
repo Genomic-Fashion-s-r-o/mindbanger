@@ -1,0 +1,5 @@
+'use client';
+import{usePathname}from'next/navigation';
+import{useDictionary}from'@/components/LanguageProvider';
+import{normalizeLocale,portalPath}from'@/lib/portal-locale';
+export default function ClientLanguageSwitcher(){const path=usePathname(),locale=normalizeLocale(useDictionary().lang);return <label className="client-language-picker"><span className="sr-only">{locale==='en'?'Language':locale==='cs'?'Jazyk':'Jazyk'}</span><select aria-label={locale==='en'?'Language':'Jazyk'} value={locale} onChange={async e=>{const next=normalizeLocale(e.target.value);document.cookie='user-lang='+next+'; path=/; max-age=31536000; SameSite=Lax';try{await fetch('/api/client/language',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({language:next})});}catch{}window.location.assign(portalPath(path,next)+window.location.search+window.location.hash);}}><option value="sk">Slovenčina</option><option value="cs">Čeština</option><option value="en">English</option></select></label>;}

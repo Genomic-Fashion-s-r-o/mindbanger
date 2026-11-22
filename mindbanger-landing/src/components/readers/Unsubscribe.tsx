@@ -1,0 +1,4 @@
+'use client';
+import { useEffect,useState,useRef } from 'react';
+import { readerText } from '@/lib/readers/locale';
+export default function Unsubscribe({locale}:{locale:string}){const t=readerText(locale),token=useRef('');const [ready,setReady]=useState(false),[done,setDone]=useState(false),[error,setError]=useState(false);useEffect(()=>{token.current=new URLSearchParams(window.location.hash.slice(1)).get('token')||'';history.replaceState(null,'',window.location.pathname);setReady(/^[a-f0-9]{64}$/.test(token.current));},[]);return <div className="reader-narrow"><h1>{t.withdraw}</h1><p>{t.marketingHelp}</p>{done?<p role="status">{t.saved}</p>:<button disabled={!ready} onClick={async()=>{setError(false);const r=await fetch('/api/readers/unsubscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token.current})});if(r.ok)setDone(true);else setError(true);}}>{t.withdraw}</button>}{error&&<p role="alert">{t.error}</p>}</div>;}

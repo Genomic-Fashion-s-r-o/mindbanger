@@ -6,7 +6,7 @@ const dateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(s => {
 }, 'Vyberte platný dátum.');
 const cellsSchema = z.array(z.number().int().min(0).max(47)).max(48).refine(a => new Set(a).size === a.length, 'Časy sa nesmú opakovať.');
 export const availabilityPlanSchema = z.object({
-  id: z.uuid(), from: dateSchema, to: dateSchema,
+  id: z.uuid(), name: z.string().trim().max(80).optional(), from: dateSchema, to: dateSchema,
   week: z.array(z.object({ day: z.number().int().min(0).max(6), cells: cellsSchema })).length(7)
     .refine(a => new Set(a.map(d => d.day)).size === 7, 'Vyplňte celý týždeň.'),
 }).refine(p => p.from <= p.to, 'Koniec platnosti musí byť po začiatku.');

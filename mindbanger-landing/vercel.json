@@ -3,6 +3,14 @@
     {
       "path": "/api/cron/appointments",
       "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/program-campaigns",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/readers",
+      "schedule": "*/15 * * * *"
     }
   ],
   "buildCommand": "npm run build -- --webpack"

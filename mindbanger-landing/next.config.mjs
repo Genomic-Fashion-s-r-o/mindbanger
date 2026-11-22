@@ -3,6 +3,9 @@ import { fileURLToPath } from 'node:url';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Build the application; generated previews and maintenance scripts are checked separately.
+  typescript: { tsconfigPath: 'tsconfig.app.json' },
+  outputFileTracingIncludes: { '/api/**': ['./assets/invoices/NotoSans.ttf'] },
   outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
   // Keep saved links and external callbacks working after moving Daily.
   async redirects() {
@@ -24,9 +27,13 @@ const nextConfig = {
     return [{ source: '/mindbanger_daily/api/:path*', destination: '/api/:path*' }];
   },
   async headers() {
-    const hidden = ['ucet', 'dokoncit-ucet', 'prihlasenie', 'registracia','mindbanger_daily', 'mindbanger', 'app', 'admin', 'about', 'terms', 'privacy', 'affiliate-terms', 'join', 'login', 'b2b', 'checkout', 'success', 'cancel', 'auth'];
+    const hidden = ['dotaznik','ucet', 'dokoncit-ucet', 'prihlasenie', 'registracia','mindbanger_daily', 'mindbanger', 'app', 'admin', 'about', 'terms', 'privacy', 'affiliate-terms', 'join', 'login', 'b2b', 'checkout', 'success', 'cancel', 'auth'];
     return [
-      ...['ucet', 'api/client', 'produkty', 'dokoncit-ucet', 'prihlasenie', 'registracia'].map(p => ({ source: `/${p}/:path*`, headers: [{ key: 'Cache-Control', value: 'private, no-store' }] })),
+      {source:'/dotaznik',headers:[{key:'Referrer-Policy',value:'no-referrer'},{key:'Cache-Control',value:'private, no-store'},{key:'X-Robots-Tag',value:'noindex, nofollow'}]},
+      {source:'/vitaj/:path*',headers:[{key:'Referrer-Policy',value:'no-referrer'},{key:'Cache-Control',value:'private, no-store'},{key:'X-Robots-Tag',value:'noindex, nofollow'}]},
+      {source:'/bonus/:path*',headers:[{key:'Referrer-Policy',value:'no-referrer'},{key:'Cache-Control',value:'private, no-store'}]},
+      { source: '/produkty/chut-na-sladke/potvrdenie', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }, { key: 'Cache-Control', value: 'private, no-store' }, { key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      ...['dotaznik','api/coaching/teen-questionnaire','ucet', 'api/client', 'produkty', 'dokoncit-ucet', 'prihlasenie', 'registracia'].map(p => ({ source: `/${p}/:path*`, headers: [{ key: 'Cache-Control', value: 'private, no-store' }] })),
       ...hidden.map(p => ({ source: `/${p}/:path*`, headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] })),
       { source: '/rezervacia/sprava/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }, { key: 'Referrer-Policy', value: 'no-referrer' }, { key: 'Cache-Control', value: 'no-store' }] },
       { source: '/api/appointments/:path*', headers: [{ key: 'Cache-Control', value: 'no-store' }, { key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },

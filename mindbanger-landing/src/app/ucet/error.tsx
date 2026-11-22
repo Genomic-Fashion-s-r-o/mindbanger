@@ -1,5 +1,8 @@
 'use client';
-import Link from 'next/link';
-export default function ErrorPage({ reset }: { reset: () => void }) {
-  return <section className="client-card client-empty"><h1>Účet sa nepodarilo načítať.</h1><p>Skúste stránku načítať znova. Ak problém pretrváva, prihláste sa opäť.</p><button className="client-button" onClick={reset}>Skúsiť znova</button><p><Link href="/prihlasenie">Späť na prihlásenie</Link></p></section>;
+import PortalElement from '@/components/client/PortalElement';
+import Link from '@/components/client/PortalLink';
+export default function ErrorPage({ reset }: {
+    reset: () => void;
+}) {
+    return <PortalElement as="section" className="client-card client-empty"><PortalElement as="h1">Účet sa nepodarilo načítať.</PortalElement><PortalElement as="p">Skúste stránku načítať znova. Ak problém pretrváva, prihláste sa opäť.</PortalElement><PortalElement as="button" className="client-button" onClick={reset}>Skúsiť znova</PortalElement><PortalElement as="p"><Link href="/prihlasenie">Späť na prihlásenie</Link></PortalElement></PortalElement>;
 }

@@ -5,7 +5,7 @@
     "productInfo": "Mindbanger Daily",
     "price": "7,99€",
     "perMonth": "/ měsíčně",
-    "vatExcluded": "Cena je bez DPH",
+    "vatExcluded": "Konečná spotřebitelská cena včetně DPH",
     "features": [
       "Denní mind signál",
       "Denní zaměření",
@@ -21,12 +21,12 @@
     "emailPlaceholder": "ty@priklad.cz",
     "password": "Vytvořit heslo",
     "passwordPlaceholder": "••••••••",
-    "submit": "Objednávka s povinností platby",
+    "submit": "Objednávka zavazující k platbě",
     "processing": "Zpracovává se...",
     "cancelAnytime": "Zrušit kdykoliv. Bezpečně spravováno přes Stripe.",
     "alreadyHaveAccount": "Už máš účet? Přihlas se nejdřív",
-    "digitalConsent": "Výslovně souhlasím s okamžitým dodáním digitálního obsahu a beru na vědomí, že tím ztrácím právo na odstoupení od smlouvy do 14 dnů.",
-    "ageConsent": "Potvrzuji, že je mi více než 18 let pro možnost platby, resp. 16+ let pro používání služby.",
+    "digitalConsent": "Výslovně žádám o okamžité zahájení plnění. U digitálního obsahu beru na vědomí, že zahájením dodávání ztrácím právo odstoupit; u digitální služby mohu při odstoupení uhradit poměrnou cenu již poskytnuté části.",
+    "ageConsent": "Potvrzuji, že je mi alespoň 18 let a jsem oprávněn/a uzavřít tuto placenou smlouvu.",
     "errors": {
       "default": "Došlo k neznámé chybě. Zkontrolujte své údaje a zkuste to prosím znovu.",
       "rateLimit": "Překročili jste limit žádostí. Počkejte, prosím, chvíli a zkuste to znovu.",
@@ -298,7 +298,7 @@
       "planName": "Mindbanger Daily",
       "price": "€7.99",
       "period": " / měsíc",
-      "vatExcluded": "DPH může být účtována na základě vaší země.",
+      "vatExcluded": "Konečná spotřebitelská cena včetně DPH.",
       "subtitle": "Nízké měsíční náklady pro silnější mysl každý den.",
       "features": [
         "Denní signál pro mysl",

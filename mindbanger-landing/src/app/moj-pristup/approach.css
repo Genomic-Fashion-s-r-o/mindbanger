@@ -1,0 +1,15 @@
+.approach-page{max-width:1000px;margin:0 auto;padding:48px 36px 72px;color:#25473d;overflow-wrap:anywhere}
+.approach-hero{padding-bottom:36px;border-bottom:1px solid #cbd4bf}
+.approach-hero>.personal-text-link{display:inline-block;margin-bottom:32px}
+.approach-page h1,.approach-page h2{font-family:var(--font-serif),serif;font-weight:400;letter-spacing:-.035em;line-height:1.15}
+.approach-page h1{font-size:clamp(38px,4.5vw,58px);margin:0 0 28px}
+.approach-page h1 em{color:#7b895c;font-weight:400}
+.approach-page h2{font-size:clamp(28px,3vw,38px);margin:0 0 22px}
+.approach-page p{font-size:18px;line-height:1.8;margin:0 0 20px;color:#3d554a}
+.approach-page .personal-eyebrow{font-size:13px;letter-spacing:.14em}
+.approach-page .approach-lead{font-size:21px;line-height:1.7;max-width:850px}
+.approach-details>section,.approach-methods{padding:36px 0;border-bottom:1px solid #cbd4bf}
+.approach-details>section>p:last-child,.approach-methods>p:last-child{margin-bottom:0}
+.approach-profile-link{display:inline-block;margin-top:28px}
+.approach-actions{display:flex;align-items:center;flex-wrap:wrap;gap:24px;margin-top:36px}
+@media(max-width:760px){.approach-page{padding:28px 20px 48px}.approach-page p{font-size:17px}.approach-page .approach-lead{font-size:19px}.approach-details>section,.approach-methods{padding:28px 0}.approach-actions{align-items:flex-start;flex-direction:column}.approach-actions>.personal-button{width:100%;text-align:center}}

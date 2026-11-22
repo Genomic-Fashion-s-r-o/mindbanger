@@ -1,0 +1,15 @@
+.personal-site .related-services{max-width:1240px;margin:0 auto;padding:28px 24px 36px;border-top:1px solid var(--personal-line,#d8ded4)}
+.personal-site .related-services-heading{margin-bottom:18px}
+.personal-site .related-services-heading h2{font-size:clamp(24px,3vw,32px);line-height:1.2;margin:0 0 6px}
+.personal-site .related-services-heading p{font-size:15px;line-height:1.5;margin:0;color:#536a63}
+.personal-site .related-services-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none;margin:0;padding:0}
+.personal-site .related-services-grid li{min-width:0}
+.personal-site .related-service{display:flex;align-items:center;gap:12px;height:100%;padding:10px;border:1px solid #d8ded4;border-radius:10px;background:#fffdf8;color:#23473d;text-decoration:none;box-sizing:border-box;transition:background .15s,border-color .15s}
+.personal-site .related-service:hover{background:#edf0e5;border-color:#7d8b62}
+.personal-site .related-service:focus-visible{outline:3px solid #23473d;outline-offset:3px}
+.personal-site .related-service img{width:64px;height:72px;flex:none;object-fit:cover;border-radius:6px}
+.personal-site .related-service-copy{display:flex;flex-direction:column;gap:8px;min-width:0}
+.personal-site .related-service-name{font-size:15px;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.personal-site .related-service-more{font-size:13px;line-height:1.35;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1050px){.personal-site .related-services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.personal-site .related-services{padding:24px 20px 28px}.personal-site .related-services-grid{grid-template-columns:minmax(0,1fr);gap:8px}.personal-site .related-service{gap:14px;padding:8px 10px}.personal-site .related-service img{width:56px;height:56px}.personal-site .related-service-copy{gap:4px}.personal-site .related-service-name{font-size:15px}}

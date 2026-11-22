@@ -1,0 +1,5 @@
+.performance-page .performance-tools{display:grid;gap:18px}
+.performance-page .performance-tools article{padding:26px;background:#fafbf6;border:1px solid #d5dccb;border-radius:10px}
+.performance-page .performance-tools article>p:last-child{margin:0}
+.performance-page .performance-package-heading{margin-top:36px}
+@media(max-width:760px){.performance-page .performance-tools article{padding:20px}.performance-page .confidence-hero h1{font-size:clamp(36px,8.5vw,54px)}}

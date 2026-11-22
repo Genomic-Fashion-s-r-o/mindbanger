@@ -1,4 +1,6 @@
 'use client';
+import BrandLogo from '@/components/BrandLogo';
+
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -82,9 +84,7 @@ export default function MobileNavBar() {
 
       {/* Desktop Side/Top Navigation Shell (Optional fallback for PC viewers) */}
       <nav className="hidden md:flex fixed top-0 left-0 w-full h-16 bg-slate-900 border-b border-white/5 px-8 items-center justify-between z-50">
-        <div className="font-serif font-bold text-xl text-amber-500 tracking-wide">
-          MINDBANGER
-        </div>
+        <BrandLogo href="/ucet" account inverse/>
         <ul className="flex items-center space-x-8">
             {navItems.map((item) => {
               const isActive = pathname?.startsWith(item.href);

@@ -5,7 +5,7 @@
     "productInfo": "Mindbanger Daily",
     "price": "7.99€",
     "perMonth": "/ month",
-    "vatExcluded": "Price excludes VAT",
+    "vatExcluded": "Final consumer price including VAT",
     "features": [
       "Daily mind signal",
       "Daily focus",
@@ -21,8 +21,8 @@
     "emailPlaceholder": "you@example.com",
     "cta": "Proceed to Payment",
     "secure": "Secure Payment via Stripe",
-    "digitalConsent": "I explicitly consent to the immediate delivery of digital content and acknowledge that I thereby lose my right of withdrawal within 14 days.",
-    "ageConsent": "I confirm that I am over 18 years old to make a purchase, or 16+ years old to use the service."
+    "digitalConsent": "I expressly request immediate performance. For digital content I acknowledge that supply ends my withdrawal right; for a digital service I may owe a proportionate amount for performance supplied before withdrawal.",
+    "ageConsent": "I confirm that I am at least 18 and legally able to enter into this paid contract."
   },
   "b2b": {
     "hero": {
@@ -60,8 +60,8 @@
   "processing": "Processing...",
   "cancelAnytime": "Cancel anytime. Managed securely by Stripe.",
   "alreadyHaveAccount": "Already have an account? Log in first",
-  "digitalConsent": "I explicitly consent to the immediate delivery of digital content and acknowledge that I thereby lose my right of withdrawal within 14 days.",
-  "ageConsent": "I confirm that I am over 18 years old to make a purchase, or 16+ years old to use the service.",
+  "digitalConsent": "I expressly request immediate performance. For digital content I acknowledge that supply ends my withdrawal right; for a digital service I may owe a proportionate amount for performance supplied before withdrawal.",
+  "ageConsent": "I confirm that I am at least 18 and legally able to enter into this paid contract.",
   "errors": {
     "default": "An unknown error occurred. Please check your details and try again.",
     "rateLimit": "You have exceeded the request limit. Please wait a moment and try again.",
@@ -330,7 +330,7 @@
       "planName": "Mindbanger Daily",
       "price": "€7.99",
       "period": " / month",
-      "vatExcluded": "VAT may apply based on your country.",
+      "vatExcluded": "Final consumer price including VAT.",
       "subtitle": "A small monthly cost for a stronger daily mind.",
       "features": [
         "Daily mind signal",

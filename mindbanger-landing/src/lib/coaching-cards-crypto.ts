@@ -1,0 +1,6 @@
+import 'server-only';
+import {createCipheriv,createDecipheriv,hkdfSync,randomBytes} from 'node:crypto';
+function key(){const root=process.env.BOOKING_SUPPORT_CONTEXT_KEY;if(!root||!/^[a-f0-9]{64}$/i.test(root))throw Error('card_encryption_unavailable');return Buffer.from(hkdfSync('sha256',Buffer.from(root,'hex'),Buffer.from('mindbanger-cards-v1'),Buffer.from('private-client-records'),32));}
+const aad=(id:string,user:string,purpose:string)=>Buffer.from(`coaching-card:v1:${id}:${user}:${purpose}`);
+export function sealCard(bytes:Buffer,id:string,user:string,purpose='content'){const iv=randomBytes(12),cipher=createCipheriv('aes-256-gcm',key(),iv);cipher.setAAD(aad(id,user,purpose));const body=Buffer.concat([cipher.update(bytes),cipher.final()]);return Buffer.concat([Buffer.from('CC01'),iv,cipher.getAuthTag(),body]);}
+export function openCard(bytes:Buffer,id:string,user:string,purpose='content'){if(bytes.length<32||bytes.subarray(0,4).toString()!=='CC01')throw Error('invalid_card');const decipher=createDecipheriv('aes-256-gcm',key(),bytes.subarray(4,16));decipher.setAAD(aad(id,user,purpose));decipher.setAuthTag(bytes.subarray(16,32));return Buffer.concat([decipher.update(bytes.subarray(32)),decipher.final()]);}

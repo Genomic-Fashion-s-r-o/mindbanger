@@ -1,0 +1,55 @@
+.certification-mark {
+  --certification-logo-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--certification-logo-height);
+  flex: 0 0 auto;
+}
+.certification-mark-artwork {
+  position: relative;
+  display: block;
+  max-width: 190px;
+  overflow: hidden;
+  flex: 0 1 auto;
+}
+.certification-mark .certification-mark-artwork img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  margin: 0;
+  object-fit: fill;
+}
+.personal-qualifications .qualification-logos figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 20px 20px;
+}
+.personal-qualifications .qualification-logos figure figcaption { margin: 0; line-height: 1.4; }
+.teen-page .teen-qualifications .teen-certification-logos { align-items: stretch; }
+.teen-page .teen-qualifications .teen-certification-logos li {
+  height: auto;
+  min-height: 112px;
+  padding: 16px 12px;
+  gap: 12px;
+}
+.teen-certification-logos .certification-mark { --certification-logo-height: 52px; }
+.teen-certification-logos .certification-mark-artwork { max-width: 130px; }
+.teen-page .teen-certification-logos li > .certification-label {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #43594c;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .qualification-logos .certification-mark { --certification-logo-height: 68px; }
+  .personal-qualifications .qualification-logos figure { padding: 20px 14px 18px; gap: 14px; }
+}
+@media (max-width: 560px) {
+  .teen-page .teen-qualifications .teen-certification-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .teen-page .teen-qualifications .teen-certification-logos li { padding: 16px 10px; }
+}

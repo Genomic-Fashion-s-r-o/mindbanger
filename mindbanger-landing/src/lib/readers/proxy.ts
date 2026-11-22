@@ -1,0 +1,5 @@
+import { createServerClient } from '@supabase/ssr';
+import { NextResponse,type NextRequest } from 'next/server';
+import { readerLocaleFromPath } from './locale';
+export async function readerProxy(request:NextRequest){const locale=readerLocaleFromPath(request.nextUrl.pathname),h=new Headers(request.headers);h.set('x-reader-locale',locale);h.set('x-site-locale',locale==='sk'||locale==='cs'?locale:'en');let response=NextResponse.next({request:{headers:h}});response.headers.set('Referrer-Policy','no-referrer');response.headers.set('Cache-Control','private, no-store');
+ if(request.nextUrl.pathname.startsWith('/readers/')){const db=createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!,process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,{cookies:{getAll:()=>request.cookies.getAll(),setAll(values){values.forEach(({name,value})=>request.cookies.set(name,value));response=NextResponse.next({request:{headers:h}});values.forEach(({name,value,options})=>response.cookies.set(name,value,options));response.headers.set('Referrer-Policy','no-referrer');response.headers.set('Cache-Control','private, no-store');}}});await db.auth.getUser();}return response;}

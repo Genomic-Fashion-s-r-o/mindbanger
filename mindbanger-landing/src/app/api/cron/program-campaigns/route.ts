@@ -1,0 +1,4 @@
+import {processProgramWelcome} from '@/lib/program-welcome';
+import {NextResponse} from 'next/server';import {timingSafeEqual} from 'node:crypto';import {processProgramCampaigns} from '@/lib/program-campaigns';
+export const dynamic='force-dynamic';export const maxDuration=180;
+export async function GET(request:Request){const secret=process.env.CRON_SECRET,incoming=request.headers.get('authorization')||'',expected='Bearer '+secret;if(!secret||incoming.length!==expected.length||!timingSafeEqual(Buffer.from(incoming),Buffer.from(expected)))return NextResponse.json({error:'Unauthorized'},{status:401});try{const welcome=await processProgramWelcome();return NextResponse.json({...await processProgramCampaigns(),welcome});}catch{return NextResponse.json({error:'Campaign maintenance unavailable'},{status:503});}}

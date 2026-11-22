@@ -1,10 +1,11 @@
 'use client';
+import BrandLogo from '@/components/BrandLogo';
+
 
 import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { ArrowRight, Loader2, Check } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useDictionary } from '@/lib/i18n-client';
 import { useEffect } from 'react';
@@ -13,6 +14,7 @@ import { CookieBanner } from '@/components/CookieBanner';
 function CheckoutContent() {
   const { dict, lang, mounted } = useDictionary();
   const t = dict.checkout;
+  const c=(sk:string,cs:string,en:string)=>lang==='cs'?cs:lang==='en'?en:sk;
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'error' | 'success'; text: string } | null>(null);
@@ -63,7 +65,7 @@ function CheckoutContent() {
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, userId, refMode, refCode }),
+        body: JSON.stringify({ email, refMode, refCode,termsAccepted:true,performanceRequested:true,adultConfirmed:true,termsVersion:'daily-2026-10-21-v2',locale:lang }),
       });
 
       const { url, error: stripeError } = await res.json();
@@ -94,10 +96,7 @@ function CheckoutContent() {
       
       {/* Main Content Info */}
       <div className="relative z-10 max-w-2xl w-full flex flex-col items-center text-center space-y-8">
-         <Link href="/mindbanger_daily" className="flex items-center gap-3 transition-opacity hover:opacity-80">
-          <span className="font-serif font-bold text-2xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
-          <Image src="/logo.png" alt="Mindbanger Daily" width={180} height={45} className="h-10 w-auto object-contain" />
-        </Link>
+         <BrandLogo href="/mindbanger_daily" inverse/>
         
         <div className="space-y-4">
            <h1 className="text-4xl md:text-5xl font-serif text-white leading-tight">
@@ -139,6 +138,13 @@ function CheckoutContent() {
             )}
 
             <div className="space-y-3 pb-2 text-left bg-slate-950/30 p-4 rounded-xl">
+              <p className="text-xs text-slate-300 leading-relaxed">
+                {c('Predávajúci: Genomic Fashion s.r.o., IČO 55662072, IČ DPH SK2122052933. Uvedená mesačná cena je konečná a zahŕňa DPH. Predplatné sa automaticky obnovuje každý mesiac až do zrušenia.','Prodávající: Genomic Fashion s.r.o., IČO 55662072, IČ DPH SK2122052933. Uvedená měsíční cena je konečná a zahrnuje DPH. Předplatné se automaticky obnovuje každý měsíc až do zrušení.','Seller: Genomic Fashion s.r.o., company no. 55662072, VAT ID SK2122052933. The monthly price shown is final and includes VAT. The subscription renews monthly until cancelled.')}
+              </p>
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <div className="flex items-center h-5 mt-0.5"><input type="checkbox" required className="w-4 h-4 rounded border-slate-700 bg-slate-900/50 text-amber-500 focus:ring-amber-500 focus:ring-offset-slate-900 focus:ring-2 cursor-pointer transition-colors" /></div>
+                <span className="text-xs text-slate-400 leading-tight group-hover:text-slate-300 transition-colors">{c('Súhlasím s','Souhlasím s','I agree to the')} <Link className="underline" href="/mindbanger_daily/terms" target="_blank">{c('VOP online programov','podmínkami online programů','online-program terms')}</Link> {c('a oboznámil/a som sa s','a seznámil/a jsem se s','and I have read the')} <Link className="underline" href="/mindbanger_daily/privacy" target="_blank">{c('ochranou osobných údajov','ochranou osobních údajů','privacy notice')}</Link>.</span>
+              </label>
               <label className="flex items-start gap-3 cursor-pointer group">
                 <div className="flex items-center h-5 mt-0.5">
                   <input
@@ -178,7 +184,7 @@ function CheckoutContent() {
                 </>
               ) : (
                 <>
-                  {t.cta || 'Upgrade Now'}
+                  {t.submit || c('Objednávka s povinnosťou platby','Objednávka zavazující k platbě','Order with obligation to pay')}
                   <ArrowRight size={20} />
                 </>
               )}

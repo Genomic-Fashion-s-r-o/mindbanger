@@ -1,0 +1,22 @@
+.personal-site .topic-context{font-size:16px;line-height:1.7;padding:18px 20px;background:#e9eddf;border-left:3px solid #839260;border-radius:0 8px 8px 0;color:#3d554a;margin:24px 0}
+.personal-site .topic-booking-actions{display:flex;flex-wrap:wrap;gap:12px;width:100%;text-align:left}
+.personal-site .topic-booking-actions .personal-button{font-size:16px;line-height:1.45;padding:14px 18px;white-space:normal;min-height:52px;text-align:center;max-width:100%}
+.personal-site .topic-button-outline{background:transparent;color:#25473d!important;border:1px solid #25473d}
+.personal-site .topic-button-outline:hover{background:#e9eddf}
+.personal-site .topic-booking-offer{padding:28px;background:#e9eddf;border:1px solid #cbd5bf;border-radius:12px;text-align:left;min-width:0}
+.personal-site .topic-booking-offer>h3{font-size:30px;margin:0 0 22px}
+.personal-site .topic-booking-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.personal-site .topic-booking-grid article{padding:0 0 20px;border-bottom:1px solid #cbd5bf;min-width:0}
+.personal-site .topic-booking-grid article:last-child{padding-bottom:0;border:0}
+.personal-site .topic-booking-grid h4{font-size:25px;line-height:1.2;margin:0 0 10px;font-family:var(--font-serif),Georgia,serif;font-weight:400}
+.personal-site .topic-booking-grid p{font-size:16px;line-height:1.7;margin:10px 0 18px}
+.personal-site .topic-booking-grid .topic-booking-price{font-size:21px;font-weight:600}
+.personal-site .topic-booking-grid .personal-button{width:100%;white-space:normal;font-size:16px;text-align:center}
+.personal-site .topic-booking-note{font-size:14px;line-height:1.6;margin:20px 0 0}
+.personal-site .belief-final .topic-booking-actions{justify-content:center}
+.personal-site .teen-final .topic-booking-actions{min-width:0;flex-shrink:1}
+.personal-site .topic-offer-wide{margin-top:32px;grid-column:1/-1}
+.personal-site .topic-offer-wide .topic-booking-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.personal-site .topic-offer-wide .topic-booking-grid article{border:0;padding:0;display:flex;flex-direction:column;align-items:flex-start}
+.personal-site .topic-offer-wide .topic-booking-grid .personal-button{margin-top:auto}
+@media(max-width:760px){.personal-site .topic-booking-actions{flex-direction:column}.personal-site .topic-booking-actions .personal-button{width:100%}.personal-site .topic-booking-offer{padding:24px}.personal-site .topic-offer-wide .topic-booking-grid{grid-template-columns:1fr}.personal-site .topic-booking-offer>h3{font-size:27px}}
