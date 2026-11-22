@@ -31,14 +31,19 @@ export default async function SoulBookPage({ searchParams }: { searchParams: Pro
     </header>
     <main id="book-content">
       <section className="soul-hero" aria-labelledby="book-title">
-        <Image src="/images/books/soul-encounter.png" alt="Two people on separate shores, connected by an arc of golden light above a quiet sea" fill priority sizes="100vw" className="soul-hero-image"/>
+        <Image src="/images/books/soul-encounter.png" alt="" fill sizes="100vw" className="soul-hero-image"/>
         <div className="soul-hero-shade"/>
-        <div className="soul-hero-copy soul-width">
+        <div className="soul-hero-layout soul-width">
+        <div className="soul-hero-copy">
           <p className="soul-eyebrow">A BOOK ABOUT LOVE, TIME & CONSCIOUSNESS</p>
           <h1 id="book-title">The Soul<br/>That Met <em>Itself</em></h1>
           <p className="soul-hero-intro">What if meeting another person<br className="soul-desktop-break"/> could bring you back to yourself?</p>
           <a className="soul-button" href="#inside">Discover the book</a>
-          <p className="soul-edition">The English edition</p>
+          <p className="soul-edition">Miroslav Jobus · English edition</p>
+        </div>
+        <figure className="soul-book-figure">
+          <Image src="/images/books/the-soul-that-met-itself-3d.png" alt="3D English cover of The Soul That Met Itself by Miroslav Jobus" width={1122} height={1402} preload sizes="(max-width: 620px) 74vw, (max-width: 900px) 40vw, 430px" className="soul-book-cover"/>
+        </figure>
         </div>
         <p className="soul-hero-note">ONE SOUL. TWO LIVES. TWO FREE WILLS.</p>
       </section>
