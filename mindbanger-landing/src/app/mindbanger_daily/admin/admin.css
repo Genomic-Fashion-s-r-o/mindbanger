@@ -57,5 +57,25 @@
 .admin-root .admin-client-results button:disabled{opacity:1;color:#253f36;background:#eef1e7;border-color:#9aa894;cursor:not-allowed}
 .admin-root .booking-admin-toolbar label,.admin-root .booking-week h2 span{color:#405447;font-weight:600}
 .admin-root .admin-free-slot>span,.admin-root .booking-admin-settings p{color:#405447}
+/* Preserve readable status text; distinguish history with a surface instead of fading the card. */
+.admin-root .admin-calendar-legend span:nth-child(2){color:#79520d}
+.admin-root .booking-card.status-cancelled,.admin-root .booking-card.status-expired{opacity:1;background:#f0f1eb;border-color:#899b89}
+.admin-root .booking-card-actions button,.admin-root .booking-admin-toolbar>button,.admin-root .availability-preview button{min-height:44px}
+.admin-root .admin-assignment-heading>button{width:44px;height:44px;font-size:24px;line-height:1}
+.admin-root .admin-client-results button{min-height:60px}
+.admin-root .personal-form input[type=radio]{width:20px;min-height:20px;height:20px;margin-top:4px;accent-color:#25473d;flex-shrink:0}
 @media(min-width:1600px){.admin-workspace-content{padding:32px 40px 56px}.admin-navigation{padding-inline:40px}.admin-root .booking-card-actions button{font-size:14px}}
 @media(max-width:760px){.admin-navigation{padding:18px 16px;gap:16px}.admin-navigation nav{width:100%;order:3}.admin-navigation nav a{font-size:14px;padding:10px 14px}.admin-signed-in{font-size:12px;max-width:55%}.admin-workspace-content{padding:22px 16px 36px}.admin-root .booking-admin-tabs button{font-size:14px;padding:10px 13px}.admin-root .booking-admin-settings{padding:18px}.admin-root .booking-admin-fields{grid-template-columns:1fr}.admin-root .admin-calendar-scroll{max-width:100%}}
+@media(max-width:760px){
+ .admin-root .admin-navigation nav a{font-size:15px;min-height:44px}
+ .admin-root .booking-admin-tabs button,.admin-root .booking-card-actions button,.admin-root .booking-admin-toolbar>button,.admin-root .availability-preview button{font-size:15px;font-weight:600;line-height:1.5;min-height:44px}
+ .admin-root .booking-card-actions button{padding:10px 12px}
+ .admin-root .personal-button,.admin-root .personal-text-link{font-size:16px;min-height:44px;line-height:1.5}
+ .admin-root .personal-button{white-space:normal;text-align:center}
+ .admin-root .booking-admin-toolbar{gap:12px}
+ .admin-root .booking-admin-toolbar label{min-width:0;max-width:100%}
+ .admin-root .booking-admin-toolbar input,.admin-root .booking-admin-toolbar select{max-width:100%;min-width:0}
+ .admin-root .booking-week.admin-week-grid{grid-template-columns:repeat(7,minmax(190px,1fr));min-width:1402px}
+ .admin-root .availability-grid button{min-height:44px;font-size:15px}
+ .admin-root .personal-form .personal-checkbox{font-size:15px;line-height:1.65}
+}

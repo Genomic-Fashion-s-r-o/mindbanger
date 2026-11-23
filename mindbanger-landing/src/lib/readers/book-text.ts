@@ -1,0 +1,12 @@
+import en from './book-copy/en.json';
+import cs from './book-copy/cs.json';
+import sk from './book-copy/sk.json';
+import es from './book-copy/es.json';
+import fr from './book-copy/fr.json';
+import de from './book-copy/de.json';
+import it from './book-copy/it.json';
+import pl from './book-copy/pl.json';
+import { asBookLocale, type BookLocale } from './book-languages';
+export type BookText = typeof en;
+export const bookDictionaries: Record<BookLocale, BookText> = { en, cs, sk, es, fr, de, it, pl };
+export const bookText = (locale: string): BookText => bookDictionaries[asBookLocale(locale) || 'en'];

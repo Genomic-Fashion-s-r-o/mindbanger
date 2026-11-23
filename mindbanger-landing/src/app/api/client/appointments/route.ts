@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { getClientContext } from '@/lib/client-context';
 import { getServiceSupabase } from '@/lib/supabase-service';
 import { sameOrigin, publicError } from '@/lib/booking/store';
+import { reconcileAuthorizations } from '@/lib/booking/authorization';
+import { processVideoJobs } from '@/lib/booking/video-jobs';
 import { processBookingMail } from '@/lib/booking/notifications';
 const cancelSchema = z.object({ id: z.uuid(), action: z.literal('cancel') }).strict();
 export async function POST(request: Request) {
@@ -16,7 +18,7 @@ export async function POST(request: Request) {
     const { error } = await getServiceSupabase().rpc('appointment_cancel_for_client', { p_user: context.user.id, p_id: input.data.id });
     if (error?.message?.includes('booking_not_found')) return NextResponse.json({ error: 'Rezervácia sa nenašla.' }, { status: 404 });
     if (error) { const e = publicError(error); return NextResponse.json({ error: e.error }, { status: e.status }); }
-    after(async () => { try { await processBookingMail(); } catch { /* Durable cron retry. */ } });
+    after(async () => { try { await reconcileAuthorizations();await processVideoJobs();await processBookingMail(); } catch { /* Durable cron retry. */ } });
     return NextResponse.json({ success: true });
   } catch { return NextResponse.json({ error: 'Rezerváciu sa nepodarilo zrušiť. Skúste to znova.' }, { status: 503 }); }
 }

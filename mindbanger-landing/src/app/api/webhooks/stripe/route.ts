@@ -40,6 +40,9 @@ export async function POST(req: Request) {
 
   const supabase = await createAdminClient();
 
+  // Coaching is verified only by the dedicated Milkam webhook.
+  if ((event.data.object as Stripe.Checkout.Session).metadata?.type === 'coaching_appointment') return NextResponse.json({ received: true });
+
   const leaseToken = randomUUID();
   const { data: claim, error: claimError } = await supabase.rpc('claim_stripe_event', { p_id: event.id, p_type: event.type, p_token: leaseToken });
   if (claimError) return new NextResponse('Event storage unavailable', { status: 500 });

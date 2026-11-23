@@ -1,0 +1,11 @@
+.auth-methods{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:24px 0}
+.auth-methods button{min-height:52px;padding:12px;border:1px solid #b6c3b4;border-radius:6px;background:#fffefa;color:#24483f;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.auth-methods button[aria-pressed=true]{background:#24483f;color:#fff;border-color:#24483f}
+.auth-methods button:disabled{cursor:wait;opacity:.7}
+.client-auth-card .client-footer-links{margin-top:30px;flex-wrap:wrap}
+.client-auth-card .auth-recovery{margin-top:18px;line-height:1.5;text-align:left}
+.auth-email-sent{overflow-wrap:anywhere}.auth-email-sent>.client-text-link{display:block;margin-top:20px;text-align:left;line-height:1.6}
+.auth-callback{display:grid;place-items:center;padding:32px 20px}.auth-callback>.client-card{width:min(620px,100%);padding:40px}.auth-callback .client-brand{display:block;margin-bottom:32px}.auth-callback p{overflow-wrap:anywhere}
+.client-password-card{max-width:850px;margin-top:28px}.client-password-card .client-form{max-width:650px;margin-top:24px}.client-password-card h2{font-size:32px}.client-password-card .client-check{font-size:15px}
+@media(max-width:700px){.auth-methods{gap:7px}.auth-methods button{font-size:14px;padding:10px 8px}.client-auth-grid{margin-top:28px}.client-auth-intro h1{font-size:38px}.client-auth-intro>p{font-size:16px}.auth-callback>.client-card{padding:26px}.client-password-card h2{font-size:28px}}
+@media(max-width:700px){.client-auth-intro>p{display:none}.client-auth-intro h1{font-size:32px;margin:0}.client-auth-grid{gap:24px}}

@@ -1,0 +1,4 @@
+import { NextResponse } from 'next/server';
+import { getServiceSupabase } from '@/lib/supabase-service';
+import { result } from '@/lib/readers/store';
+export async function GET(request:Request,{params}:{params:Promise<{code:string}>}){const {code}=await params;if(!/^[a-zA-Z0-9_-]{4,40}$/.test(code))return new Response('Not found',{status:404});const r=result(await getServiceSupabase().from('reader_entry_links').select('edition_id').eq('code',code).maybeSingle());if(!r)return new Response('Not found',{status:404});const e=result(await getServiceSupabase().from('reader_editions').select('slug,status,reader_books(slug,status)').eq('id',r.edition_id).single())as unknown as {slug:string;status:string;reader_books:{slug:string;status:string}};if(e.status!=='published'||e.reader_books.status!=='published')return NextResponse.redirect(new URL('/readers/en',request.url),307);return NextResponse.redirect(new URL('/books/'+e.reader_books.slug+'/'+e.slug,request.url),307);}

@@ -1,0 +1,18 @@
+import { z } from 'zod';
+export const READER_TERMS='readers-account-2026-11-20';
+export const MARKETING_VERSION='readers-marketing-2026-11-20';
+export const BUCKET='reader-assets';
+export const MAX_BYTES=250*1024*1024;
+export const mimeTypes=['application/pdf','audio/mpeg','audio/mp4','audio/wav','audio/x-wav','audio/ogg','video/mp4','image/jpeg','image/png','image/webp'] as const;
+export const slug=z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(100);
+export const status=z.enum(['draft','published','archived']);
+export const bookInput=z.object({id:z.uuid().nullable(),revision:z.number().int().min(0),slug,title:z.string().trim().min(2).max(200),author:z.string().trim().min(2).max(200),status}).strict();
+export const editionInput=z.object({id:z.uuid().nullable(),revision:z.number().int().min(0),book_id:z.uuid(),slug,locale:z.string().max(35),title:z.string().trim().min(2).max(200),format:z.enum(['paperback','hardcover','kindle']),description:z.string().max(5000),public_body:z.string().max(20000),welcome:z.string().max(5000),cover_url:z.union([z.literal(''),z.url().refine(v=>v.startsWith('https://'))]),isbn_asin:z.string().max(40),status,club_invitation:z.boolean()}).strict();
+export const materialInput=z.object({id:z.uuid().nullable(),revision:z.number().int().min(0),book_id:z.uuid(),edition_id:z.uuid().nullable(),locale:z.string().max(35),title:z.string().trim().min(2).max(200),description:z.string().max(5000),asset_id:z.uuid().nullable(),visibility:z.enum(['public','members']),status}).strict();
+export type Book={id:string;slug:string;title:string;author:string;status:z.infer<typeof status>;revision:number};
+export type Edition=z.infer<typeof editionInput>&{id:string};
+export type Material=z.infer<typeof materialInput>&{id:string;published_at:string|null};
+export type Preferences={is_reader?:boolean;locale:string;audio_locale:string;marketing:boolean;suppressed:boolean};
+export type Member={id:string;book_id:string;status:string;joined_at:string;title:string;email:string;locale:string;marketing:boolean;editions:{id:string;title:string;locale:string;format:string}[]|null};
+export const escapeHtml=(v:string)=>v.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
+export const csvCell=(v:unknown)=>'"'+String(v??'').replace(/^[=+@\-\t\r]/,' $&').replaceAll('"','""')+'"';

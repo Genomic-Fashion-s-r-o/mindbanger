@@ -2,6 +2,8 @@ import { NextResponse, after } from 'next/server';
 import { z } from 'zod';
 import { getServiceSupabase } from '@/lib/supabase-service';
 import { publicError, sameOrigin, tokenHash } from '@/lib/booking/store';
+import { reconcileAuthorizations } from '@/lib/booking/authorization';
+import { processVideoJobs } from '@/lib/booking/video-jobs';
 import { processBookingMail } from '@/lib/booking/notifications';
 export const dynamic = 'force-dynamic';
 const schema = z.object({ token: z.string().regex(/^[a-f0-9]{64}$/), action: z.enum(['view', 'cancel']) });
@@ -11,12 +13,12 @@ export async function POST(request: Request) {
     const input = schema.safeParse(await request.json());
     if (!input.success) return NextResponse.json({ error: 'Odkaz nie je platný.' }, { status: 400 });
     const db = getServiceSupabase(), hash = tokenHash(input.data.token);
-    const { data: b, error } = await db.from('appointments').select('id,status,starts_at,ends_at,service_name,price,location,hold_until').eq('manage_hash', hash).single();
+    const { data: b, error } = await db.from('appointments').select('id,service_id,status,starts_at,ends_at,service_name,price,location,hold_until,paid,topic,payment_review,funding_type,payment_flow,payment_state,authorization_expires_at,meeting_url,meeting_event_id,meeting_state').eq('manage_hash', hash).single();
     if (error || !b) return NextResponse.json({ error: 'Odkaz sa nenašiel alebo už neplatí.' }, { status: 404 });
     if (input.data.action === 'cancel') {
       const { error: updateError } = await db.rpc('appointment_change', { p_id: b.id, p_action: 'cancel', p_actor: 'client', p_hash: hash });
       if (updateError) { const result = publicError(updateError); return NextResponse.json({ error: result.error }, { status: result.status }); }
-      after(async () => { try { await processBookingMail(); } catch { /* Retry through cron. */ } });
+      after(async () => { try { await reconcileAuthorizations();await processVideoJobs();await processBookingMail(); } catch { /* Retry through cron. */ } });
       return NextResponse.json({ booking: { ...b, status: 'cancelled' } });
     }
     const status = b.status === 'pending' && Date.parse(b.hold_until) <= Date.now() ? 'expired' : b.status;

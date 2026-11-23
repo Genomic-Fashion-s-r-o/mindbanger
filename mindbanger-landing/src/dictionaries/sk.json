@@ -5,7 +5,7 @@
     "productInfo": "Mindbanger Daily",
     "price": "7,99€",
     "perMonth": "/ mesačne",
-    "vatExcluded": "Cena je bez DPH",
+    "vatExcluded": "Konečná spotrebiteľská cena vrátane DPH",
     "features": [
       "Denný mind signál",
       "Denné zameranie",
@@ -21,8 +21,8 @@
     "emailPlaceholder": "ty@priklad.sk",
     "cta": "Prejsť k platbe",
     "secure": "Bezpečná platba cez Stripe",
-    "digitalConsent": "Výslovne súhlasím s okamžitým dodaním digitálneho obsahu a beriem na vedomie, že tým strácam právo na odstúpenie od zmluvy do 14 dní.",
-    "ageConsent": "Potvrdzujem, že mám viac ako 18 rokov pre možnosť platby, resp. 16+ rokov pre používanie služby."
+    "digitalConsent": "Výslovne žiadam o okamžité začatie poskytovania. Pri digitálnom obsahu beriem na vedomie, že začatím dodávania strácam právo na odstúpenie; pri digitálnej službe môžem pri odstúpení uhradiť pomernú cenu už poskytnutej časti.",
+    "ageConsent": "Potvrdzujem, že mám aspoň 18 rokov a som oprávnený/á uzavrieť túto platenú zmluvu."
   },
   "b2b": {
     "hero": {
@@ -60,8 +60,8 @@
   "processing": "Spracúva sa...",
   "cancelAnytime": "Zrušiť kedykoľvek. Bezpečne spravované cez Stripe.",
   "alreadyHaveAccount": "Už máš účet? Prihlás sa najprv",
-  "digitalConsent": "Výslovne súhlasím s okamžitým dodaním digitálneho obsahu a beriem na vedomie, že tým strácam právo na odstúpenie od zmluvy do 14 dní.",
-  "ageConsent": "Potvrdzujem, že mám viac ako 18 rokov pre možnosť platby, resp. 16+ rokov pre používanie služby.",
+  "digitalConsent": "Výslovne žiadam o okamžité začatie poskytovania. Pri digitálnom obsahu beriem na vedomie, že začatím dodávania strácam právo na odstúpenie; pri digitálnej službe môžem pri odstúpení uhradiť pomernú cenu už poskytnutej časti.",
+  "ageConsent": "Potvrdzujem, že mám aspoň 18 rokov a som oprávnený/á uzavrieť túto platenú zmluvu.",
   "errors": {
     "default": "Došlo k neznámej chybe. Skontrolujte svoje údaje a skúste to prosím znova.",
     "rateLimit": "Prekročili ste limit žiadostí. Počkajte, prosím, chvíľu a skúste to znova.",
@@ -330,7 +330,7 @@
       "planName": "Mindbanger Daily",
       "price": "€7.99",
       "period": " / mesiac",
-      "vatExcluded": "DPH môže byť účtovaná na základe vašej krajiny.",
+      "vatExcluded": "Konečná spotrebiteľská cena vrátane DPH.",
       "subtitle": "Nízke mesačné náklady pre silnejšiu myseľ každý deň.",
       "features": [
         "Denný signál pre myseľ",

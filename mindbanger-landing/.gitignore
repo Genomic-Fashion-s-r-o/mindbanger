@@ -44,3 +44,7 @@ next-env.d.ts
 .security-backups/
 
 .deployment-source/
+
+# Local artifacts and manuscript research
+output/
+.github-publish/

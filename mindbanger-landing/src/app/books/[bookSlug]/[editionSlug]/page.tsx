@@ -1,0 +1,10 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { publicEdition,registrationOpen } from '@/lib/readers/store';
+import { readerText } from '@/lib/readers/locale';
+import ReaderShell from '@/components/readers/ReaderShell';
+export const dynamic='force-dynamic';
+type Params=Promise<{bookSlug:string;editionSlug:string}>;
+export async function generateMetadata({params}:{params:Params}):Promise<Metadata>{const p=await params,d=await publicEdition(p.bookSlug,p.editionSlug);return d?{title:d.edition.title+' | Mindbanger',description:d.edition.description,alternates:{canonical:'/books/'+p.bookSlug+'/'+p.editionSlug},openGraph:{title:d.edition.title,description:d.edition.description,...(d.edition.cover_url?{images:[d.edition.cover_url]}:{})}}:{title:'Mindbanger Readers',robots:{index:false}};}
+export default async function Page({params}:{params:Params}){const p=await params,d=await publicEdition(p.bookSlug,p.editionSlug);if(!d)notFound();const {book,edition,materials}=d,t=readerText(edition.locale);return <ReaderShell locale={edition.locale} publicPage><article><div className="reader-book"><div>{edition.cover_url?<img src={edition.cover_url} alt={edition.title} className="reader-cover"/>:<div className="reader-book-symbol" aria-hidden="true">{edition.title}</div>}</div><div><p className="reader-kicker">{book.author}</p><h1>{edition.title}</h1><p>{edition.description}</p><div className="reader-plain">{edition.public_body}</div></div></div>{materials.length>0&&<section className="reader-card"><h2>{t.publicMaterials}</h2>{materials.map(m=><p key={m.id}><Link href={'/readers/'+edition.locale+'/material/'+m.id}>{m.title}</Link></p>)}</section>}{edition.club_invitation&&(await registrationOpen()).registrations_enabled&&<aside className="reader-card"><h2>{t.joinTitle}</h2><p>{t.joinBody}</p><Link className="reader-button" href={'/readers/'+edition.locale+'/join/'+edition.id}>{t.joinClub}</Link></aside>}</article></ReaderShell>;}

@@ -1,0 +1,11 @@
+export const bookingServiceCopy: Record<string, { intro: string; topics: string[] }> = {
+  'opora-pocas-liecby': {intro:'Nemusíš niesť všetko sám. Spolu vytvoríme priestor pre to, čo počas liečby prežívaš, a pripravíme zvládnuteľné kroky popri starostlivosti tvojich lekárov.',topics:['Ľudská opora','Zvládanie záťaže','Každodenné kroky']},
+  'vypni-hlavu': { intro: 'Keď hlava ide naplno, dopraj si priestor vydýchnuť. Spoločne utriedime, čo ťa zamestnáva, a nájdeme ďalší krok, ktorý ti dáva zmysel.', topics: ['Utriedenie myšlienok', 'Priestor spomaliť', 'Vlastné tempo'] },
+  'zvladaj-stres': { intro: 'Nemusíš zvládať všetko naraz. Pomenujeme, čo ti berie energiu, a preskúmame praktické možnosti, ako pristupovať ku každodennému tlaku.', topics: ['Zdroje stresu', 'Osobné hranice', 'Zvládnuteľné kroky'] },
+  'znovu-si-ver': { intro: 'Tvoj názor má hodnotu. Pozrieme sa na to, čo ťa brzdí, o aké silné stránky sa môžeš oprieť a aký krok chceš urobiť s väčšou dôverou v seba.', topics: ['Sebadôvera', 'Vlastné rozhodnutia', 'Silné stránky'] },
+  'individualny-coaching': { intro: 'Stojíš pred rozhodnutím alebo cítiš, že chceš zmenu? Nemusíš mať hotové odpovede. V rozhovore si ujasníš svoje priority a vlastný ďalší krok.', topics: ['Nový smer', 'Ujasnenie priorít', 'Konkrétny ďalší krok'] },
+  'teenager-pod-tlakom': { intro: 'Škola, očakávania, kamaráti. A kde je pri tom tvoj vlastný hlas? Priestor na otvorený rozhovor bez súdenia, v ktorom môžeš hľadať svoje odpovede.', topics: ['Škola a motivácia', 'Sebavedomie', 'Vlastná cesta'] },
+  'mentalny-trening': { intro: 'Výkon sa začína aj v hlave. Preskúmame tvoju prípravu, sústredenie a reakcie pod tlakom, aby si si mohol vytvoriť postup, ktorý sedí práve tebe.', topics: ['Sústredenie', 'Mentálna príprava', 'Vlastné ciele'] },
+  'relaxacia': { intro: 'Na chvíľu nemusíš nič podávať ani dokazovať. Dopraj si vedenú relaxáciu, priestor spomaliť a spoznať spôsoby uvoľnenia, ktoré môžeš skúšať aj v bežnom dni.', topics: ['Vedené uvoľnenie', 'Pokojné tempo', 'Čas pre seba'] },
+  'premiovy-mentalny-koucing': { intro: 'Niektoré témy potrebujú viac priestoru. Vyhraď si dlhší rozhovor na preskúmanie súvislostí, ujasnenie toho podstatného a prípravu konkrétneho postupu.', topics: ['Hlbšie preskúmanie témy', 'Viac priestoru', 'Vlastný postup'] },
+};

@@ -16,7 +16,7 @@ export async function PATCH(request: Request) {
     const p = parsed.data;
     const service = getServiceSupabase();
     // The authenticated identity supplies the row ID; no permission or billing fields are accepted.
-    const { error: saveError } = await service.from('profiles').upsert({ id: user.id, full_name: p.fullName, preferred_language: p.language, timezone: p.timezone }, { onConflict: 'id' });
+    const { error: saveError } = await service.from('profiles').upsert({ id: user.id, full_name: p.fullName, preferred_language: p.language, timezone: p.timezone,...(p.birthYear!==undefined?{birth_year:p.birthYear}:{}) }, { onConflict: 'id' });
     if (saveError) throw saveError;
     if (p.accepted) {
       const { error: consentError } = await service.from('client_consents').upsert({ user_id: user.id, version: CLIENT_TERMS_VERSION }, { onConflict: 'user_id,version', ignoreDuplicates: true });

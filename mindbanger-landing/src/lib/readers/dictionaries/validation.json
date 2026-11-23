@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "keysPerDictionary": 53,
+  "ready": [
+    "af",
+    "ar",
+    "eu",
+    "nb",
+    "ca",
+    "zh-Hant",
+    "da",
+    "nl",
+    "en",
+    "fi",
+    "fr",
+    "fy",
+    "gl",
+    "de",
+    "gu",
+    "he",
+    "hi",
+    "is",
+    "ga",
+    "it",
+    "ja",
+    "la",
+    "lb",
+    "ml",
+    "mr",
+    "no",
+    "nn",
+    "fa",
+    "pl",
+    "pt",
+    "es",
+    "sv",
+    "ta",
+    "uk",
+    "cy",
+    "yi",
+    "sk",
+    "cs"
+  ],
+  "inactive": [
+    {
+      "code": "gsw",
+      "name": "Elsässisch",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "br",
+      "name": "Brezhoneg",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "kw",
+      "name": "Kernewek",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "co",
+      "name": "Corsu",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "frs",
+      "name": "Seeltersk",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "gv",
+      "name": "Gaelg",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "frr",
+      "name": "Nordfriisk",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "oc",
+      "name": "Occitan",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "rm",
+      "name": "Rumantsch",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "sco",
+      "name": "Scots",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    },
+    {
+      "code": "gd",
+      "name": "Gàidhlig",
+      "reason": "Needs a reliable full translation and language review; no translated dictionary supplied."
+    }
+  ],
+  "notes": [
+    "Ready indicates a complete supplied UI and summary dictionary, not native-speaker certification or KDP language/format eligibility.",
+    "Keep termsBody and privacyBody labelled as summaries. Link to the full privacy notice using schema.json privacyFullNoticePath.",
+    "The locale code zh-Hant is case-sensitive in dictionary filenames. Preserve its canonical spelling."
+  ]
+}

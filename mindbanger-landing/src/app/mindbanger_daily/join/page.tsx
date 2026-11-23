@@ -1,11 +1,11 @@
 // src/app/join/page.tsx
 'use client';
+import BrandLogo from '@/components/BrandLogo';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Mail, KeyRound, Loader2, Sparkles, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
 type JoinLang = 'sk' | 'cs' | 'en';
@@ -169,17 +169,7 @@ export default function JoinPage() {
       const response = await fetch('/api/auth/magic-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email, 
-          lang,
-          options: {
-             data: {
-               terms_accepted: termsAccepted,
-               privacy_policy_accepted: gdprAccepted,
-               consents_timestamp: new Date().toISOString()
-             }
-          }
-        }),
+        body: JSON.stringify({ email, lang, mode: 'code' }),
       });
 
       const data = await response.json();
@@ -230,10 +220,7 @@ export default function JoinPage() {
       
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8 space-y-2 flex flex-col items-center">
-          <Link href="/mindbanger_daily" className="flex items-center gap-3 transition-opacity hover:opacity-80">
-            <span className="font-serif font-bold text-2xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
-            <Image src="/logo.png" alt="Mindbanger Daily" width={180} height={45} className="h-10 w-auto object-contain" />
-          </Link>
+          <BrandLogo href="/mindbanger_daily" inverse/>
           <p className="text-amber-400/80 uppercase tracking-widest text-xs font-bold mt-3">{t.startMembership}</p>
         </div>
 

@@ -1,10 +1,11 @@
 'use client';
+import BrandLogo from '@/components/BrandLogo';
+
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Mail, KeyRound, Loader2, Sparkles, UserCircle, Building2 } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
 // Helper for translations
@@ -124,7 +125,7 @@ function LoginContent() {
       const response = await fetch('/api/auth/magic-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, lang }),
+        body: JSON.stringify({ email, lang, mode: 'code' }),
       });
 
       const data = await response.json();
@@ -171,10 +172,7 @@ function LoginContent() {
   return (
     <div className="relative z-10 w-full max-w-md mx-auto">
       <div className="text-center mb-8 space-y-2 flex flex-col items-center">
-        <Link href="/mindbanger_daily" className="flex items-center gap-3 transition-opacity hover:opacity-80">
-          <span className="font-serif font-bold text-2xl text-slate-50 tracking-wide">Mindbanger <span className="text-amber-500">Daily</span></span>
-          <Image src="/logo.png" alt="Mindbanger Daily" width={180} height={45} className="h-10 w-auto object-contain" />
-        </Link>
+        <BrandLogo href="/mindbanger_daily" inverse/>
         <p className="text-slate-400 text-sm mt-3">
           {step === 'email' ? t.emailSubtitle : t.codeSubtitle}
         </p>

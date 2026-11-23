@@ -1,0 +1,9 @@
+/* Shared gold emblem and wordmark for the public site and client account. */
+a.mindbanger-wordmark{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;width:max-content;max-width:100%;font-family:var(--font-sans),Arial,sans-serif;font-size:25px;font-weight:600;font-style:normal;letter-spacing:-.06em;line-height:1.1;color:#24483f;text-decoration:none;white-space:nowrap;overflow-wrap:normal}
+.mindbanger-brand-symbol{display:block;flex:none;width:52px;height:52px;border-radius:50%;object-fit:contain;background:#030403}
+a.mindbanger-wordmark>.mindbanger-brand-copy{display:block}
+.mindbanger-brand-copy>small{display:block;font-family:var(--font-sans),Arial,sans-serif;font-size:8px;font-weight:500;font-style:normal;letter-spacing:.19em;line-height:1.2;margin-top:7px;color:inherit}
+a.mindbanger-wordmark-inverse{color:#f7f6f0}
+.personal-footer .mindbanger-wordmark{margin-bottom:8px}
+@media(max-width:760px){a.mindbanger-wordmark{font-size:23px;gap:8px}.mindbanger-brand-symbol{width:44px;height:44px}}
+@media(max-width:380px){.personal-header a.mindbanger-wordmark{font-size:20px;gap:6px}.personal-header .mindbanger-brand-symbol{width:38px;height:38px}.personal-header .mindbanger-brand-copy>small{font-size:7px;letter-spacing:.14em}}

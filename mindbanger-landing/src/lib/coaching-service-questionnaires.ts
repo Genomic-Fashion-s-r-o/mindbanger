@@ -1,0 +1,7 @@
+import importedForms from './coaching-questionnaire-imports.json';
+import {SERVICE_CATALOG} from './booking/catalog';
+import {cardContent,questionnaireSeeds} from './coaching-cards-model';
+
+const sourceForService=(id:string)=>id==='mentalny-trening'?importedForms['focus-performance']:id==='relaxacia'?importedForms['relaxation-safety']:id==='opora-pocas-liecby'?importedForms['treatment-intake']:id==='zvladaj-stres'?importedForms.intake:importedForms['mind-goals'];
+export const serviceQuestionnaires=SERVICE_CATALOG.filter(s=>s.id!=='teenager-pod-tlakom').map(s=>({id:s.id,label:s.name,content:cardContent.parse({...sourceForService(s.id),title:'Vstupný dotazník · '+s.name,formType:'intake',serviceId:s.id,templateKey:'service:'+s.id})}));
+export const questionnaireLibrary=[{key:'service:teenager-pod-tlakom',label:'Teenager pod tlakom – dotazník pre rodiča',content:cardContent.parse({...questionnaireSeeds['parent-intake'],formType:'parent-intake',serviceId:'teenager-pod-tlakom',templateKey:'service:teenager-pod-tlakom'})},...serviceQuestionnaires.map(s=>({key:'service:'+s.id,label:s.label,content:s.content})),...['mind-goals','focus-performance','relaxation-safety','treatment-intake'].map(key=>({key:'source:'+key,label:importedForms[key as keyof typeof importedForms].title,content:cardContent.parse({...importedForms[key as keyof typeof importedForms],formType:'intake',templateKey:'source:'+key})})),...Object.entries(questionnaireSeeds).map(([key,value])=>({key,label:value.title,content:cardContent.parse({...value,formType:key,templateKey:key})}))];

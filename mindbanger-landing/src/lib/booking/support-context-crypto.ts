@@ -1,0 +1,6 @@
+import 'server-only';
+import {createCipheriv,createDecipheriv,randomBytes} from 'node:crypto';
+function key(){const raw=process.env.BOOKING_SUPPORT_CONTEXT_KEY;if(!raw||!/^[a-f0-9]{64}$/i.test(raw))throw Error('support_context_key_unavailable');return Buffer.from(raw,'hex');}
+const aad=(id:string,user:string)=>Buffer.from('support-context:v1:'+id+':'+user);
+export function encryptSupportContext(text:string,id:string,user:string){const iv=randomBytes(12),cipher=createCipheriv('aes-256-gcm',key(),iv);cipher.setAAD(aad(id,user));const ciphertext=Buffer.concat([cipher.update(text,'utf8'),cipher.final()]);return ['v1',iv.toString('base64url'),cipher.getAuthTag().toString('base64url'),ciphertext.toString('base64url')].join('.');}
+export function decryptSupportContext(value:string,id:string,user:string){const [version,iv,tag,body,...rest]=value.split('.');if(version!=='v1'||!iv||!tag||!body||rest.length)throw Error('invalid_support_context');const decipher=createDecipheriv('aes-256-gcm',key(),Buffer.from(iv,'base64url'));decipher.setAAD(aad(id,user));decipher.setAuthTag(Buffer.from(tag,'base64url'));return Buffer.concat([decipher.update(Buffer.from(body,'base64url')),decipher.final()]).toString('utf8');}
