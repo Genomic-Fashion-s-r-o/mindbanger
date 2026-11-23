@@ -7,10 +7,11 @@ export function resolvePortalLocale(path:string,cookie?:string|null,requested?:s
  if(/^\/cz(?:\/|$)/.test(path))return 'cs';if(/^\/en(?:\/|$)/.test(path))return 'en';
  if(portalLocales.includes(requested as PortalLocale))return requested as PortalLocale;
  if(portalLocales.includes(cookie as PortalLocale))return cookie as PortalLocale;
- if(/^\/(ucet|bonus|vitaj|registracia|prihlasenie|dokoncit-ucet|dotaznik|rezervacia|ziadost-o-termin)(?:\/|$)/.test(bare)){
-  const first=browserLanguage?.split(',')[0]?.split('-')[0]?.toLowerCase();if(first==='en'||first==='cs'||first==='sk')return first;
- }
- return country?.toUpperCase()==='CZ'?'cs':'sk';
+ const region=country?.trim().toUpperCase();
+ if(region==='SK')return 'sk';if(region==='CZ')return 'cs';
+ if(region)return 'en';
+ const first=browserLanguage?.split(',')[0]?.split(';')[0]?.split('-')[0]?.toLowerCase();
+ return first==='sk'||first==='cs'?first:'en';
 }
 export function barePath(path:string){return path.replace(/^\/(cz|en)(?=\/|$)/,'')||'/';}
 export function portalPath(path:string,locale:PortalLocale){

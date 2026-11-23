@@ -1,3 +1,4 @@
+import EnglishHome from '@/components/personal/EnglishHome';
 import HomeTopicCards from '@/components/personal/HomeTopicCards';
 import HomeMeetings from '@/components/personal/HomeMeetings';
 import AboutCoach from '@/components/personal/AboutCoach';
@@ -19,7 +20,7 @@ import { localizedPath } from '@/lib/site-locale';
 import { siteLocale } from '@/lib/site-locale-server';
 export const dynamic='force-dynamic';
 const quoteScript = Caveat({ variable: '--font-quote', subsets: ['latin', 'latin-ext'], weight: '500', display: 'swap' });
-export async function generateMetadata():Promise<Metadata>{const cs=(await siteLocale())==='cs',path=cs?'/cz':'/';return {title:cs?'Individuální online koučink | MINDBANGER':'Individuálny online coaching | MINDBANGER',description:cs?'Utřiď si myšlenky. Najdi svůj další krok. Individuální online koučink s Miroslavem Jobusem.':'Utrieď si myšlienky. Nájdi svoj ďalší krok. Individuálny online coaching s Miroslavom Jobusom pre dospelých: 30 minút, 1 hodina alebo 1,5 hodiny podľa stretnutia.',alternates:{canonical:path,languages:{sk:'/', 'cs-CZ':'/cz','x-default':'/'}},openGraph:{title:cs?'MINDBANGER · Podívej se na svůj život z jiného úhlu':'MINDBANGER · Pozri sa na svoj život z iného uhla',description:cs?'Individuální online koučink. Služby, balíčky a termíny online.':'Individuálny online coaching. Služby, balíčky a termíny online.',url:`https://www.mindbanger.com${path}`,images:[{url:'https://www.mindbanger.com/share/home-miro-zuzka-v1.jpg',width:1440,height:1080,type:'image/jpeg',alt:'Miroslav Jobus a Zuzka pri rozhovore – ilustračná AI scéna'}],locale:cs?'cs_CZ':'sk_SK',type:'website'}};}
+export async function generateMetadata():Promise<Metadata>{const locale=await siteLocale();if(locale==='en')return {title:'Individual online coaching | MINDBANGER',description:'Find clarity, trust in yourself and your next step. Individual online coaching with Miroslav Jobus via Zoom.',alternates:{canonical:'/en',languages:{sk:'/',cs:'/cz',en:'/en','x-default':'/en'}},openGraph:{title:'MINDBANGER · See your life from a different angle',description:'Individual online coaching with Miroslav Jobus.',url:'https://www.mindbanger.com/en',locale:'en_GB',type:'website'}};const cs=locale==='cs',path=cs?'/cz':'/';return {title:cs?'Individuální online koučink | MINDBANGER':'Individuálny online coaching | MINDBANGER',description:cs?'Utřiď si myšlenky. Najdi svůj další krok. Individuální online koučink s Miroslavem Jobusem.':'Utrieď si myšlienky. Nájdi svoj ďalší krok. Individuálny online coaching s Miroslavom Jobusom pre dospelých: 30 minút, 1 hodina alebo 1,5 hodiny podľa stretnutia.',alternates:{canonical:path,languages:{sk:'/', 'cs-CZ':'/cz','x-default':'/'}},openGraph:{title:cs?'MINDBANGER · Podívej se na svůj život z jiného úhlu':'MINDBANGER · Pozri sa na svoj život z iného uhla',description:cs?'Individuální online koučink. Služby, balíčky a termíny online.':'Individuálny online coaching. Služby, balíčky a termíny online.',url:`https://www.mindbanger.com${path}`,images:[{url:'https://www.mindbanger.com/share/home-miro-zuzka-v1.jpg',width:1440,height:1080,type:'image/jpeg',alt:'Miroslav Jobus a Zuzka pri rozhovore – ilustračná AI scéna'}],locale:cs?'cs_CZ':'sk_SK',type:'website'}};}
 const questions=(manual:boolean,locale:'sk'|'cs'|'en')=>locale==='cs'?[
  ['Jaké setkání si mám vybrat?','Témata jsou inspirací. V nabídce najdeš rychlý rozhovor, koučink, řízenou relaxaci i balíčky. U každé nabídky vidíš konečnou cenu a délku. Koučink má nezdravotnický charakter.'],
  ['Jak dlouho trvá koučovací hodina?','Rychlý rozhovor si rezervuješ na 30 min, běžné setkání na 1 h, prémiový koučink na 1,5 h. Podrobné vysvětlení času připojení najdeš v poznámce u rezervačního kalendáře.'],
@@ -39,6 +40,7 @@ const questions=(manual:boolean,locale:'sk'|'cs'|'en')=>locale==='cs'?[
 ];
 export default async function Home(){
  const {settings,locale}=await getLocalizedBookingSettings();
+ if(locale==='en')return <EnglishHome settings={settings}/>;
  const cs=locale==='cs',c=(sk:string,cz:string)=>cs?cz:sk,p=(path:string)=>localizedPath(path,locale);
  const orderedSettings={...settings,services:orderedServices(settings.services)};
  const manual=settings.paymentMode==='authorize_confirm';

@@ -10,3 +10,8 @@
 .soul-book-cover{display:block;width:100%;max-width:430px;height:auto;filter:drop-shadow(0 25px 25px #0006)}
 @media(max-width:900px){.soul-hero-layout{grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);gap:26px;padding-block:65px 90px}.soul-hero-layout h1{font-size:clamp(44px,6.3vw,60px)}.soul-hero-layout .soul-hero-intro{font-size:18px}.soul-hero-layout .soul-desktop-break{display:none}}
 @media(max-width:620px){.soul-hero:has(.soul-book-cover){min-height:0}.soul-hero-layout{grid-template-columns:1fr;gap:30px;padding-block:42px 65px}.soul-hero-layout h1{font-size:50px}.soul-hero-layout .soul-hero-intro{margin-bottom:26px}.soul-book-cover{width:74vw;max-width:290px}.soul-hero:has(.soul-book-cover) .soul-hero-shade{background:linear-gradient(180deg,#062522e8,#062522a8 55%,#06252275)}}
+
+/* Language choice is independent of the main site's three-language navigation. */
+.soul-header{gap:18px}.soul-header-tools{display:flex;align-items:center;gap:28px}.soul-brand span{max-width:235px;letter-spacing:1.1px;white-space:normal;line-height:1.5}.soul-section-heading>p{max-width:290px}.soul-part h3,.soul-intro h2,.soul-readers h2,.soul-model h2{overflow-wrap:anywhere}.soul-hero-intro{max-width:530px}.soul-header .book-language-picker{flex-shrink:0}.soul-registration .soul-button{white-space:normal}
+@media(max-width:1000px){.soul-header-tools{gap:18px}.soul-header nav{gap:18px}}
+@media(max-width:760px){.soul-header-tools nav{display:none}.soul-brand span{max-width:175px}.soul-header-tools{gap:0}.soul-header .book-language-picker select{width:128px}.soul-page .soul-hero-note{max-width:calc(100% - 44px)}}
